@@ -270,28 +270,6 @@ themes). Added in 1.0.0.
 | ---------- | -------- | ------- | ------------------------------------------ |
 | `fontSize` | `string` | `small` | Text size preset (e.g. `small`, `medium`). |
 
-## REST API
-
-The plugin extends the WooCommerce products REST endpoint with a `outletpro` query
-parameter.
-
-```http
-GET /wc/v3/products?outletpro=true
-```
-
-The plugin also extends the WordPress products REST endpoint (post type) with the same
-parameter.
-
-```http
-GET /wp/v2/products?outletpro=true
-```
-
-| Parameter   | Type      | Description                                                    |
-| ----------- | --------- | -------------------------------------------------------------- |
-| `outletpro` | `boolean` | When `true`, limits results to products in the store's outlet. |
-
-Added in 1.0.0.
-
 ## Shortcodes
 
 The plugin extends the WooCommerce `[products]` shortcode with a `outletpro` attribute.
@@ -321,7 +299,7 @@ time without a MAJOR version bump. Do not rely on them in third-party code.
 
 - The taxonomy slug `outletpro_status` and term slug `outlet`.
 
-  The outlet status is powered by a non-public taxonomy for performance but is considered experimental and may change in the future. Instead, use the outlet status functions or REST API parameter for stable access to the outlet status.
+  The outlet status is powered by a non-public taxonomy for performance but is considered experimental and may change in the future. Instead, use the outlet status functions for stable access to the outlet status.
 
 - Admin dashboard CSS.
 
