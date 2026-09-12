@@ -5,11 +5,7 @@
 
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-test( 'plugin activation seeds outlet settings', async ( {
-	page,
-	admin,
-	requestUtils,
-} ) => {
+test( 'plugin can be activated', async ( { page, admin, requestUtils } ) => {
 	// Arrange.
 	await requestUtils.rest( {
 		path: '/wp/v2/plugins/outletpro/outletpro',
@@ -28,10 +24,4 @@ test( 'plugin activation seeds outlet settings', async ( {
 
 	// Assert: plugin activation success message is shown.
 	await expect( page.getByText( 'Plugin activated' ) ).toBeVisible();
-
-	// Assert: WooCommerce Status screen shows the seeded Canonical term ID.
-	await admin.visitAdminPage( 'admin.php', 'page=wc-status' );
-	await expect(
-		page.getByTestId( 'outlet-canonical-term-id' )
-	).toContainText( /\d+/ );
 } );

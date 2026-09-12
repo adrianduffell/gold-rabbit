@@ -2,144 +2,13 @@
 
 Outlet implements a stable public API intended for use by third-party code. All items listed here increment the plugin's MAJOR semver version when any known incompatible changes are made.
 
-## Functions
-
-### Outlet status
-
-#### `OutletPro\is_outlet( \WC_Product $product ): bool`
-
-Check if a product is in the store’s outlet.
-
-Throws exception on error. Added in 1.0.0.
-
-| Parameter  | Type          | Description           |
-| ---------- | ------------- | --------------------- |
-| `$product` | `\WC_Product` | The product to check. |
-
-```php
-try {
-    $is_outlet = OutletPro\is_outlet( $product );
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
-#### `OutletPro\add_to_outlet( \WC_Product $product ): void`
-
-Add a product to the store’s outlet.
-
-Throws exception on error. Added in 1.0.0.
-
-| Parameter  | Type          | Description         |
-| ---------- | ------------- | ------------------- |
-| `$product` | `\WC_Product` | The product to add. |
-
-```php
-try {
-    OutletPro\add_to_outlet( $product );
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
-#### `OutletPro\remove_from_outlet( \WC_Product $product ): void`
-
-Remove a product from the store’s outlet.
-
-Throws exception on error. Added in 1.0.0.
-
-| Parameter  | Type          | Description            |
-| ---------- | ------------- | ---------------------- |
-| `$product` | `\WC_Product` | The product to remove. |
-
-```php
-try {
-    OutletPro\remove_from_outlet( $product );
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
-#### `OutletPro\set_outlet( \WC_Product $product, bool $new_value ): void`
-
-Set the outlet status for a product.
-
-Fires the `outletpro_status_changed` action on a status change.
-
-Throws exception on error. Added in 1.0.0.
-
-| Parameter    | Type          | Description                                 |
-| ------------ | ------------- | ------------------------------------------- |
-| `$product`   | `\WC_Product` | The product to update.                      |
-| `$new_value` | `bool`        | `true` to add to outlet, `false` to remove. |
-
-```php
-try {
-    OutletPro\set_outlet( $product, true );
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
-#### `OutletPro\count_outlet(): int`
-
-Count the number of published products in the store’s outlet.
-
-Throws exception on error. Added in 1.0.0.
-
-```php
-try {
-    $count = OutletPro\count_outlet();
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
-#### `OutletPro\outlet_empty(): bool`
-
-Check if the store’s outlet has no published products.
-
-More performant than `count_outlet()` because it skips the SQL `COUNT(*)`.
-
-Throws exception on error. Added in 1.0.0.
-
-```php
-try {
-    if ( OutletPro\outlet_empty() ) {
-        // nothing to display
-    }
-} catch ( \Throwable $e ) {
-    // Handle exception
-}
-```
-
 ## Hooks
-
-### Actions
-
-#### `outletpro_status_changed`
-
-Fires when a product's outlet status changes.
-
-```php
-add_action( 'outletpro_status_changed', function ( $product_id, $old_value, $new_value ) {
-    // React to the outlet status change.
-}, 10, 3 );
-```
-
-| Parameter     | Type   | Description             |
-| ------------- | ------ | ----------------------- |
-| `$product_id` | `int`  | Product ID.             |
-| `$old_value`  | `bool` | Previous outlet status. |
-| `$new_value`  | `bool` | New outlet status.      |
-
-Added in 1.0.0.
 
 ### Filters
 
 #### `outletpro_badge_single_product_hook`
 
-Filter to modify which `single-product` [WooCommerce template hook](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) (or theme hook) to display the outlet badge on.
+Filter to modify which `single-product` [WooCommerce template hook](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) (or theme hook) displays the badge.
 
 ```php
 add_filter( 'outletpro_badge_single_product_hook', function ( $name ) {
@@ -155,7 +24,7 @@ Must return a non-empty string. Added in 1.0.0.
 
 #### `outletpro_badge_single_product_priority`
 
-Filters the priority used for [hooking](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) the outlet badge to the `single-product` classic templates.
+Filters the priority used for [hooking](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) the badge to the `single-product` classic templates.
 
 ```php
 add_filter( 'outletpro_badge_single_product_priority', function ( $priority ) {
@@ -171,24 +40,17 @@ Must return an integer. Added in 1.0.0.
 
 ## Script and style handles
 
-These handles are registered by the plugin and can be used as dependencies in third-party
-enqueues.
+These handles are registered by the plugin and can be used as dependencies in third-party enqueues.
 
 ### Styles
 
 #### `outletpro-classic-badge`
 
-Front-end badge stylesheet for classic (non-block) themes. Registered — but not
-automatically enqueued — on `wp_enqueue_scripts`. Use
-`wp_enqueue_style( 'outletpro-classic-badge' )` or declare it as a dependency to load
-it on demand. Added in 1.0.0.
+Front-end badge stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'outletpro-classic-badge' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
 
 #### `outletpro-classic-message`
 
-Front-end message stylesheet for classic (non-block) themes. Registered — but not
-automatically enqueued — on `wp_enqueue_scripts`. Use
-`wp_enqueue_style( 'outletpro-classic-message' )` or declare it as a dependency to load
-it on demand. Added in 1.0.0.
+Front-end message stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'outletpro-classic-message' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
 
 #### `outletpro-admin`
 
@@ -198,43 +60,31 @@ Admin stylesheet enqueued on all `admin_enqueue_scripts` pages. Added in 1.0.0.
 
 #### `outletpro-editor`
 
-Block editor JavaScript enqueued on `enqueue_block_editor_assets`. Contains the block
-editor integration for the outlet badge and outlet message blocks. Added in 1.0.0.
-
-#### `outletpro-products-admin`
-
-Admin JavaScript enqueued on `admin_enqueue_scripts` for the product edit screen only.
-Added in 1.0.0.
+Block editor JavaScript enqueued on `enqueue_block_editor_assets`. Contains the block editor integration for the badge and message blocks. Added in 1.0.0.
 
 #### `outletpro-admin-canvas-scripts`
 
-Admin JavaScript enqueued on `enqueue_block_assets` in wp-admin for editor canvas
-previewing. Added in 1.0.0.
+Admin JavaScript enqueued on `enqueue_block_assets` in wp-admin for editor canvas previewing. Added in 1.0.0.
 
 ## CSS classes
 
-These classes are part of the public API and stable across versions. They can be targeted
-for custom styling.
+These classes are part of the public API and stable across versions. They can be targeted for custom styling.
 
 ### Front-end classes
 
 #### `.outletpro-badge`
 
-Applied to the outlet badge element. Used by both the block renderer and classic theme
-template hooks. Added in 1.0.0.
+Applied to the badge element. Used by both the block renderer and classic theme template hooks. Added in 1.0.0.
 
 #### `.outletpro-message`
 
-Applied to the outlet message element. Used by both the block renderer and classic theme
-template hooks. Added in 1.0.0.
+Applied to the message element. Used by both the block renderer and classic theme template hooks. Added in 1.0.0.
 
 ## Blocks
 
 ### `outletpro/outlet-badge`
 
-Displays a outlet badge when the product is in the store’s outlet. Automatically
-inserted after the product price on the single product template (block themes). Added
-in 1.0.0.
+Displays the badge on product pages. Automatically inserted after the product price on the single product template (block themes). Added in 1.0.0.
 
 Styles are inherited from site-wide settings. Default style values:
 
@@ -262,32 +112,15 @@ Use the scale setting to control the height of the badge, and density (called "f
 
 ### `outletpro/outlet-message`
 
-Displays the outlet message when the product is in the store’s outlet. Automatically
-inserted as the first child of the product meta block on the single product template (block
-themes). Added in 1.0.0.
+Displays the message on product pages. Automatically inserted as the first child of the product meta block on the single product template (block themes). Added in 1.0.0.
 
 | Attribute  | Type     | Default | Description                                |
 | ---------- | -------- | ------- | ------------------------------------------ |
 | `fontSize` | `string` | `small` | Text size preset (e.g. `small`, `medium`). |
 
-## Shortcodes
-
-The plugin extends the WooCommerce `[products]` shortcode with a `outletpro` attribute.
-
-```text
-[products outletpro="true"]
-```
-
-| Attribute   | Type                       | Description                                                    |
-| ----------- | -------------------------- | -------------------------------------------------------------- |
-| `outletpro` | `boolean` (`true`/`false`) | When `true`, limits results to products in the store’s outlet. |
-
-Added in 1.0.0.
-
 ## Non-Public API
 
-The following items are intentionally excluded from the public API. They may change at any
-time without a MAJOR version bump. Do not rely on them in third-party code.
+The following items are intentionally excluded from the public API. They may change at any time without a MAJOR version bump. Do not rely on them in third-party code.
 
 - All code items tagged with `@internal` comment.
 
@@ -296,10 +129,6 @@ time without a MAJOR version bump. Do not rely on them in third-party code.
 - File paths.
 
   File paths are subject to change in future versions.
-
-- The taxonomy slug `outletpro_status` and term slug `outlet`.
-
-  The outlet status is powered by a non-public taxonomy for performance but is considered experimental and may change in the future. Instead, use the outlet status functions for stable access to the outlet status.
 
 - Admin dashboard CSS.
 

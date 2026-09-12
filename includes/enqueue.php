@@ -21,7 +21,6 @@ function enqueue_init(): void {
 	add_action( 'enqueue_block_assets', 'OutletPro\enqueue_admin_canvas_scripts_hook' );
 	add_action( 'wp_head', 'OutletPro\output_badge_style_css_variables_hook' );
 	add_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_styles_hook' );
-	add_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_product_scripts_hook' );
 	add_action( 'enqueue_block_editor_assets', 'OutletPro\enqueue_build_assets_hook' );
 
 	register_block_styles();
@@ -37,7 +36,6 @@ function deinit_enqueue(): void {
 	remove_action( 'enqueue_block_assets', 'OutletPro\enqueue_admin_canvas_scripts_hook' );
 	remove_action( 'wp_head', 'OutletPro\output_badge_style_css_variables_hook' );
 	remove_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_styles_hook' );
-	remove_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_product_scripts_hook' );
 	remove_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_welcome_page_scripts_hook' );
 	remove_action( 'enqueue_block_editor_assets', 'OutletPro\enqueue_build_assets_hook' );
 	wp_deregister_style( 'outletpro-classic-badge' );
@@ -48,8 +46,6 @@ function deinit_enqueue(): void {
 	wp_deregister_style( 'outletpro-admin-editor' );
 	wp_dequeue_script( 'outletpro-admin-canvas-scripts' );
 	wp_deregister_script( 'outletpro-admin-canvas-scripts' );
-	wp_dequeue_script( 'outletpro-products-admin' );
-	wp_deregister_script( 'outletpro-products-admin' );
 	wp_dequeue_script( 'outletpro-welcome-page' );
 	wp_deregister_script( 'outletpro-welcome-page' );
 	wp_dequeue_script( 'outletpro-editor' );
@@ -200,34 +196,6 @@ function enqueue_admin_styles_hook(): void {
 		plugin_dir_url( PLUGIN_FILE ) . 'assets/css/admin.css',
 		array(),
 		VERSION
-	);
-}
-
-/**
- * Enqueue admin scripts for the product edit page.
- *
- * Fired by `admin_enqueue_scripts`.
- *
- * @internal WordPress action hook
- */
-function enqueue_admin_product_scripts_hook(): void {
-	$screen = get_current_screen();
-
-	if ( ! $screen || 'product' !== $screen->post_type || 'post' !== $screen->base ) {
-		return;
-	}
-
-	/**
-	 * Admin product edit page script.
-	 *
-	 * @internal
-	 */
-	wp_enqueue_script(
-		'outletpro-products-admin',
-		plugin_dir_url( PLUGIN_FILE ) . 'assets/js/admin-product.js',
-		array(),
-		VERSION,
-		true
 	);
 }
 

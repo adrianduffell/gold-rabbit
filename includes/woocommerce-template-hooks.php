@@ -69,10 +69,6 @@ function display_outlet_badge_hook(): void {
 		return;
 	}
 
-	if ( ! taxonomy_exists( OUTLET_STATUS_TAXONOMY ) || ! is_outlet( $product ) ) {
-		return;
-	}
-
 	$label = get_option( OUTLET_BADGE_LABEL_OPTION );
 
 	if ( ! is_string( $label ) || '' === $label ) {
@@ -98,14 +94,6 @@ function display_outlet_message_hook(): void {
 	$product = wc_get_product( get_the_ID() );
 
 	if ( ! $product instanceof \WC_Product ) {
-		return;
-	}
-
-	try {
-		if ( ! is_outlet( $product ) ) {
-			return;
-		}
-	} catch ( \Throwable $e ) {
 		return;
 	}
 

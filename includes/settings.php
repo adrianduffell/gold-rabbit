@@ -493,7 +493,7 @@ function register_outlet_message_setting(): void {
 		array(
 			'type'              => 'string',
 			'label'             => __( 'Outlet message', 'outletpro' ),
-			'description'       => __( 'Message displayed on outlet products.', 'outletpro' ),
+			'description'       => __( 'Message displayed on product pages.', 'outletpro' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_text_field',
 			'show_in_rest'      => array(
