@@ -29,10 +29,9 @@ test( 'plugin activation seeds outlet settings', async ( {
 	// Assert: plugin activation success message is shown.
 	await expect( page.getByText( 'Plugin activated' ) ).toBeVisible();
 
-	// Assert: WooCommerce Status screen shows seeded Canonical term ID and Page ID.
+	// Assert: WooCommerce Status screen shows the seeded Canonical term ID.
 	await admin.visitAdminPage( 'admin.php', 'page=wc-status' );
 	await expect(
 		page.getByTestId( 'outlet-canonical-term-id' )
 	).toContainText( /\d+/ );
-	await expect( page.getByTestId( 'outlet-page-id' ) ).toContainText( /\d+/ );
 } );

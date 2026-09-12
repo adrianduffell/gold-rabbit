@@ -48,7 +48,6 @@ require_once __DIR__ . '/includes/admin-menu-license.php';
 // #endif
 require_once __DIR__ . '/includes/admin-product-options.php';
 require_once __DIR__ . '/includes/admin-product-bulk-edit.php';
-require_once __DIR__ . '/includes/admin-page-list-table.php';
 require_once __DIR__ . '/includes/shortcodes.php';
 require_once __DIR__ . '/includes/settings.php';
 // #ifdef LICENSE
@@ -56,9 +55,6 @@ require_once __DIR__ . '/includes/settings-license.php';
 require_once __DIR__ . '/includes/admin-plugins-license.php';
 require_once __DIR__ . '/includes/enqueue-license.php';
 // #endif
-require_once __DIR__ . '/includes/patterns.php';
-require_once __DIR__ . '/includes/page.php';
-require_once __DIR__ . '/includes/tools.php';
 require_once __DIR__ . '/includes/admin-product-list-table.php';
 require_once __DIR__ . '/includes/block-editor.php';
 require_once __DIR__ . '/includes/blocks.php';
@@ -90,8 +86,6 @@ function init_hook(): void {
 	init_taxonomies();
 	init_rest_api();
 	init_shortcodes();
-	init_patterns();
-	init_page();
 	init_blocks();
 	init_block_editor();
 	init_orders();
@@ -127,8 +121,6 @@ function admin_init_hook(): void {
 	init_admin_product_options();
 	init_admin_product_bulk_edit();
 	init_system_status();
-	init_tools();
-	init_admin_page_list_table();
 	init_admin_product_list_table();
 	init_admin_order();
 }
@@ -157,9 +149,7 @@ function activate(): void {
 
 	try {
 		init_taxonomies(); // Needed since init hook does not run on activation.
-		init_patterns(); // Needed to create the outlet page.
 		seed_outlet_status_taxonomy();
-		create_outlet_page();
 		seed_activated_at_option();
 		seed_settings();
 	} catch ( \RuntimeException $e ) {

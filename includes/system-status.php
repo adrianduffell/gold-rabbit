@@ -31,7 +31,7 @@ function add_system_status_section_hook(): void {
 	echo '<table class="wc_status_table widefat" cellspacing="0">';
 	echo '<thead><tr><th colspan="3" data-export-label="Outlet">	<h2>' . esc_html__( 'Outlet', 'outletpro' ) . '</h2></th></tr></thead><tbody>';
 
-	$report_items = array_merge( report_page(), report_taxonomies() );
+	$report_items = report_taxonomies();
 
 	foreach ( $report_items as $id => $report_item ) {
 		$label = $report_item[0];
