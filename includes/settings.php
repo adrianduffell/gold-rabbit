@@ -19,6 +19,13 @@ defined( 'ABSPATH' ) || exit;
 const OUTLET_MESSAGE_OPTION = 'outletpro_message';
 
 /**
+ * WordPress option key used to store the outlet page ID.
+ *
+ * @internal
+ */
+const OUTLET_PAGE_OPTION = 'outletpro_page_id';
+
+/**
  * WordPress option key used to store the badge label text.
  *
  * @internal
@@ -183,6 +190,7 @@ function settings_screen_enabled(): bool {
  * @internal
  */
 function init_settings(): void {
+	register_outlet_page_setting();
 	register_outlet_badge_label_setting();
 	register_outlet_badge_text_color_setting();
 	register_outlet_badge_bg_color_setting();
@@ -236,6 +244,27 @@ function seed_settings(): void {
 	add_option( OUTLET_BADGE_SCALE_OPTION, 166 );
 	add_option( OUTLET_BADGE_DENSITY_OPTION, 50 );
 	add_option( OUTLET_MESSAGE_OPTION, get_default_outlet_message() );
+}
+
+/**
+ * Register the outlet page ID setting.
+ *
+ * @internal
+ */
+function register_outlet_page_setting(): void {
+	register_setting(
+		'outletpro',
+		OUTLET_PAGE_OPTION,
+		array(
+			'type'         => 'integer',
+			'show_in_rest' => array(
+				'schema' => array(
+					'type'    => 'integer',
+					'minimum' => 1,
+				),
+			),
+		)
+	);
 }
 
 /**
@@ -503,4 +532,40 @@ function register_outlet_message_setting(): void {
 			),
 		)
 	);
+}
+
+/**
+ * Get the outlet page ID from the option.
+ *
+ * Validates the page ID is a positive integer. Zero and non-digit values
+ * indicate a corrupted state and exceptions are thrown in these cases.
+ *
+ * Returns the page ID as a normalized int, or null when the option does
+ * not exist.
+ *
+ * @since 1.0.0
+ * @throws \UnexpectedValueException If the stored option value is not an integer greater than zero.
+ */
+function get_outlet_page_id(): ?int {
+	$value = get_option( OUTLET_PAGE_OPTION );
+
+	if ( false === $value ) {
+		return null;
+	}
+
+	if ( ! is_scalar( $value ) ) {
+		throw new \UnexpectedValueException( 'Invalid outlet page option value.' );
+	}
+
+	// Cast the value to a string for simpler validation.
+	// The original value may have been returned as an int or a string depending on the storage and caching layer.
+	$as_string = (string) $value;
+
+	// Validate the value is a positive integer.
+	if ( ! ctype_digit( $as_string ) || '0' === $as_string ) {
+		throw new \UnexpectedValueException( 'Invalid outlet page option value.' );
+	}
+
+	// Return the original value in normalized form.
+	return (int) $value;
 }
