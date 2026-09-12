@@ -190,24 +190,9 @@ automatically enqueued — on `wp_enqueue_scripts`. Use
 `wp_enqueue_style( 'outletpro-classic-message' )` or declare it as a dependency to load
 it on demand. Added in 1.0.0.
 
-#### `outletpro-cart-badge`
-
-Cart badge stylesheet enqueued on `wp_enqueue_scripts`. Added in 1.0.0.
-
-#### `outletpro-badge-block`
-
-Stylesheet for the outlet badge block. Registered via `wp_enqueue_block_style` so it
-is only loaded when the `outletpro/outlet-badge` block is rendered on the page.
-Added in 1.0.0.
-
 #### `outletpro-admin`
 
 Admin stylesheet enqueued on all `admin_enqueue_scripts` pages. Added in 1.0.0.
-
-#### `outletpro-admin-editor`
-
-Admin editor stylesheet enqueued on `enqueue_block_assets` in wp-admin for editor canvas
-previewing. Added in 1.0.0.
 
 ### Scripts
 
@@ -268,8 +253,8 @@ Styles are inherited from site-wide settings. Default style values:
 
 1. The default height of the badge is 1.66x the capital letter height of surrounding text.
 
--   The default padding on each side is 25% the height of the badge.
--   The default font-size is 50% the height of the badge.
+- The default padding on each side is 25% the height of the badge.
+- The default font-size is 50% the height of the badge.
 
 Use the scale setting to control the height of the badge, and density (called "font-size" in the UI) to control the font-size/padding ratio.
 
@@ -326,18 +311,18 @@ Added in 1.0.0.
 The following items are intentionally excluded from the public API. They may change at any
 time without a MAJOR version bump. Do not rely on them in third-party code.
 
--   All code items tagged with `@internal` comment.
+- All code items tagged with `@internal` comment.
 
-    These are intended only for use internally and are likely to change in refactors.
+  These are intended only for use internally and are likely to change in refactors.
 
--   File paths.
+- File paths.
 
-    File paths are subject to change in future versions.
+  File paths are subject to change in future versions.
 
--   The taxonomy slug `outletpro_status` and term slug `outlet`.
+- The taxonomy slug `outletpro_status` and term slug `outlet`.
 
-    The outlet status is powered by a non-public taxonomy for performance but is considered experimental and may change in the future. Instead, use the outlet status functions or REST API parameter for stable access to the outlet status.
+  The outlet status is powered by a non-public taxonomy for performance but is considered experimental and may change in the future. Instead, use the outlet status functions or REST API parameter for stable access to the outlet status.
 
--   Admin dashboard CSS.
+- Admin dashboard CSS.
 
-    Admin dashboard-related selectors and HTML structures are subject to change.
+  Admin dashboard-related selectors and HTML structures are subject to change.
