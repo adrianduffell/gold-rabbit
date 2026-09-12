@@ -59,7 +59,6 @@ require_once __DIR__ . '/includes/enqueue-license.php';
 require_once __DIR__ . '/includes/patterns.php';
 require_once __DIR__ . '/includes/page.php';
 require_once __DIR__ . '/includes/tools.php';
-require_once __DIR__ . '/includes/setup-task.php';
 require_once __DIR__ . '/includes/admin-product-list-table.php';
 require_once __DIR__ . '/includes/block-editor.php';
 require_once __DIR__ . '/includes/blocks.php';
@@ -112,11 +111,6 @@ function init_hook(): void {
 	// #ifdef LICENSE
 	license_enqueue_init();
 	// #endif
-	try {
-		init_setup_task();
-	} catch ( \Throwable $e ) {
-		\wc_get_logger()->error( 'Could not initialize setup task: ' . $e->getMessage() );
-	}
 }
 
 /**

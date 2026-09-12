@@ -29,36 +29,6 @@
 	}
 }
 
-.outletpro-onboarding-notice {
-	display: none;
-}
-
-.outletpro-onboarding-notice.is-visible {
-	display: block;
-}
-
-.outletpro-checklist {
-	margin: 0 0 12px 0;
-	padding: 0;
-	list-style: none;
-}
-
-.outletpro-new {
-	display: inline-block;
-	background: #f2edff;
-	color: #2c045d;
-	padding: 4px;
-	border-radius: 999px;
-	font-size: 8px;
-	font-weight: 500;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
-	vertical-align: top;
-	line-height: 1;
-	margin-top: 2px;
-	margin-right: 0.25em;
-}
-
 .outletpro-button-link {
 	text-decoration: none;
 }
