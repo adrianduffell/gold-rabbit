@@ -13,7 +13,6 @@ use const OutletPro\OUTLET_BADGE_BG_COLOUR_DEFAULT;
 use const OutletPro\OUTLET_BADGE_LABEL_OPTION;
 use const OutletPro\OUTLET_BADGE_SCALE_OPTION;
 use const OutletPro\OUTLET_BADGE_TEXT_COLOR_OPTION;
-use const OutletPro\OUTLET_BADGE_TEXT_COLOUR_DEFAULT;
 use const OutletPro\OUTLET_MESSAGE_OPTION;
 
 class Test_Register_Customizer extends WP_UnitTestCase {
@@ -103,7 +102,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( OUTLET_BADGE_TEXT_COLOUR_DEFAULT, $wp_customize->get_setting( OUTLET_BADGE_TEXT_COLOR_OPTION )->default );
+		$this->assertSame( '#111111', $wp_customize->get_setting( OUTLET_BADGE_TEXT_COLOR_OPTION )->default );
 	}
 
 	public function test_registers_badge_bg_colour_setting(): void {
@@ -169,7 +168,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'Last chance', $wp_customize->get_setting( OUTLET_BADGE_LABEL_OPTION )->default );
+		$this->assertSame( 'Authentic', $wp_customize->get_setting( OUTLET_BADGE_LABEL_OPTION )->default );
 	}
 
 	public function test_registers_badge_scale_setting(): void {

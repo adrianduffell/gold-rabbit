@@ -197,25 +197,6 @@ function init_settings(): void {
 }
 
 /**
- * Get the default outlet message based on the store's country.
- *
- * Returns "Only while supplies last" for US and Canada, and
- * "Only while stocks last" for all other countries.
- *
- * @since 1.0.0
- */
-function get_default_outlet_message(): string {
-	$base_location = (string) get_option( 'woocommerce_default_country', '' );
-	$country       = explode( ':', $base_location )[0];
-
-	if ( in_array( $country, array( 'US', 'CA' ), true ) ) {
-		return __( 'Only while supplies last', 'outletpro' );
-	}
-
-	return __( 'Only while stocks last', 'outletpro' );
-}
-
-/**
  * Seed option values with defaults.
  *
  * Uses add_option() so that existing values are never overwritten. This
@@ -225,9 +206,9 @@ function get_default_outlet_message(): string {
  * @internal
  */
 function seed_settings(): void {
-	add_option( OUTLET_BADGE_LABEL_OPTION, __( 'Last chance', 'outletpro' ) );
-	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#FFFFFF' );
-	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '#F81240' );
+	add_option( OUTLET_BADGE_LABEL_OPTION, __( 'Authentic', 'outletpro' ) );
+	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#111111' );
+	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '#D3AF37' );
 	add_option( OUTLET_BADGE_BORDER_COLOR_OPTION, '' );
 	add_option( OUTLET_BADGE_BORDER_STYLE_OPTION, 'none' );
 	add_option( OUTLET_BADGE_BORDER_WIDTH_OPTION, '0' );
@@ -235,7 +216,7 @@ function seed_settings(): void {
 	add_option( OUTLET_BADGE_FONT_WEIGHT_OPTION, '600' );
 	add_option( OUTLET_BADGE_SCALE_OPTION, 166 );
 	add_option( OUTLET_BADGE_DENSITY_OPTION, 50 );
-	add_option( OUTLET_MESSAGE_OPTION, get_default_outlet_message() );
+	add_option( OUTLET_MESSAGE_OPTION, __( 'Our product images are not AI-generated', 'outletpro' ) );
 }
 
 /**
