@@ -245,7 +245,7 @@ Styles are inherited from site-wide settings. Default style values:
 | `text-box-edge`    | `cap alphabetic` |
 | `line-height`      | `1`              |
 | `background-color` | `#FFEE85`\*      |
-| `color`            | `#222`\*         |
+| `color`            | `#111111`\*      |
 | `padding`          | Calculated\*¹    |
 | `font-size`        | Calculated\*¹    |
 | `font-weight`      | `600`\*          |

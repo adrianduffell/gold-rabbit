@@ -207,7 +207,7 @@ function init_settings(): void {
  */
 function seed_settings(): void {
 	add_option( OUTLET_BADGE_LABEL_OPTION, __( 'Authentic', 'outletpro' ) );
-	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#222' );
+	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#111111' );
 	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '#D3AF37' );
 	add_option( OUTLET_BADGE_BORDER_COLOR_OPTION, '' );
 	add_option( OUTLET_BADGE_BORDER_STYLE_OPTION, 'none' );

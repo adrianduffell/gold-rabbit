@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const OUTLET_BADGE_TEXT_COLOUR_DEFAULT = '#222';
+const OUTLET_BADGE_TEXT_COLOUR_DEFAULT = '#111111';
 
 /**
  * Default badge background colour (yellow).

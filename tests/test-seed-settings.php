@@ -74,7 +74,7 @@ class Test_Seed_Settings extends WP_UnitTestCase {
 		seed_settings();
 
 		// Assert.
-		$this->assertSame( '#222', get_option( OUTLET_BADGE_TEXT_COLOR_OPTION ) );
+		$this->assertSame( '#111111', get_option( OUTLET_BADGE_TEXT_COLOR_OPTION ) );
 	}
 
 	public function test_does_not_overwrite_existing_badge_text_color_option(): void {
