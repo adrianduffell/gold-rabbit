@@ -7,52 +7,21 @@
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\add_to_outlet;
 use function OutletPro\deinit_blocks;
 use function OutletPro\init_blocks;
 use function OutletPro\register_outlet_badge_block;
-use function OutletPro\register_outlet_status_taxonomy;
 use function OutletPro\render_outlet_badge_callback;
-use function OutletPro\seed_outlet_status_taxonomy;
 use const OutletPro\OUTLET_BADGE_LABEL_OPTION;
 
 class Test_Render_Outlet_Badge_Callback extends WP_UnitTestCase {
 
-	public function test_returns_empty_string_when_product_not_in_outlet(): void {
+	public function test_returns_badge_html_for_product(): void {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_badge_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
-		$product = \WC_Helper_Product::create_simple_product();
-		$block   = new WP_Block(
-			array(
-				'blockName'    => 'outletpro/outlet-badge',
-				'attrs'        => array(),
-				'innerBlocks'  => array(),
-				'innerHTML'    => '',
-				'innerContent' => array(),
-			),
-			array( 'postId' => $product->get_id() )
-		);
-
-		// Act.
-		$result = render_outlet_badge_callback( array(), '', $block );
-
-		// Assert.
-		$this->assertSame( '', $result );
-	}
-
-	public function test_returns_badge_html_when_product_is_in_outlet(): void {
-		// Arrange.
-		deinit_blocks();
-		register_outlet_badge_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_BADGE_LABEL_OPTION, 'Clearance' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-badge',
 				'attrs'        => array(),
@@ -76,12 +45,9 @@ class Test_Render_Outlet_Badge_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_badge_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_BADGE_LABEL_OPTION, 'Sale' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-badge',
 				'attrs'        => array(),
@@ -104,8 +70,6 @@ class Test_Render_Outlet_Badge_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_badge_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		$block = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-badge',
@@ -126,8 +90,6 @@ class Test_Render_Outlet_Badge_Callback extends WP_UnitTestCase {
 
 	public function test_badge_is_registered_after_init_blocks(): void {
 		// Arrange.
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		deinit_blocks();
 
 		// Act.
@@ -141,12 +103,9 @@ class Test_Render_Outlet_Badge_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_badge_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_BADGE_LABEL_OPTION, '' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-badge',
 				'attrs'        => array(),

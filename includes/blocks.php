@@ -110,7 +110,7 @@ function auto_insert_outlet_message_hook( $hooked_blocks, $relative_position, $a
  * @param array<string, mixed> $attributes Block attributes.
  * @param string               $_content   Block inner content (unused).
  * @param \WP_Block            $block      Block instance.
- * @return string Rendered HTML, or empty string if the product is not in outlet.
+ * @return string Rendered HTML.
  */
 function render_outlet_badge_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
@@ -122,10 +122,6 @@ function render_outlet_badge_callback( array $attributes, string $_content, \WP_
 	$product = wc_get_product( $product_id );
 
 	if ( ! $product instanceof \WC_Product ) {
-		return '';
-	}
-
-	if ( ! taxonomy_exists( OUTLET_STATUS_TAXONOMY ) || ! is_outlet( $product ) ) {
 		return '';
 	}
 
@@ -169,7 +165,7 @@ function register_outlet_message_block(): void {
  * @param array<string, mixed> $attributes Block attributes.
  * @param string               $_content   Block inner content (unused).
  * @param \WP_Block            $block      Block instance.
- * @return string Rendered HTML, or empty string if the product is not in outlet.
+ * @return string Rendered HTML.
  */
 function render_outlet_message_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
@@ -181,10 +177,6 @@ function render_outlet_message_callback( array $attributes, string $_content, \W
 	$product = wc_get_product( $product_id );
 
 	if ( ! $product instanceof \WC_Product ) {
-		return '';
-	}
-
-	if ( ! taxonomy_exists( OUTLET_STATUS_TAXONOMY ) || ! is_outlet( $product ) ) {
 		return '';
 	}
 

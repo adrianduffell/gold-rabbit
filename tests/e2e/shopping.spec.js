@@ -33,8 +33,6 @@ function getViewportKey( page ) {
 }
 
 test( 'Shopping flow', async ( { requestUtils, browser } ) => {
-	test.fail();
-
 	// Arrange.
 	const runId = Date.now();
 	const themeSlug = await getActiveThemeSlug( requestUtils );

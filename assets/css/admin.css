@@ -5,38 +5,6 @@
  * Licensed under the GNU General Public License v2.0 or later.
  */
 
-.outletpro-status-panel {
-	margin-bottom: 1.5em;
-}
-
-.outletpro-status-panel .form-field {
-	margin-bottom: 0;
-
-}
-
-.outletpro-status-panel .outletpro-status-help {
-	margin: 0 0 0 162px;
-	max-width: 290px;
-	font-size: 12px;
-	line-height: 1.4;
-	color: var(--wc-subtext);
-}
-
-@media (max-width: 500px) {
-
-	.outletpro-status-panel .outletpro-status-help {
-		display: none;
-	}
-}
-
-.outletpro-button-link {
-	text-decoration: none;
-}
-
-.outletpro-button-link:hover {
-	text-decoration: underline;
-}
-
 .outletpro-alert-text {
 	color: #b32d2e;
 }

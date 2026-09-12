@@ -41,13 +41,9 @@ const PLUGIN_FILE = __FILE__;
 
 require_once __DIR__ . '/includes/activate.php';
 require_once __DIR__ . '/includes/system-status.php';
-require_once __DIR__ . '/includes/taxonomies.php';
 // #ifdef LICENSE
 require_once __DIR__ . '/includes/admin-menu-license.php';
 // #endif
-require_once __DIR__ . '/includes/admin-product-options.php';
-require_once __DIR__ . '/includes/admin-product-bulk-edit.php';
-require_once __DIR__ . '/includes/shortcodes.php';
 require_once __DIR__ . '/includes/settings.php';
 // #ifdef LICENSE
 require_once __DIR__ . '/includes/settings-license.php';
@@ -78,8 +74,6 @@ function init_hook(): void {
 	init_update_plugin();
 	// #endif
 	init_settings();
-	init_taxonomies();
-	init_shortcodes();
 	init_blocks();
 	init_block_editor();
 
@@ -110,8 +104,6 @@ function admin_init_hook(): void {
 	// #ifdef LICENSE
 	init_license();
 	// #endif
-	init_admin_product_options();
-	init_admin_product_bulk_edit();
 	init_system_status();
 }
 
@@ -138,8 +130,6 @@ function activate(): void {
 	\wc_get_logger()->info( 'Activating Outlet plugin.' );
 
 	try {
-		init_taxonomies(); // Needed since init hook does not run on activation.
-		seed_outlet_status_taxonomy();
 		seed_activated_at_option();
 		seed_settings();
 	} catch ( \RuntimeException $e ) {
