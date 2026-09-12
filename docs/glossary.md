@@ -1,16 +1,17 @@
 # Glossary
 
-Outlet uses the following terminology:
+Authentic Images uses the following terminology:
 
-| Name            | Definition                                                   |
-| --------------- | ------------------------------------------------------------ |
-| Outlet          | Section on the site for discontinued or overstocked products |
-| Outlet products | Products included in the store’s outlet                      |
-| Outlet badge    | Visual mark displayed on outlet products                     |
-| Outlet message  | Optional message shown on outlet products                    |
+| Name                      | Definition                                                      |
+| ------------------------- | --------------------------------------------------------------- |
+| Authentic Images          | Name of the extension (capitalized)                             |
+| Authentic images          | Product images that are authentic (uncapitalized)               |
+| Authentic badge           | Visual badge displayed declaring authenticity of product images |
+| Authentic message         | Optional message shown next to authentic badge                  |
+
+
 
 ❌ Don't use:
 
--   The outlet
--   Outlet section
--   Mark as outlet
+- Authentic images badge
+- Authentic images message
