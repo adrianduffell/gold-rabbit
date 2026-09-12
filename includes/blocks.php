@@ -21,8 +21,6 @@ function init_blocks(): void {
 	register_outlet_message_block();
 	add_filter( 'hooked_block_types', 'OutletPro\auto_insert_outlet_badge_hook', 10, 4 );
 	add_filter( 'hooked_block_types', 'OutletPro\auto_insert_outlet_message_hook', 10, 4 );
-	add_filter( 'render_block_data', 'OutletPro\set_outlet_product_collection_orderby_hook', 11 );
-	add_filter( 'query_loop_block_query_vars', 'OutletPro\filter_outlet_product_collection_hook', 11, 3 );
 }
 
 /**
@@ -32,9 +30,6 @@ function init_blocks(): void {
  */
 function deinit_blocks(): void {
 	$registry = \WP_Block_Type_Registry::get_instance();
-
-	remove_filter( 'render_block_data', 'OutletPro\set_outlet_product_collection_orderby_hook', 11 );
-	remove_filter( 'query_loop_block_query_vars', 'OutletPro\filter_outlet_product_collection_hook', 11 );
 
 	// Unregister all blocks in the outletpro namespace.
 	foreach ( $registry->get_all_registered() as $block_name => $block_type ) {
@@ -106,87 +101,6 @@ function auto_insert_outlet_message_hook( $hooked_blocks, $relative_position, $a
 	}
 
 	return $hooked_blocks;
-}
-
-/**
- * Set orderby for the outlet product collection block using the URL param.
- *
- * Fired by `render_block_data`.
- *
- * @internal WordPress filter hook
- * @param array<string, mixed> $parsed_block Parsed block data.
- * @return array<string, mixed> Updated parsed block data.
- */
-function set_outlet_product_collection_orderby_hook( array $parsed_block ): array {
-	if ( 'woocommerce/product-collection' !== ( $parsed_block['blockName'] ?? null ) ) {
-		return $parsed_block;
-	}
-
-	$is_outlet_query = $parsed_block['attrs']['query']['outletpro'] ?? false;
-	if ( ! $is_outlet_query ) {
-		return $parsed_block;
-	}
-
-	$orderby = sanitize_key( wp_unslash( $_GET['orderby'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only query param used to adjust catalog sort order.
-	if ( ! in_array( $orderby, array( 'price', 'price-desc', 'date', 'popularity', 'rating', 'menu_order' ), true ) ) {
-		return $parsed_block;
-	}
-
-	$parsed_block['attrs']['query']['orderBy'] = str_replace( '-desc', '', $orderby );
-	switch ( $orderby ) {
-		case 'price-desc':
-		case 'date':
-		case 'popularity':
-		case 'rating':
-			$parsed_block['attrs']['query']['order'] = 'desc';
-			break;
-		case 'price':
-		case 'menu_order':
-		default:
-			$parsed_block['attrs']['query']['order'] = 'asc';
-	}
-
-	return $parsed_block;
-}
-
-/**
- * Filter the query vars for the outlet product collection block.
- *
- * Restricts the product collection query to only return products that have
- * the outlet canonical term assigned.
- *
- * Fired by `query_loop_block_query_vars`.
- *
- * @internal WordPress filter hook
- * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint
- * @param array<string, mixed> $query   The query vars.
- * @param \WP_Block            $block   The block instance.
- * @param int                  $page    The current page.
- * @return array<string, mixed> Filtered query vars.
- */
-function filter_outlet_product_collection_hook( array $query, \WP_Block $block, int $page ): array { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
-	$is_outlet_query = $block->context['query']['outletpro'] ?? false;
-
-	if ( ! $is_outlet_query ) {
-		return $query;
-	}
-
-	$canonical_term = get_term_by( 'name', OUTLET_STATUS_CANONICAL_TERM, OUTLET_STATUS_TAXONOMY );
-	if ( ! $canonical_term ) {
-		$canonical_term = 0;
-	}
-
-	if ( ! isset( $query['tax_query'] ) || ! is_array( $query['tax_query'] ) ) {
-		$query['tax_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-	}
-
-	$query['tax_query'][] = array(
-		'taxonomy' => OUTLET_STATUS_TAXONOMY,
-		'field'    => 'term_id',
-		'terms'    => $canonical_term instanceof \WP_Term ? $canonical_term->term_id : 0,
-	);
-
-	return $query;
 }
 
 /**

@@ -9,7 +9,6 @@ import { registerPlugin } from '@wordpress/plugins';
 import './welcome-page';
 // #endif
 import './settings-sidebar';
-import './outlet-toggle';
 import EditorPreview from './editor-preview';
 import './blocks/outlet-badge';
 import './blocks/outlet-message';
