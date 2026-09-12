@@ -34,17 +34,6 @@ class Test_Deinit_Enqueue extends WP_UnitTestCase {
 		$this->assertFalse( has_action( 'wp_head', 'OutletPro\output_badge_style_css_variables_hook' ) );
 	}
 
-	public function test_removes_enqueue_admin_editor_styles_hook(): void {
-		// Arrange.
-		enqueue_init();
-
-		// Act.
-		deinit_enqueue();
-
-		// Assert.
-		$this->assertFalse( has_action( 'enqueue_block_assets', 'OutletPro\enqueue_admin_editor_styles_hook' ) );
-	}
-
 	public function test_removes_enqueue_admin_canvas_scripts_hook(): void {
 		// Arrange.
 		enqueue_init();
