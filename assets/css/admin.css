@@ -1,0 +1,113 @@
+/**
+ * Admin dashboard styles.
+ *
+ * Copyright 2026 Adrian Duffell
+ * Licensed under the GNU General Public License v2.0 or later.
+ */
+
+.outletpro-status-panel {
+	margin-bottom: 1.5em;
+}
+
+.outletpro-status-panel .form-field {
+	margin-bottom: 0;
+
+}
+
+.outletpro-status-panel .outletpro-status-help {
+	margin: 0 0 0 162px;
+	max-width: 290px;
+	font-size: 12px;
+	line-height: 1.4;
+	color: var(--wc-subtext);
+}
+
+@media (max-width: 500px) {
+
+	.outletpro-status-panel .outletpro-status-help {
+		display: none;
+	}
+}
+
+.outletpro-onboarding-notice {
+	display: none;
+}
+
+.outletpro-onboarding-notice.is-visible {
+	display: block;
+}
+
+.outletpro-checklist {
+	margin: 0 0 12px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.outletpro-new {
+	display: inline-block;
+	background: #f2edff;
+	color: #2c045d;
+	padding: 4px;
+	border-radius: 999px;
+	font-size: 8px;
+	font-weight: 500;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	vertical-align: top;
+	line-height: 1;
+	margin-top: 2px;
+	margin-right: 0.25em;
+}
+
+.outletpro-button-link {
+	text-decoration: none;
+}
+
+.outletpro-button-link:hover {
+	text-decoration: underline;
+}
+
+.outletpro-alert-text {
+	color: #b32d2e;
+}
+
+.outletpro-admin-badge {
+	display: block;
+	width: fit-content;
+	text-box: trim-both cap alphabetic;
+	line-height: 1;
+	padding: 0.32em;
+	font-size: 12px;
+	background-color: transparent;
+	color: inherit;
+	border: 1px solid currentcolor;
+	border-radius: 4px;
+	opacity: 0.85;
+}
+
+.wp-list-table .outletpro-admin-badge {
+	margin-top: 2px;
+}
+
+.outletpro-admin-badge:empty {
+	display: none;
+}
+
+@supports selector(:has(*)) {
+
+	/* Remove the plugin row divider before the custom license notice. */
+	.plugins tr:has(+ .outletpro-license-notice) > th,
+	.plugins tr:has(+ .outletpro-license-notice) > td {
+		border-bottom: 0;
+		box-shadow: none;
+	}
+}
+
+@media (max-width: 782px) {
+
+	/* Fill the area behind the premium license notice. */
+	.plugins .outletpro-license-notice::before {
+		background-color: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+		border-inline-start: 4px solid var(--wp-admin-theme-color);
+	}
+}

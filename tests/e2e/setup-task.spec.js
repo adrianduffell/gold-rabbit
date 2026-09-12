@@ -1,0 +1,47 @@
+/**
+ * Copyright 2026 Adrian Duffell
+ * Licensed under the GNU General Public License v2.0 or later.
+ */
+
+import { test, expect } from '@wordpress/e2e-test-utils-playwright';
+
+test( 'choose products in store setup task', async ( {
+	page,
+	admin,
+	requestUtils,
+} ) => {
+	// Arrange.
+	const product = await requestUtils.rest( {
+		method: 'POST',
+		path: '/wc/v3/products',
+		data: {
+			name: 'Test Outlet Product',
+			type: 'simple',
+			status: 'publish',
+		},
+	} );
+
+	await admin.visitAdminPage( 'admin.php', 'page=wc-admin' );
+	const taskItem = page.locator( '.woocommerce-task-list__item', {
+		hasText: 'Choose outlet products',
+	} );
+	await expect( taskItem ).toBeVisible();
+	await expect( taskItem ).not.toHaveClass( /is-complete/ );
+
+	await taskItem.click();
+	await expect( page ).toHaveURL( /edit\.php\?post_type=product/ );
+
+	// Act.
+	await admin.visitAdminPage(
+		'post.php',
+		`post=${ product.id }&action=edit`
+	);
+	await page.getByRole( 'link', { name: 'Inventory' } ).click();
+	await page.getByRole( 'checkbox', { name: 'Outlet' } ).check();
+	await page.getByRole( 'button', { name: 'Update' } ).click();
+	await page.waitForLoadState( 'networkidle' );
+
+	// Assert.
+	await admin.visitAdminPage( 'admin.php', 'page=wc-admin' );
+	await expect( taskItem ).toHaveClass( /complete/ );
+} );

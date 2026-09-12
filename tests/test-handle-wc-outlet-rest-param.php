@@ -1,0 +1,117 @@
+<?php
+/**
+ * Tests for handle_outletpro_rest_param().
+ *
+ * @package OutletPro
+ * @copyright 2026 Adrian Duffell
+ * @license GNU General Public License v2.0 or later
+ */
+
+use function OutletPro\add_to_outlet;
+use function OutletPro\register_outlet_status_taxonomy;
+use const OutletPro\OUTLET_STATUS_TAXONOMY;
+
+class Test_Handle_Outletpro_Rest_Param extends WP_UnitTestCase {
+
+	public function test_unfiltered_request_returns_all_products(): void {
+		// Arrange.
+		register_outlet_status_taxonomy();
+		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+		$outlet_product     = WC_Helper_Product::create_simple_product();
+		$non_outlet_product = WC_Helper_Product::create_simple_product();
+		add_to_outlet( $outlet_product );
+
+		// Act.
+		$request  = new WP_REST_Request( 'GET', '/wc/v3/products' );
+		$response = rest_do_request( $request );
+
+		// Assert.
+		$ids = wp_list_pluck( $response->get_data(), 'id' );
+		$this->assertContains( $outlet_product->get_id(), $ids );
+		$this->assertContains( $non_outlet_product->get_id(), $ids );
+	}
+
+	public function test_outletpro_param_filters_to_outlet_products_only(): void {
+		// Arrange.
+		register_outlet_status_taxonomy();
+		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+		$outlet_product     = WC_Helper_Product::create_simple_product();
+		$non_outlet_product = WC_Helper_Product::create_simple_product();
+		add_to_outlet( $outlet_product );
+
+		// Act.
+		$request = new WP_REST_Request( 'GET', '/wc/v3/products' );
+		$request->set_param( 'outletpro', true );
+		$response = rest_do_request( $request );
+
+		// Assert.
+		$ids = wp_list_pluck( $response->get_data(), 'id' );
+		$this->assertContains( $outlet_product->get_id(), $ids );
+		$this->assertNotContains( $non_outlet_product->get_id(), $ids );
+	}
+
+	public function test_false_outletpro_param_returns_all_products(): void {
+		// Arrange.
+		register_outlet_status_taxonomy();
+		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+		$outlet_product     = WC_Helper_Product::create_simple_product();
+		$non_outlet_product = WC_Helper_Product::create_simple_product();
+		add_to_outlet( $outlet_product );
+
+		// Act.
+		$request = new WP_REST_Request( 'GET', '/wc/v3/products' );
+		$request->set_param( 'outletpro', false );
+		$response = rest_do_request( $request );
+
+		// Assert.
+		$ids = wp_list_pluck( $response->get_data(), 'id' );
+		$this->assertContains( $outlet_product->get_id(), $ids );
+		$this->assertContains( $non_outlet_product->get_id(), $ids );
+	}
+
+	public function test_rest_product_query_is_unchanged_when_outletpro_param_is_absent(): void {
+		// Arrange.
+		$args     = array( 'post_type' => 'product' );
+		$request  = new WP_REST_Request( 'GET', '/wp/v2/products' );
+		$expected = $args;
+
+		// Act.
+		$result = apply_filters( 'rest_product_query', $args, $request );
+
+		// Assert.
+		$this->assertSame( $expected, $result );
+	}
+
+	public function test_rest_product_query_adds_tax_query_when_outletpro_is_true(): void {
+		// Arrange.
+		$args    = array( 'post_type' => 'product' );
+		$request = new WP_REST_Request( 'GET', '/wp/v2/products' );
+		$request->set_param( 'outletpro', true );
+
+		// Act.
+		$result = apply_filters( 'rest_product_query', $args, $request );
+
+		// Assert.
+		$this->assertArrayHasKey( 'tax_query', $result );
+		$this->assertCount( 1, $result['tax_query'] );
+		$this->assertSame( OUTLET_STATUS_TAXONOMY, $result['tax_query'][0]['taxonomy'] );
+		$this->assertSame( 'slug', $result['tax_query'][0]['field'] );
+	}
+
+	public function test_rest_product_query_is_unchanged_when_outletpro_is_false(): void {
+		// Arrange.
+		$args    = array( 'post_type' => 'product' );
+		$request = new WP_REST_Request( 'GET', '/wp/v2/products' );
+		$request->set_param( 'outletpro', false );
+		$expected = $args;
+
+		// Act.
+		$result = apply_filters( 'rest_product_query', $args, $request );
+
+		// Assert.
+		$this->assertSame( $expected, $result );
+	}
+}
