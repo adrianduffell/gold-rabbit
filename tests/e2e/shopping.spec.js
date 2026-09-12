@@ -71,7 +71,7 @@ test( 'Shopping flow', async ( { requestUtils, browser } ) => {
 
 	const badge = customerPage.locator( '.outletpro-badge' );
 	await expect( badge ).toBeVisible();
-	await expect( badge ).toHaveText( 'Last chance' );
+	await expect( badge ).toHaveText( 'Authentic' );
 	await expect
 		.soft( badge, 'Product font-size' )
 		.toHaveCSS( 'font-size', fixture?.productPage?.fontSize );
@@ -81,7 +81,9 @@ test( 'Shopping flow', async ( { requestUtils, browser } ) => {
 
 	const message = customerPage.locator( '.outletpro-message' );
 	await expect( message ).toBeVisible();
-	await expect( message ).toHaveText( 'Only while supplies last' );
+	await expect( message ).toHaveText(
+		'Our product images are not AI-generated'
+	);
 
 	await customerContext.close();
 } );
