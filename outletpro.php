@@ -46,7 +46,6 @@ require_once __DIR__ . '/includes/rest-api.php';
 // #ifdef LICENSE
 require_once __DIR__ . '/includes/admin-menu-license.php';
 // #endif
-require_once __DIR__ . '/includes/admin-product-options.php';
 require_once __DIR__ . '/includes/admin-product-bulk-edit.php';
 require_once __DIR__ . '/includes/admin-page-list-table.php';
 require_once __DIR__ . '/includes/shortcodes.php';
@@ -130,7 +129,6 @@ function admin_init_hook(): void {
 	// #ifdef LICENSE
 	init_license();
 	// #endif
-	init_admin_product_options();
 	init_admin_product_bulk_edit();
 	init_system_status();
 	init_tools();

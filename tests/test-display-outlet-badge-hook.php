@@ -32,16 +32,17 @@ class Test_Display_Outlet_Badge_Hook extends WP_UnitTestCase {
 		do_action( 'woocommerce_single_product_summary' );
 	}
 
-	public function test_outputs_nothing_for_non_outlet_product(): void {
+	public function test_outputs_badge_without_outlet_status(): void {
 		// Arrange.
 		register_outlet_status_taxonomy();
 		seed_outlet_status_taxonomy();
+		update_option( OUTLET_BADGE_LABEL_OPTION, 'Authentic images' );
 		$product         = WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-badge).*/s' ); // Does not contain the outlet badge.
+		$this->expectOutputRegex( '/outletpro-badge/' );
 
 		// Act.
 		do_action( 'woocommerce_single_product_summary' );

@@ -94,31 +94,17 @@ class Test_Display_Outlet_Message_Hook extends WP_UnitTestCase {
 		do_action( 'woocommerce_product_meta_start' );
 	}
 
-	public function test_does_not_display_message_for_non_outlet_product(): void {
+	public function test_displays_message_without_outlet_status(): void {
 		// Arrange.
 		register_outlet_status_taxonomy();
 		seed_outlet_status_taxonomy();
+		update_option( OUTLET_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-message).*/s' ); // Does not contain the outlet message.
-
-		// Act.
-		do_action( 'woocommerce_product_meta_start' );
-	}
-
-	public function test_does_not_display_message_when_post_is_not_a_product(): void {
-		// Arrange.
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
-		$post_id         = self::factory()->post->create();
-		$GLOBALS['post'] = get_post( $post_id );
-		init_woocommerce_template_hooks();
-
-		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-message).*/s' ); // Does not contain the outlet message.
+		$this->expectOutputRegex( '/outletpro-message/' );
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );

@@ -7,23 +7,19 @@
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\add_to_outlet;
 use function OutletPro\deinit_blocks;
 use function OutletPro\init_blocks;
 use function OutletPro\register_outlet_message_block;
-use function OutletPro\register_outlet_status_taxonomy;
 use function OutletPro\render_outlet_message_callback;
-use function OutletPro\seed_outlet_status_taxonomy;
 use const OutletPro\OUTLET_MESSAGE_OPTION;
 
 class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 
-	public function test_returns_empty_string_when_product_not_in_outlet(): void {
+	public function test_returns_message_html_without_outlet_status(): void {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
+		update_option( OUTLET_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(
@@ -40,19 +36,17 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		$result = render_outlet_message_callback( array(), '', $block );
 
 		// Assert.
-		$this->assertSame( '', $result );
+		$this->assertStringContainsString( 'outletpro-message', $result );
+		$this->assertStringContainsString( 'All of our product images are real.', $result );
 	}
 
-	public function test_returns_message_html_when_product_is_in_outlet(): void {
+	public function test_returns_message_html_with_expected_markup(): void {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-message',
 				'attrs'        => array(),
@@ -78,12 +72,9 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_MESSAGE_OPTION, 'Final sale — no returns.' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-message',
 				'attrs'        => array(),
@@ -105,34 +96,8 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		delete_option( OUTLET_MESSAGE_OPTION );
 	}
 
-	public function test_returns_empty_string_when_post_id_is_zero(): void {
-		// Arrange.
-		deinit_blocks();
-		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
-		$block = new WP_Block(
-			array(
-				'blockName'    => 'outletpro/outlet-message',
-				'attrs'        => array(),
-				'innerBlocks'  => array(),
-				'innerHTML'    => '',
-				'innerContent' => array(),
-			),
-			array()
-		);
-
-		// Act.
-		$result = render_outlet_message_callback( array(), '', $block );
-
-		// Assert.
-		$this->assertSame( '', $result );
-	}
-
 	public function test_message_is_registered_after_init_blocks(): void {
 		// Arrange.
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		deinit_blocks();
 
 		// Act.
@@ -146,12 +111,9 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_MESSAGE_OPTION, '' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-message',
 				'attrs'        => array(),
@@ -176,12 +138,9 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		delete_option( OUTLET_MESSAGE_OPTION );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-message',
 				'attrs'        => array(),
@@ -203,12 +162,9 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_outlet_message_block();
-		register_outlet_status_taxonomy();
-		seed_outlet_status_taxonomy();
 		update_option( OUTLET_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
 		$product = \WC_Helper_Product::create_simple_product();
-		add_to_outlet( $product );
-		$block = new WP_Block(
+		$block   = new WP_Block(
 			array(
 				'blockName'    => 'outletpro/outlet-message',
 				'attrs'        => array(),

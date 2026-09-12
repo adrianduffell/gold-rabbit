@@ -193,28 +193,12 @@ function filter_outlet_product_collection_hook( array $query, \WP_Block $block, 
  * Render callback for the outlet badge block.
  *
  * @internal
- * @param array<string, mixed> $attributes Block attributes.
+ * @param array<string, mixed> $_attributes Block attributes (unused).
  * @param string               $_content   Block inner content (unused).
- * @param \WP_Block            $block      Block instance.
- * @return string Rendered HTML, or empty string if the product is not in outlet.
+ * @param \WP_Block            $_block     Block instance (unused).
+ * @return string Rendered HTML, or empty string if the label is unavailable.
  */
-function render_outlet_badge_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
-	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
-
-	if ( ! $product_id ) {
-		return '';
-	}
-
-	$product = wc_get_product( $product_id );
-
-	if ( ! $product instanceof \WC_Product ) {
-		return '';
-	}
-
-	if ( ! taxonomy_exists( OUTLET_STATUS_TAXONOMY ) || ! is_outlet( $product ) ) {
-		return '';
-	}
-
+function render_outlet_badge_callback( array $_attributes, string $_content, \WP_Block $_block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
 			'class' => 'outletpro-badge',
@@ -252,28 +236,12 @@ function register_outlet_message_block(): void {
  * Render callback for the outlet message block.
  *
  * @internal
- * @param array<string, mixed> $attributes Block attributes.
+ * @param array<string, mixed> $_attributes Block attributes (unused).
  * @param string               $_content   Block inner content (unused).
- * @param \WP_Block            $block      Block instance.
- * @return string Rendered HTML, or empty string if the product is not in outlet.
+ * @param \WP_Block            $_block     Block instance (unused).
+ * @return string Rendered HTML, or empty string if the message is unavailable.
  */
-function render_outlet_message_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
-	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
-
-	if ( ! $product_id ) {
-		return '';
-	}
-
-	$product = wc_get_product( $product_id );
-
-	if ( ! $product instanceof \WC_Product ) {
-		return '';
-	}
-
-	if ( ! taxonomy_exists( OUTLET_STATUS_TAXONOMY ) || ! is_outlet( $product ) ) {
-		return '';
-	}
-
+function render_outlet_message_callback( array $_attributes, string $_content, \WP_Block $_block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
 			'class' => 'outletpro-message',
