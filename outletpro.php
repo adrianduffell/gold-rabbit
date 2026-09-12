@@ -55,11 +55,8 @@ require_once __DIR__ . '/includes/settings-license.php';
 require_once __DIR__ . '/includes/admin-plugins-license.php';
 require_once __DIR__ . '/includes/enqueue-license.php';
 // #endif
-require_once __DIR__ . '/includes/admin-product-list-table.php';
 require_once __DIR__ . '/includes/block-editor.php';
 require_once __DIR__ . '/includes/blocks.php';
-require_once __DIR__ . '/includes/admin-order.php';
-require_once __DIR__ . '/includes/orders.php';
 require_once __DIR__ . '/includes/customizer.php';
 require_once __DIR__ . '/includes/woocommerce-template-hooks.php';
 require_once __DIR__ . '/includes/enqueue.php';
@@ -87,7 +84,6 @@ function init_hook(): void {
 	init_shortcodes();
 	init_blocks();
 	init_block_editor();
-	init_orders();
 
 	// #ifdef LICENSE
 	if ( is_admin() ) {
@@ -119,8 +115,6 @@ function admin_init_hook(): void {
 	init_admin_product_options();
 	init_admin_product_bulk_edit();
 	init_system_status();
-	init_admin_product_list_table();
-	init_admin_order();
 }
 
 /**
