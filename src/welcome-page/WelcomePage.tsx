@@ -155,7 +155,7 @@ export function WelcomePage(): JSX.Element {
 								'authenticimages'
 						  )
 						: __(
-								"Authentic Images is now set up. Get started by adding the authentic badge to a product.",
+								'Authentic Images is now set up. Get started by adding the authentic badge to a product.',
 								'authenticimages'
 						  ) }{ ' ' }
 					{ createInterpolateElement(
