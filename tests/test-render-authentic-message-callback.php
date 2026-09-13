@@ -13,13 +13,13 @@ use function AuthenticImages\register_authentic_message_block;
 use function AuthenticImages\render_authentic_message_callback;
 use const AuthenticImages\AUTHENTIC_MESSAGE_OPTION;
 
-class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
+class Test_Render_Authentic_Message_Callback extends WP_UnitTestCase {
 
 	public function test_returns_message_html_for_product(): void {
 		// Arrange.
 		deinit_blocks();
 		register_authentic_message_block();
-		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(
@@ -37,7 +37,7 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 
 		// Assert.
 		$this->assertStringContainsString( 'authenticimages-message', $result );
-		$this->assertStringContainsString( 'Not eligible for change of mind returns', $result );
+		$this->assertStringContainsString( 'All of our product images are real.', $result );
 
 		// Cleanup.
 		delete_option( AUTHENTIC_MESSAGE_OPTION );
@@ -47,7 +47,7 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_authentic_message_block();
-		update_option( AUTHENTIC_MESSAGE_OPTION, 'Final sale — no returns.' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'Every product image shows the actual item.' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(
@@ -64,8 +64,8 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		$result = $block->render();
 
 		// Assert.
-		$this->assertStringContainsString( 'Final sale — no returns.', $result );
-		$this->assertStringNotContainsString( 'Not eligible for change of mind returns', $result );
+		$this->assertStringContainsString( 'Every product image shows the actual item.', $result );
+		$this->assertStringNotContainsString( 'All of our product images are real.', $result );
 
 		// Cleanup.
 		delete_option( AUTHENTIC_MESSAGE_OPTION );
@@ -159,7 +159,7 @@ class Test_Render_Outlet_Message_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_authentic_message_block();
-		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(

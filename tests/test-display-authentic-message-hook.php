@@ -25,7 +25,7 @@ class Test_Display_Authentic_Message_Hook extends WP_UnitTestCase {
 
 	public function test_displays_message_for_product(): void {
 		// Arrange.
-		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
@@ -39,13 +39,13 @@ class Test_Display_Authentic_Message_Hook extends WP_UnitTestCase {
 
 	public function test_message_contains_text(): void {
 		// Arrange.
-		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'All of our product images are real.' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/Not eligible for change of mind returns/' );
+		$this->expectOutputRegex( '/All of our product images are real\./' );
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );

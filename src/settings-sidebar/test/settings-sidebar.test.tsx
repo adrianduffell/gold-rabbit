@@ -472,7 +472,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			label: 'Sale',
+			label: 'Authentic',
 			setLabel,
 		} );
 		jest.isolateModules( () => {
@@ -485,7 +485,7 @@ describe( 'settings-sidebar registration', () => {
 
 		// Assert.
 		expect( screen.getByRole( 'textbox', { name: 'Label' } ) ).toHaveValue(
-			'Sale'
+			'Authentic'
 		);
 	} );
 
@@ -519,7 +519,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			label: 'Clearance',
+			label: 'Real images',
 			setLabel,
 		} );
 		jest.isolateModules( () => {
@@ -530,10 +530,10 @@ describe( 'settings-sidebar registration', () => {
 		const input = screen.getByRole( 'textbox', { name: 'Label' } );
 
 		// Act.
-		fireEvent.change( input, { target: { value: 'Discounts' } } );
+		fireEvent.change( input, { target: { value: 'Verified images' } } );
 
 		// Assert.
-		expect( setLabel ).toHaveBeenCalledWith( 'Discounts' );
+		expect( setLabel ).toHaveBeenCalledWith( 'Verified images' );
 	} );
 
 	test( 'font scale control reflects stored scale value', () => {
@@ -1128,7 +1128,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			message: 'Only while stocks last',
+			message: 'No AI-generated product images.',
 			setMessage,
 		} );
 		jest.isolateModules( () => {
@@ -1162,7 +1162,7 @@ describe( 'settings-sidebar registration', () => {
 		// Assert.
 		expect(
 			screen.getByRole( 'textbox', { name: 'Message' } )
-		).toHaveValue( 'Only while stocks last' );
+		).toHaveValue( 'No AI-generated product images.' );
 	} );
 
 	test( 'message textarea is empty when setting is not set', () => {
@@ -1215,7 +1215,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			message: 'Only while stocks last',
+			message: 'No AI-generated product images.',
 			setMessage,
 		} );
 		jest.isolateModules( () => {

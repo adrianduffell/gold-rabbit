@@ -83,30 +83,34 @@ describe( 'Edit', () => {
 	test( 'renders badge with label from global setting', () => {
 		// Arrange.
 		const setLabel = jest.fn();
-		mockUseEntityProp.mockReturnValue( [ 'Sale', setLabel, undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			setLabel,
+			undefined,
+		] );
 
 		// Act.
 		render( <Edit /> );
 
 		// Assert.
-		expect( screen.getByDisplayValue( 'Sale' ) ).toBeInTheDocument();
+		expect( screen.getByDisplayValue( 'Authentic' ) ).toBeInTheDocument();
 	} );
 
 	test( 'calls setLabel with updated label when content changes', () => {
 		// Arrange.
 		const setLabel = jest.fn();
 		mockUseEntityProp.mockReturnValue( [
-			'Clearance',
+			'Real images',
 			setLabel,
 			undefined,
 		] );
 		render( <Edit /> );
-		const input = screen.getByDisplayValue( 'Clearance' );
+		const input = screen.getByDisplayValue( 'Real images' );
 
 		// Act.
-		fireEvent.change( input, { target: { value: 'Discounted' } } );
+		fireEvent.change( input, { target: { value: 'Authentic images' } } );
 
 		// Assert.
-		expect( setLabel ).toHaveBeenCalledWith( 'Discounted' );
+		expect( setLabel ).toHaveBeenCalledWith( 'Authentic images' );
 	} );
 } );

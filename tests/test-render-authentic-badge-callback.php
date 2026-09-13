@@ -19,7 +19,7 @@ class Test_Render_Authentic_Badge_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_authentic_badge_block();
-		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Clearance' );
+		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Real images' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(
@@ -37,7 +37,7 @@ class Test_Render_Authentic_Badge_Callback extends WP_UnitTestCase {
 
 		// Assert.
 		$this->assertStringContainsString( 'authenticimages-badge', $result );
-		$this->assertStringContainsString( 'Clearance', $result );
+		$this->assertStringContainsString( 'Real images', $result );
 		$this->assertMatchesRegularExpression( '/<div[^>]+class="[^"]*authenticimages-badge/', $result );
 	}
 
@@ -45,7 +45,7 @@ class Test_Render_Authentic_Badge_Callback extends WP_UnitTestCase {
 		// Arrange.
 		deinit_blocks();
 		register_authentic_badge_block();
-		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Sale' );
+		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Authentic' );
 		$product = \WC_Helper_Product::create_simple_product();
 		$block   = new WP_Block(
 			array(
@@ -62,8 +62,8 @@ class Test_Render_Authentic_Badge_Callback extends WP_UnitTestCase {
 		$result = $block->render();
 
 		// Assert.
-		$this->assertStringContainsString( 'Sale', $result );
-		$this->assertStringNotContainsString( 'Clearance', $result );
+		$this->assertStringContainsString( 'Authentic', $result );
+		$this->assertStringNotContainsString( 'Real images', $result );
 	}
 
 	public function test_returns_empty_string_when_post_id_is_zero(): void {

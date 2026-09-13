@@ -76,7 +76,7 @@ describe( 'Edit', () => {
 		// Arrange.
 		const setMessage = jest.fn();
 		mockUseEntityProp.mockReturnValue( [
-			'Final sale — no returns.',
+			'Every product image shows the actual item.',
 			setMessage,
 			undefined,
 		] );
@@ -86,7 +86,9 @@ describe( 'Edit', () => {
 
 		// Assert.
 		expect(
-			screen.getByDisplayValue( 'Final sale — no returns.' )
+			screen.getByDisplayValue(
+				'Every product image shows the actual item.'
+			)
 		).toBeInTheDocument();
 	} );
 
@@ -94,22 +96,24 @@ describe( 'Edit', () => {
 		// Arrange.
 		const setMessage = jest.fn();
 		mockUseEntityProp.mockReturnValue( [
-			'Not eligible for change of mind returns',
+			'All of our product images are real.',
 			setMessage,
 			undefined,
 		] );
 		render( <Edit /> );
 		const input = screen.getByDisplayValue(
-			'Not eligible for change of mind returns'
+			'All of our product images are real.'
 		);
 
 		// Act.
 		fireEvent.change( input, {
-			target: { value: 'Final sale — no returns.' },
+			target: { value: 'Every product image shows the actual item.' },
 		} );
 
 		// Assert.
-		expect( setMessage ).toHaveBeenCalledWith( 'Final sale — no returns.' );
+		expect( setMessage ).toHaveBeenCalledWith(
+			'Every product image shows the actual item.'
+		);
 	} );
 
 	test( 'disables rich text formatting controls', () => {
@@ -117,7 +121,7 @@ describe( 'Edit', () => {
 		mockRichText.mockClear();
 		const setMessage = jest.fn();
 		mockUseEntityProp.mockReturnValue( [
-			'Final sale',
+			'Authentic product images',
 			setMessage,
 			undefined,
 		] );

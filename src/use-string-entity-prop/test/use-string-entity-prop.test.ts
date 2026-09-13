@@ -16,7 +16,11 @@ const mockUseEntityProp = useEntityProp as jest.Mock;
 describe( 'useStringEntityProp', () => {
 	test( 'returns string value from entity prop', () => {
 		// Arrange.
-		mockUseEntityProp.mockReturnValue( [ 'Sale', jest.fn(), undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			jest.fn(),
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>
@@ -24,7 +28,7 @@ describe( 'useStringEntityProp', () => {
 		);
 
 		// Assert.
-		expect( result.current[ 0 ] ).toBe( 'Sale' );
+		expect( result.current[ 0 ] ).toBe( 'Authentic' );
 	} );
 
 	test( 'returns undefined when entity prop is not set', () => {
@@ -81,22 +85,30 @@ describe( 'useStringEntityProp', () => {
 	test( 'exposes setter from entity prop', () => {
 		// Arrange.
 		const setValue = jest.fn();
-		mockUseEntityProp.mockReturnValue( [ 'Sale', setValue, undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			setValue,
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>
 			useStringEntityProp( 'authenticimages_badge_label' )
 		);
-		result.current[ 1 ]( 'Clearance' );
+		result.current[ 1 ]( 'Real images' );
 
 		// Assert.
-		expect( setValue ).toHaveBeenCalledWith( 'Clearance' );
+		expect( setValue ).toHaveBeenCalledWith( 'Real images' );
 	} );
 
 	test( 'setter forwards undefined to clear the value', () => {
 		// Arrange.
 		const setValue = jest.fn();
-		mockUseEntityProp.mockReturnValue( [ 'Sale', setValue, undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			setValue,
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>

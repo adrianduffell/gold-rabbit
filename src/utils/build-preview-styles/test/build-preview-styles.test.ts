@@ -25,19 +25,23 @@ describe( 'buildPreviewStyles', () => {
 	} );
 
 	test( 'serializes label as a JSON string', () => {
-		const result = buildPreviewStyles( { label: 'Sale' } );
+		const result = buildPreviewStyles( { label: 'Authentic' } );
 
-		expect( result ).toContain( '--authenticimages-badge-label: "Sale"' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic"'
+		);
 	} );
 
 	test( 'escapes special characters in label', () => {
-		const resultQuote = buildPreviewStyles( { label: 'Bob"s Sale' } );
+		const resultQuote = buildPreviewStyles( {
+			label: 'Bob"s original photography',
+		} );
 		const resultNewline = buildPreviewStyles( {
 			label: 'A "quote"\nand newline',
 		} );
 
 		expect( resultQuote ).toContain(
-			'--authenticimages-badge-label: "Bob\\"s Sale"'
+			'--authenticimages-badge-label: "Bob\\"s original photography"'
 		);
 		expect( resultNewline ).toContain(
 			'--authenticimages-badge-label: "A \\"quote\\"\\nand newline"'
@@ -74,7 +78,7 @@ describe( 'buildPreviewStyles', () => {
 
 	test( 'includes all CSS vars when all settings are provided', () => {
 		const result = buildPreviewStyles( {
-			label: 'Sale',
+			label: 'Authentic',
 			bgColor: '#ff0000',
 			textColor: '#ffffff',
 			fontWeight: '700',
@@ -86,7 +90,9 @@ describe( 'buildPreviewStyles', () => {
 			density: 60,
 		} );
 
-		expect( result ).toContain( '--authenticimages-badge-label: "Sale"' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic"'
+		);
 		expect( result ).toContain(
 			'--authenticimages-badge-bg-color: #ff0000'
 		);
@@ -168,11 +174,13 @@ describe( 'buildPreviewStyles', () => {
 
 	test( 'joins declarations with semicolons', () => {
 		const result = buildPreviewStyles( {
-			label: 'Sale',
+			label: 'Authentic',
 			bgColor: '#ff0000',
 		} );
 
-		expect( result ).toContain( '--authenticimages-badge-label: "Sale";' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic";'
+		);
 
 		expect( result ).toContain(
 			'--authenticimages-badge-bg-color: #ff0000;'

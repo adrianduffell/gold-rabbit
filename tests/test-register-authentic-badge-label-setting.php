@@ -75,8 +75,8 @@ class Test_Register_Authentic_Badge_Label_Setting extends WP_UnitTestCase {
 		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $user_id );
 
-		$raw_value       = '<strong>Clearance</strong> Badge';
-		$sanitized_value = 'Clearance Badge';
+		$raw_value       = '<strong>Real</strong> product images';
+		$sanitized_value = 'Real product images';
 
 		// Act.
 		$request = new WP_REST_Request( 'POST', '/wp/v2/settings' );

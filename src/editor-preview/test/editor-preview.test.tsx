@@ -48,7 +48,7 @@ describe( 'EditorPreview', () => {
 	test( 'renders CSS vars from settings', () => {
 		// Arrange.
 		setupEntityPropMock( {
-			authenticimages_badge_label: [ 'Sale', jest.fn() ],
+			authenticimages_badge_label: [ 'Authentic', jest.fn() ],
 			authenticimages_badge_bg_color: [ '#ff0000', jest.fn() ],
 			authenticimages_badge_text_color: [ '#ffffff', jest.fn() ],
 			authenticimages_badge_scale: [ 140, jest.fn() ],
@@ -64,7 +64,7 @@ describe( 'EditorPreview', () => {
 		);
 
 		expect( styleEl?.textContent ).toContain(
-			'--authenticimages-badge-label: "Sale"'
+			'--authenticimages-badge-label: "Authentic"'
 		);
 		expect( styleEl?.textContent ).toContain(
 			'--authenticimages-badge-bg-color: #ff0000'

@@ -14,7 +14,7 @@ class Test_Display_Authentic_Badge_Hook extends WP_UnitTestCase {
 
 	public function test_outputs_badge_html_for_product(): void {
 		// Arrange.
-		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Clearance' );
+		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Real images' );
 		$product         = WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
@@ -34,7 +34,7 @@ class Test_Display_Authentic_Badge_Hook extends WP_UnitTestCase {
 				return 'foo_hook';
 			}
 		);
-		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Clearance' );
+		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Real images' );
 		$product         = WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
@@ -54,7 +54,7 @@ class Test_Display_Authentic_Badge_Hook extends WP_UnitTestCase {
 				return 1;
 			}
 		);
-		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Clearance' );
+		update_option( AUTHENTIC_BADGE_LABEL_OPTION, 'Real images' );
 		$product         = WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();

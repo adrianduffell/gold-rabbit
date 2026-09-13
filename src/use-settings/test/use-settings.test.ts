@@ -34,13 +34,13 @@ function setupMock(
 describe( 'useSettings', () => {
 	test( 'returns label value from entity prop', () => {
 		// Arrange.
-		setupMock( { authenticimages_badge_label: 'Sale' } );
+		setupMock( { authenticimages_badge_label: 'Authentic' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
 
 		// Assert.
-		expect( result.current.label ).toBe( 'Sale' );
+		expect( result.current.label ).toBe( 'Authentic' );
 	} );
 
 	test( 'returns undefined label when entity prop is not set', () => {
@@ -131,7 +131,7 @@ describe( 'useSettings', () => {
 		const setLabel = jest.fn();
 		mockUseStringEntityProp.mockImplementation( ( key: string ) => {
 			if ( key === 'authenticimages_badge_label' ) {
-				return [ 'Clearance', setLabel ];
+				return [ 'Real images', setLabel ];
 			}
 			return [ undefined, jest.fn() ];
 		} );
@@ -141,10 +141,10 @@ describe( 'useSettings', () => {
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
-		result.current.setLabel( 'Sale' );
+		result.current.setLabel( 'Authentic' );
 
 		// Assert.
-		expect( setLabel ).toHaveBeenCalledWith( 'Sale' );
+		expect( setLabel ).toHaveBeenCalledWith( 'Authentic' );
 	} );
 
 	test( 'exposes setters wired to the correct entity prop key', () => {
