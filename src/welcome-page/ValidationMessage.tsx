@@ -7,8 +7,8 @@ import { __, _n, sprintf } from '@wordpress/i18n';
 import { Link } from '@wordpress/ui';
 import type { ValidationState } from './useLicenseValidation';
 export type { ValidationState } from './useLicenseValidation';
-const HELP_URL = 'https://outletpro.zip/help/license-key';
-const EXPIRY_HELP_URL = 'https://outletpro.zip/help/license-expiry';
+const HELP_URL = 'https://authenticimages.zip/help/license-key';
+const EXPIRY_HELP_URL = 'https://authenticimages.zip/help/license-expiry';
 export function ValidationMessage( {
 	validationState,
 }: {
@@ -16,11 +16,11 @@ export function ValidationMessage( {
 } ) {
 	switch ( validationState.status ) {
 		case 'validating':
-			return __( 'Validating…', 'outletpro' );
+			return __( 'Validating…', 'authenticimages' );
 		case 'invalid':
 			return __(
 				'Please check your premium license key and try again.',
-				'outletpro'
+				'authenticimages'
 			);
 		case 'expired': {
 			const expiryDate = new Date(
@@ -35,7 +35,7 @@ export function ValidationMessage( {
 					/* translators: %s: localized license expiry date. */
 					__(
 						'❌ License expired on %s. <help>Learn more</help>',
-						'outletpro'
+						'authenticimages'
 					),
 					expiryDate
 				),
@@ -45,7 +45,7 @@ export function ValidationMessage( {
 		case 'error':
 			return __(
 				'Unable to contact the licensing service. Please try again.',
-				'outletpro'
+				'authenticimages'
 			);
 		case 'available': {
 			const expiryDate = validationState.expiresAt
@@ -61,7 +61,7 @@ export function ValidationMessage( {
 					/* translators: %s: localized license expiry date. */
 					__(
 						'✅ Unlimited site activations available. Expires %s',
-						'outletpro'
+						'authenticimages'
 					),
 					expiryDate
 				);
@@ -69,7 +69,7 @@ export function ValidationMessage( {
 			if ( validationState.remaining === Infinity ) {
 				return __(
 					'✅ Unlimited site activations available',
-					'outletpro'
+					'authenticimages'
 				);
 			}
 			const availableMessage = validationState.expiresAt
@@ -78,14 +78,14 @@ export function ValidationMessage( {
 						'✅ %1$d site activation available. Expires %3$s',
 						'✅ %1$d of %2$d site activations available. Expires %3$s',
 						validationState.remaining,
-						'outletpro'
+						'authenticimages'
 				  )
 				: /* translators: 1: remaining activations, 2: total activations. */
 				  _n(
 						'✅ %1$d site activation available',
 						'✅ %1$d of %2$d site activations available',
 						validationState.remaining,
-						'outletpro'
+						'authenticimages'
 				  );
 			return sprintf(
 				availableMessage,
@@ -100,7 +100,7 @@ export function ValidationMessage( {
 				'❌ License has reached the site activation limit%2$s. Purchase another license or deactivate the existing site to use this license. <help>Learn more</help>',
 				'❌ License has reached the %1$d-site activation limit%2$s. Purchase another license or deactivate a site to use this license. <help>Learn more</help>',
 				validationState.total,
-				'outletpro'
+				'authenticimages'
 			);
 			return createInterpolateElement(
 				sprintf( unavailableMessage, validationState.total, '' ),
@@ -111,10 +111,10 @@ export function ValidationMessage( {
 			return createInterpolateElement(
 				__(
 					'Need a premium license? <purchase>Purchase a license</purchase> or <help>find your license key</help>',
-					'outletpro'
+					'authenticimages'
 				),
 				{
-					purchase: <Link href="https://outletpro.zip/buy" />,
+					purchase: <Link href="https://authenticimages.zip/buy" />,
 					help: <Link href={ HELP_URL } />,
 				}
 			);

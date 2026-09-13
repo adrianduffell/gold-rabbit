@@ -2,12 +2,12 @@
 /**
  * Test the sanitize_css_value function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\sanitize_css_value;
+use function AuthenticImages\sanitize_css_value;
 
 class Test_Sanitize_Css_Value extends WP_UnitTestCase {
 

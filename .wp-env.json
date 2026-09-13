@@ -2,7 +2,7 @@
 	"phpVersion": "8.2",
 	"plugins": [ "https://downloads.wordpress.org/plugin/woocommerce.zip" ],
 	"mappings": {
-		"wp-content/plugins/outletpro": "."
+		"wp-content/plugins/authenticimages": "."
 	},
 	"themes": [
 		"WordPress/twentytwentyfive",

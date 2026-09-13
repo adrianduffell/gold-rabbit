@@ -67,7 +67,7 @@ test( 'Shopping flow', async ( { requestUtils, browser } ) => {
 
 	await expect( customerPage.locator( '#wpadminbar' ) ).toHaveCount( 0 );
 
-	const badge = customerPage.locator( '.outletpro-badge' );
+	const badge = customerPage.locator( '.authenticimages-badge' );
 	await expect( badge ).toBeVisible();
 	await expect( badge ).toHaveText( 'Authentic' );
 	await expect
@@ -77,7 +77,7 @@ test( 'Shopping flow', async ( { requestUtils, browser } ) => {
 		.soft( badge, 'Product padding' )
 		.toHaveCSS( 'padding-top', fixture?.productPage?.padding );
 
-	const message = customerPage.locator( '.outletpro-message' );
+	const message = customerPage.locator( '.authenticimages-message' );
 	await expect( message ).toBeVisible();
 	await expect( message ).toHaveText(
 		'Our product images are not AI-generated'

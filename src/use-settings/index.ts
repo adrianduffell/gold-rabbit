@@ -32,35 +32,39 @@ export type Settings = {
 };
 
 const useSettings = (): Settings => {
-	const [ label, setLabel ] = useStringEntityProp( 'outletpro_badge_label' );
+	const [ label, setLabel ] = useStringEntityProp(
+		'authenticimages_badge_label'
+	);
 	const [ textColor, setTextColor ] = useStringEntityProp(
-		'outletpro_badge_text_color'
+		'authenticimages_badge_text_color'
 	);
 	const [ bgColor, setBgColor ] = useStringEntityProp(
-		'outletpro_badge_bg_color'
+		'authenticimages_badge_bg_color'
 	);
 	const [ fontWeight, setFontWeight ] = useStringEntityProp(
-		'outletpro_badge_font_weight'
+		'authenticimages_badge_font_weight'
 	);
 	const [ borderColor, setBorderColor ] = useStringEntityProp(
-		'outletpro_badge_border_color'
+		'authenticimages_badge_border_color'
 	);
 	const [ borderStyle, setBorderStyle ] = useStringEntityProp(
-		'outletpro_badge_border_style'
+		'authenticimages_badge_border_style'
 	);
 	const [ borderWidth, setBorderWidth ] = useStringEntityProp(
-		'outletpro_badge_border_width'
+		'authenticimages_badge_border_width'
 	);
 	const [ borderRadius, setBorderRadius ] = useStringEntityProp(
-		'outletpro_badge_border_radius'
+		'authenticimages_badge_border_radius'
 	);
 	const [ scale, setScale ] = useUnsignedIntegerEntityProp(
-		'outletpro_badge_scale'
+		'authenticimages_badge_scale'
 	);
 	const [ density, setDensity ] = useUnsignedIntegerEntityProp(
-		'outletpro_badge_density'
+		'authenticimages_badge_density'
 	);
-	const [ message, setMessage ] = useStringEntityProp( 'outletpro_message' );
+	const [ message, setMessage ] = useStringEntityProp(
+		'authenticimages_message'
+	);
 
 	return {
 		label,

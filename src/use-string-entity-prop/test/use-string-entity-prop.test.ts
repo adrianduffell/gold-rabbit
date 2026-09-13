@@ -20,7 +20,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
@@ -37,7 +37,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
@@ -50,7 +50,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
@@ -66,13 +66,15 @@ describe( 'useStringEntityProp', () => {
 		] );
 
 		// Act.
-		renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) );
+		renderHook( () =>
+			useStringEntityProp( 'authenticimages_badge_label' )
+		);
 
 		// Assert.
 		expect( mockUseEntityProp ).toHaveBeenCalledWith(
 			'root',
 			'site',
-			'outletpro_badge_label'
+			'authenticimages_badge_label'
 		);
 	} );
 
@@ -83,7 +85,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 		result.current[ 1 ]( 'Clearance' );
 
@@ -98,7 +100,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 		result.current[ 1 ]( undefined );
 
@@ -112,9 +114,11 @@ describe( 'useStringEntityProp', () => {
 
 		// Expect.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).toThrow(
-			'outletpro setting "outletpro_badge_label" must be a string'
+			'authenticimages setting "authenticimages_badge_label" must be a string'
 		);
 		expect( console ).toHaveErrored();
 	} );
@@ -129,7 +133,9 @@ describe( 'useStringEntityProp', () => {
 
 		// Act + Assert: no throw when value is undefined.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).not.toThrow();
 	} );
 
@@ -139,7 +145,9 @@ describe( 'useStringEntityProp', () => {
 
 		// Act + Assert: no throw when value is null.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).not.toThrow();
 	} );
 } );

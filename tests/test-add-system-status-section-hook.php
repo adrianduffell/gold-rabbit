@@ -2,12 +2,12 @@
 /**
  * Tests for add_system_status_section_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\init_system_status;
+use function AuthenticImages\init_system_status;
 
 class Test_Add_System_Status_Section_Hook extends WP_UnitTestCase {
 
@@ -16,7 +16,7 @@ class Test_Add_System_Status_Section_Hook extends WP_UnitTestCase {
 		init_system_status();
 
 		// Expect.
-		$this->expectOutputRegex( '/<table[^>]*>.*?<thead>.*?<h2>Outlet<\/h2>.*?<\/thead>.*?<\/table>/s' );
+		$this->expectOutputRegex( '/<table[^>]*>.*?<thead>.*?<h2>Authentic Images<\/h2>.*?<\/thead>.*?<\/table>/s' );
 
 		// Act.
 		do_action( 'woocommerce_system_status_report' );

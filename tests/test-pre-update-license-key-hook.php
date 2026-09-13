@@ -2,16 +2,16 @@
 /**
  * Tests for the pre_update_license_key_hook function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_license_settings;
-use function OutletPro\init_license_settings;
-use const OutletPro\LICENSE_ACTIVATION_OPTION;
-use const OutletPro\LICENSE_KEY_OPTION;
+use function AuthenticImages\deinit_license_settings;
+use function AuthenticImages\init_license_settings;
+use const AuthenticImages\LICENSE_ACTIVATION_OPTION;
+use const AuthenticImages\LICENSE_KEY_OPTION;
 
 class Test_Pre_Update_License_Key_Hook extends WP_UnitTestCase {
 	public function test_rest_api_returns_previous_license_when_activation_fails(): void { //phpcs:ignore Generic.Metrics.NestingLevel.MaxExceeded

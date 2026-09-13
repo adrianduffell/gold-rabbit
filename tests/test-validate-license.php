@@ -2,15 +2,15 @@
 /**
  * Test the validate_license function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\validate_license;
-use const OutletPro\LICENSE_ERROR_EXPIRED;
-use const OutletPro\LICENSE_ERROR_NOT_FOUND;
+use function AuthenticImages\validate_license;
+use const AuthenticImages\LICENSE_ERROR_EXPIRED;
+use const AuthenticImages\LICENSE_ERROR_NOT_FOUND;
 
 class Test_Validate_License extends WP_UnitTestCase {
 

@@ -1,45 +1,45 @@
 <?php
 /**
- * Tests for display_outlet_message_hook().
+ * Tests for display_authentic_message_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\init_woocommerce_template_hooks;
-use const OutletPro\OUTLET_MESSAGE_OPTION;
+use function AuthenticImages\init_woocommerce_template_hooks;
+use const AuthenticImages\AUTHENTIC_MESSAGE_OPTION;
 
-class Test_Display_Outlet_Message_Hook extends WP_UnitTestCase {
+class Test_Display_Authentic_Message_Hook extends WP_UnitTestCase {
 
 	public function test_hook_is_registered_after_init_woocommerce_template_hooks(): void {
 		// Arrange.
-		remove_action( 'woocommerce_product_meta_start', 'OutletPro\display_outlet_message_hook', 1 );
+		remove_action( 'woocommerce_product_meta_start', 'AuthenticImages\display_authentic_message_hook', 1 );
 
 		// Act.
 		init_woocommerce_template_hooks();
 
 		// Assert.
-		$this->assertSame( 1, has_action( 'woocommerce_product_meta_start', 'OutletPro\display_outlet_message_hook' ) );
+		$this->assertSame( 1, has_action( 'woocommerce_product_meta_start', 'AuthenticImages\display_authentic_message_hook' ) );
 	}
 
 	public function test_displays_message_for_product(): void {
 		// Arrange.
-		update_option( OUTLET_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/outletpro-message/' );
+		$this->expectOutputRegex( '/authenticimages-message/' );
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );
 	}
 
-	public function test_message_contains_outlet_text(): void {
+	public function test_message_contains_text(): void {
 		// Arrange.
-		update_option( OUTLET_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, 'Not eligible for change of mind returns' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
@@ -53,13 +53,13 @@ class Test_Display_Outlet_Message_Hook extends WP_UnitTestCase {
 
 	public function test_does_not_display_message_when_option_is_empty(): void {
 		// Arrange.
-		update_option( OUTLET_MESSAGE_OPTION, '' );
+		update_option( AUTHENTIC_MESSAGE_OPTION, '' );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-message).*/s' ); // Does not contain the outlet message.
+		$this->expectOutputRegex( '/^(?!.*authenticimages-message).*/s' ); // Does not contain the authentic message.
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );
@@ -67,13 +67,13 @@ class Test_Display_Outlet_Message_Hook extends WP_UnitTestCase {
 
 	public function test_does_not_display_message_when_option_does_not_exist(): void {
 		// Arrange.
-		delete_option( OUTLET_MESSAGE_OPTION );
+		delete_option( AUTHENTIC_MESSAGE_OPTION );
 		$product         = \WC_Helper_Product::create_simple_product();
 		$GLOBALS['post'] = get_post( $product->get_id() );
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-message).*/s' ); // Does not contain the outlet message.
+		$this->expectOutputRegex( '/^(?!.*authenticimages-message).*/s' ); // Does not contain the authentic message.
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );
@@ -86,7 +86,7 @@ class Test_Display_Outlet_Message_Hook extends WP_UnitTestCase {
 		init_woocommerce_template_hooks();
 
 		// Expect.
-		$this->expectOutputRegex( '/^(?!.*outletpro-message).*/s' ); // Does not contain the outlet message.
+		$this->expectOutputRegex( '/^(?!.*authenticimages-message).*/s' ); // Does not contain the authentic message.
 
 		// Act.
 		do_action( 'woocommerce_product_meta_start' );

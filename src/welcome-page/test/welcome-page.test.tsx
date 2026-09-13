@@ -76,8 +76,8 @@ function arrangeGlobals( {
 	licenseStatus?: string;
 	productsUrl?: string;
 } = {} ) {
-	document.cookie = 'OUTLETPRO_DISMISS_SETUP=; max-age=0; path=/';
-	( window as any ).outletproWelcomePage = {
+	document.cookie = 'AUTHENTICIMAGES_DISMISS_SETUP=; max-age=0; path=/';
+	( window as any ).authenticimagesWelcomePage = {
 		licenseName,
 		licenseStatus,
 		productsUrl,
@@ -114,7 +114,7 @@ test( 'renders the welcome message', () => {
 
 	// Assert.
 	expect(
-		screen.getByText( /Thank you for choosing Outlet Pro!/i )
+		screen.getByText( /Thank you for choosing Authentic Images!/i )
 	).toBeInTheDocument();
 	expect( screen.getByLabelText( /Premium license key/i ) ).toHaveValue( '' );
 } );
@@ -131,7 +131,7 @@ test.each( [ 'not_found', 'error' ] )(
 
 		// Assert.
 		expect(
-			screen.getByRole( 'heading', { name: 'Outlet Pro Setup' } )
+			screen.getByRole( 'heading', { name: 'Authentic Images Setup' } )
 		).toBeInTheDocument();
 		expect(
 			screen.getByText(
@@ -157,7 +157,7 @@ test( 'renders the expired license heading and re-setup message', () => {
 
 	// Assert.
 	expect(
-		screen.getByRole( 'heading', { name: 'Outlet Pro Setup' } )
+		screen.getByRole( 'heading', { name: 'Authentic Images Setup' } )
 	).toBeInTheDocument();
 	expect(
 		screen.getByText(
@@ -229,9 +229,9 @@ test( 'dismisses the welcome screen for the current device', () => {
 	);
 	expect( learnMoreLink ).toHaveAttribute(
 		'href',
-		'https://outletpro.zip/help/license-key'
+		'https://authenticimages.zip/help/license-key'
 	);
-	expect( document.cookie ).toContain( 'OUTLETPRO_DISMISS_SETUP=1' );
+	expect( document.cookie ).toContain( 'AUTHENTICIMAGES_DISMISS_SETUP=1' );
 } );
 
 test( 'undoes dismissal for the current device', () => {
@@ -246,9 +246,9 @@ test( 'undoes dismissal for the current device', () => {
 
 	// Assert.
 	expect(
-		screen.getByRole( 'heading', { name: 'Welcome to Outlet Pro' } )
+		screen.getByRole( 'heading', { name: 'Welcome to Authentic Images' } )
 	).toBeInTheDocument();
-	expect( document.cookie ).not.toContain( 'OUTLETPRO_DISMISS_SETUP' );
+	expect( document.cookie ).not.toContain( 'AUTHENTICIMAGES_DISMISS_SETUP' );
 } );
 
 test( 'forwards license key changes to validation', () => {
@@ -339,7 +339,7 @@ test( 'shows success message after valid license key is saved', async () => {
 		canActivate: true,
 	} );
 	mockApiFetch.mockResolvedValue( {
-		outletpro_license_key: 'ABCD-1234',
+		authenticimages_license_key: 'ABCD-1234',
 	} );
 
 	// Act.
@@ -355,7 +355,7 @@ test( 'shows success message after valid license key is saved', async () => {
 	expect( mockApiFetch ).toHaveBeenCalledWith( {
 		path: '/wp/v2/settings',
 		method: 'POST',
-		data: { outletpro_license_key: 'ABCD-1234' },
+		data: { authenticimages_license_key: 'ABCD-1234' },
 	} );
 } );
 
@@ -393,7 +393,7 @@ test( 'shows activation error when the saved license key does not match', async 
 		canActivate: true,
 	} );
 	mockApiFetch.mockResolvedValue( {
-		outletpro_license_key: 'PREVIOUS-LICENSE-KEY',
+		authenticimages_license_key: 'PREVIOUS-LICENSE-KEY',
 	} );
 
 	// Act.
@@ -422,7 +422,7 @@ test( 'welcome mode success view shows Products link', async () => {
 		canActivate: true,
 	} );
 	mockApiFetch.mockResolvedValue( {
-		outletpro_license_key: 'ABCD-1234',
+		authenticimages_license_key: 'ABCD-1234',
 	} );
 
 	// Act.
@@ -450,7 +450,7 @@ test( 'reset mode success view omits getting started guidance', async () => {
 		canActivate: true,
 	} );
 	mockApiFetch.mockResolvedValue( {
-		outletpro_license_key: 'NEW-LICENSE-KEY',
+		authenticimages_license_key: 'NEW-LICENSE-KEY',
 	} );
 
 	// Act.
@@ -468,7 +468,7 @@ test( 'reset mode success view omits getting started guidance', async () => {
 	const learnMoreLink = screen.getByRole( 'link', { name: 'Learn more' } );
 	expect( learnMoreLink ).toHaveAttribute(
 		'href',
-		'https://outletpro.zip/help/license'
+		'https://authenticimages.zip/help/license'
 	);
 	const description = learnMoreLink.closest( 'p' );
 	expect( description ).toHaveTextContent(
@@ -476,10 +476,5 @@ test( 'reset mode success view omits getting started guidance', async () => {
 	);
 	expect(
 		screen.queryByRole( 'link', { name: /Get Started/i } )
-	).not.toBeInTheDocument();
-	expect(
-		screen.queryByText(
-			/Get started by including your first product in the store's outlet/i
-		)
 	).not.toBeInTheDocument();
 } );

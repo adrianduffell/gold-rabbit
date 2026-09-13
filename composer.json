@@ -1,6 +1,6 @@
 {
-	"name": "adrianduffell/outletpro",
-	"description": "Move old stock easily by adding a dedicated outlet to WooCommerce.",
+	"name": "adrianduffell/authenticimages",
+	"description": "Authentic Images for WooCommerce.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"authors": [

@@ -5,12 +5,12 @@
 
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-test( 'system status shows outlet heading', async ( { page, admin } ) => {
+test( 'system status shows heading', async ( { page, admin } ) => {
 	// Act.
 	await admin.visitAdminPage( 'admin.php', 'page=wc-status' );
 
 	// Assert.
 	await expect(
-		page.getByRole( 'heading', { name: 'Outlet' } )
+		page.getByRole( 'heading', { name: 'Authentic Images' } )
 	).toBeVisible();
 } );

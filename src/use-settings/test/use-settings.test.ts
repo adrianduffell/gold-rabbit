@@ -34,7 +34,7 @@ function setupMock(
 describe( 'useSettings', () => {
 	test( 'returns label value from entity prop', () => {
 		// Arrange.
-		setupMock( { outletpro_badge_label: 'Sale' } );
+		setupMock( { authenticimages_badge_label: 'Sale' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
@@ -56,7 +56,7 @@ describe( 'useSettings', () => {
 
 	test( 'returns bg color value from entity prop', () => {
 		// Arrange.
-		setupMock( { outletpro_badge_bg_color: '#FFEE85' } );
+		setupMock( { authenticimages_badge_bg_color: '#FFEE85' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
@@ -67,7 +67,7 @@ describe( 'useSettings', () => {
 
 	test( 'returns text color value from entity prop', () => {
 		// Arrange.
-		setupMock( { outletpro_badge_text_color: '#333333' } );
+		setupMock( { authenticimages_badge_text_color: '#333333' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
@@ -78,7 +78,7 @@ describe( 'useSettings', () => {
 
 	test( 'returns font weight value from entity prop', () => {
 		// Arrange.
-		setupMock( { outletpro_badge_font_weight: '700' } );
+		setupMock( { authenticimages_badge_font_weight: '700' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
@@ -89,7 +89,7 @@ describe( 'useSettings', () => {
 
 	test( 'returns border radius value from entity prop', () => {
 		// Arrange.
-		setupMock( { outletpro_badge_border_radius: '4px' } );
+		setupMock( { authenticimages_badge_border_radius: '4px' } );
 
 		// Act.
 		const { result } = renderHook( () => useSettings() );
@@ -130,7 +130,7 @@ describe( 'useSettings', () => {
 		// Arrange.
 		const setLabel = jest.fn();
 		mockUseStringEntityProp.mockImplementation( ( key: string ) => {
-			if ( key === 'outletpro_badge_label' ) {
+			if ( key === 'authenticimages_badge_label' ) {
 				return [ 'Clearance', setLabel ];
 			}
 			return [ undefined, jest.fn() ];
@@ -151,15 +151,15 @@ describe( 'useSettings', () => {
 		// Arrange.
 		const setters: Record< string, jest.Mock > = {};
 		const keyToSetter: Record< string, string > = {
-			outletpro_badge_label: 'setLabel',
-			outletpro_badge_text_color: 'setTextColor',
-			outletpro_badge_bg_color: 'setBgColor',
-			outletpro_badge_font_weight: 'setFontWeight',
-			outletpro_badge_border_color: 'setBorderColor',
-			outletpro_badge_border_style: 'setBorderStyle',
-			outletpro_badge_border_width: 'setBorderWidth',
-			outletpro_badge_border_radius: 'setBorderRadius',
-			outletpro_message: 'setMessage',
+			authenticimages_badge_label: 'setLabel',
+			authenticimages_badge_text_color: 'setTextColor',
+			authenticimages_badge_bg_color: 'setBgColor',
+			authenticimages_badge_font_weight: 'setFontWeight',
+			authenticimages_badge_border_color: 'setBorderColor',
+			authenticimages_badge_border_style: 'setBorderStyle',
+			authenticimages_badge_border_width: 'setBorderWidth',
+			authenticimages_badge_border_radius: 'setBorderRadius',
+			authenticimages_message: 'setMessage',
 		};
 		for ( const key of Object.keys( keyToSetter ) ) {
 			setters[ key ] = jest.fn();
@@ -189,29 +189,33 @@ describe( 'useSettings', () => {
 		result.current.setMessage( 'o' );
 
 		// Assert.
-		expect( setters.outletpro_badge_label ).toHaveBeenCalledWith( 'a' );
-		expect( setters.outletpro_badge_text_color ).toHaveBeenCalledWith(
+		expect( setters.authenticimages_badge_label ).toHaveBeenCalledWith(
+			'a'
+		);
+		expect( setters.authenticimages_badge_text_color ).toHaveBeenCalledWith(
 			'b'
 		);
-		expect( setters.outletpro_badge_bg_color ).toHaveBeenCalledWith( 'c' );
-		expect( setters.outletpro_badge_font_weight ).toHaveBeenCalledWith(
-			'e'
+		expect( setters.authenticimages_badge_bg_color ).toHaveBeenCalledWith(
+			'c'
 		);
-		expect( setters.outletpro_badge_border_color ).toHaveBeenCalledWith(
-			'f'
-		);
-		expect( setters.outletpro_badge_border_style ).toHaveBeenCalledWith(
-			'g'
-		);
-		expect( setters.outletpro_badge_border_width ).toHaveBeenCalledWith(
-			'h'
-		);
-		expect( setters.outletpro_badge_border_radius ).toHaveBeenCalledWith(
-			'i'
-		);
+		expect(
+			setters.authenticimages_badge_font_weight
+		).toHaveBeenCalledWith( 'e' );
+		expect(
+			setters.authenticimages_badge_border_color
+		).toHaveBeenCalledWith( 'f' );
+		expect(
+			setters.authenticimages_badge_border_style
+		).toHaveBeenCalledWith( 'g' );
+		expect(
+			setters.authenticimages_badge_border_width
+		).toHaveBeenCalledWith( 'h' );
+		expect(
+			setters.authenticimages_badge_border_radius
+		).toHaveBeenCalledWith( 'i' );
 		expect( scaleSetter ).toHaveBeenCalledWith( 140 );
 		expect( densitySetter ).toHaveBeenCalledWith( 80 );
-		expect( setters.outletpro_message ).toHaveBeenCalledWith( 'o' );
+		expect( setters.authenticimages_message ).toHaveBeenCalledWith( 'o' );
 	} );
 
 	test( 'calls useStringEntityProp for string settings and useUnsignedIntegerEntityProp for scale and density', () => {
@@ -227,22 +231,22 @@ describe( 'useSettings', () => {
 		const keys = mockUseStringEntityProp.mock.calls.map(
 			( call: [ string ] ) => call[ 0 ]
 		);
-		expect( keys ).toContain( 'outletpro_badge_label' );
-		expect( keys ).toContain( 'outletpro_badge_text_color' );
-		expect( keys ).toContain( 'outletpro_badge_bg_color' );
-		expect( keys ).toContain( 'outletpro_badge_font_weight' );
-		expect( keys ).toContain( 'outletpro_badge_border_color' );
-		expect( keys ).toContain( 'outletpro_badge_border_style' );
-		expect( keys ).toContain( 'outletpro_badge_border_width' );
-		expect( keys ).toContain( 'outletpro_badge_border_radius' );
-		expect( keys ).toContain( 'outletpro_message' );
+		expect( keys ).toContain( 'authenticimages_badge_label' );
+		expect( keys ).toContain( 'authenticimages_badge_text_color' );
+		expect( keys ).toContain( 'authenticimages_badge_bg_color' );
+		expect( keys ).toContain( 'authenticimages_badge_font_weight' );
+		expect( keys ).toContain( 'authenticimages_badge_border_color' );
+		expect( keys ).toContain( 'authenticimages_badge_border_style' );
+		expect( keys ).toContain( 'authenticimages_badge_border_width' );
+		expect( keys ).toContain( 'authenticimages_badge_border_radius' );
+		expect( keys ).toContain( 'authenticimages_message' );
 		expect( mockUseUnsignedIntegerEntityProp ).toHaveBeenNthCalledWith(
 			1,
-			'outletpro_badge_scale'
+			'authenticimages_badge_scale'
 		);
 		expect( mockUseUnsignedIntegerEntityProp ).toHaveBeenNthCalledWith(
 			2,
-			'outletpro_badge_density'
+			'authenticimages_badge_density'
 		);
 		expect( mockUseUnsignedIntegerEntityProp ).toHaveBeenCalledTimes( 2 );
 	} );

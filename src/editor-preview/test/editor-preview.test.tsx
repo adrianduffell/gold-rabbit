@@ -41,18 +41,18 @@ describe( 'EditorPreview', () => {
 
 		// Assert.
 		expect(
-			document.head.querySelector( '#outletpro-preview-vars' )
+			document.head.querySelector( '#authenticimages-preview-vars' )
 		).not.toBeNull();
 	} );
 
 	test( 'renders CSS vars from settings', () => {
 		// Arrange.
 		setupEntityPropMock( {
-			outletpro_badge_label: [ 'Sale', jest.fn() ],
-			outletpro_badge_bg_color: [ '#ff0000', jest.fn() ],
-			outletpro_badge_text_color: [ '#ffffff', jest.fn() ],
-			outletpro_badge_scale: [ 140, jest.fn() ],
-			outletpro_badge_density: [ 80, jest.fn() ],
+			authenticimages_badge_label: [ 'Sale', jest.fn() ],
+			authenticimages_badge_bg_color: [ '#ff0000', jest.fn() ],
+			authenticimages_badge_text_color: [ '#ffffff', jest.fn() ],
+			authenticimages_badge_scale: [ 140, jest.fn() ],
+			authenticimages_badge_density: [ 80, jest.fn() ],
 		} );
 
 		// Act.
@@ -60,23 +60,23 @@ describe( 'EditorPreview', () => {
 
 		// Assert.
 		const styleEl = document.head.querySelector(
-			'#outletpro-preview-vars'
+			'#authenticimages-preview-vars'
 		);
 
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-label: "Sale"'
+			'--authenticimages-badge-label: "Sale"'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-bg-color: #ff0000'
+			'--authenticimages-badge-bg-color: #ff0000'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-text-color: #ffffff'
+			'--authenticimages-badge-text-color: #ffffff'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-scale: 140'
+			'--authenticimages-badge-scale: 140'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-density: 80'
+			'--authenticimages-badge-density: 80'
 		);
 	} );
 
@@ -89,23 +89,23 @@ describe( 'EditorPreview', () => {
 
 		// Assert.
 		const styleEl = document.head.querySelector(
-			'#outletpro-preview-vars'
+			'#authenticimages-preview-vars'
 		);
 
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-bg-color: unset'
+			'--authenticimages-badge-bg-color: unset'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-text-color: unset'
+			'--authenticimages-badge-text-color: unset'
 		);
 	} );
 
 	test( 'falls back to unset for empty string style values', () => {
 		// Arrange.
 		setupEntityPropMock( {
-			outletpro_badge_bg_color: [ '', jest.fn() ],
-			outletpro_badge_border_style: [ '', jest.fn() ],
-			outletpro_badge_font_weight: [ '', jest.fn() ],
+			authenticimages_badge_bg_color: [ '', jest.fn() ],
+			authenticimages_badge_border_style: [ '', jest.fn() ],
+			authenticimages_badge_font_weight: [ '', jest.fn() ],
 		} );
 
 		// Act.
@@ -113,17 +113,17 @@ describe( 'EditorPreview', () => {
 
 		// Assert.
 		const styleEl = document.head.querySelector(
-			'#outletpro-preview-vars'
+			'#authenticimages-preview-vars'
 		);
 
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-bg-color: unset'
+			'--authenticimages-badge-bg-color: unset'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-border-style: unset'
+			'--authenticimages-badge-border-style: unset'
 		);
 		expect( styleEl?.textContent ).toContain(
-			'--outletpro-badge-font-weight: unset'
+			'--authenticimages-badge-font-weight: unset'
 		);
 	} );
 
@@ -138,7 +138,7 @@ describe( 'EditorPreview', () => {
 			// Act.
 			act( () => {
 				window.dispatchEvent(
-					new CustomEvent( 'outletproCanvasReady', {
+					new CustomEvent( 'authenticimagesCanvasReady', {
 						detail: {
 							document: canvasDoc,
 						},
@@ -148,10 +148,10 @@ describe( 'EditorPreview', () => {
 
 			// Assert.
 			expect(
-				canvasDoc.head.querySelector( '#outletpro-preview-vars' )
+				canvasDoc.head.querySelector( '#authenticimages-preview-vars' )
 			).not.toBeNull();
 			expect(
-				document.head.querySelector( '#outletpro-preview-vars' )
+				document.head.querySelector( '#authenticimages-preview-vars' )
 			).toBeNull();
 		} );
 
@@ -165,7 +165,7 @@ describe( 'EditorPreview', () => {
 
 			act( () => {
 				window.dispatchEvent(
-					new CustomEvent( 'outletproCanvasReady', {
+					new CustomEvent( 'authenticimagesCanvasReady', {
 						detail: {
 							document: canvasDoc1,
 						},
@@ -174,13 +174,13 @@ describe( 'EditorPreview', () => {
 			} );
 
 			expect(
-				canvasDoc1.head.querySelector( '#outletpro-preview-vars' )
+				canvasDoc1.head.querySelector( '#authenticimages-preview-vars' )
 			).not.toBeNull();
 
 			// Act.
 			act( () => {
 				window.dispatchEvent(
-					new CustomEvent( 'outletproCanvasReady', {
+					new CustomEvent( 'authenticimagesCanvasReady', {
 						detail: {
 							document: canvasDoc2,
 						},
@@ -190,10 +190,10 @@ describe( 'EditorPreview', () => {
 
 			// Assert.
 			expect(
-				canvasDoc2.head.querySelector( '#outletpro-preview-vars' )
+				canvasDoc2.head.querySelector( '#authenticimages-preview-vars' )
 			).not.toBeNull();
 			expect(
-				canvasDoc1.head.querySelector( '#outletpro-preview-vars' )
+				canvasDoc1.head.querySelector( '#authenticimages-preview-vars' )
 			).toBeNull();
 		} );
 	} );

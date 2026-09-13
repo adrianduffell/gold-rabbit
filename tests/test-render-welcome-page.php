@@ -2,14 +2,14 @@
 /**
  * Tests for render_welcome_page().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\init_admin_menu;
-use function OutletPro\render_welcome_page;
+use function AuthenticImages\init_admin_menu;
+use function AuthenticImages\render_welcome_page;
 
 class Test_Render_Welcome_Page extends WP_UnitTestCase {
 
@@ -20,7 +20,7 @@ class Test_Render_Welcome_Page extends WP_UnitTestCase {
 		wp_set_current_user( $user_id );
 
 		// Expect.
-		$this->expectOutputRegex( '/id="outletpro-welcome-page-root"/' );
+		$this->expectOutputRegex( '/id="authenticimages-welcome-page-root"/' );
 
 		// Act.
 		render_welcome_page();

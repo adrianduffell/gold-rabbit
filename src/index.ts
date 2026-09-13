@@ -10,9 +10,9 @@ import './welcome-page';
 // #endif
 import './settings-sidebar';
 import EditorPreview from './editor-preview';
-import './blocks/outlet-badge';
-import './blocks/outlet-message';
+import './blocks/authentic-badge';
+import './blocks/authentic-message';
 
-registerPlugin( 'outletpro-editor-preview', {
+registerPlugin( 'authenticimages-editor-preview', {
 	render: EditorPreview,
 } );

@@ -1,27 +1,27 @@
 <?php
 /**
- * Plugin Name: Outlet Pro
- * Description: Adds an outlet to WooCommerce. Move old stock quickly with an outlet page, badge, and message.
- * Version: 1.1.0-dev
+ * Plugin Name: Authentic Images
+ * Description: Adds AI declaration to WooCommerce. Declare the authenticity of product images with a badge and promo message.
+ * Version: 0.1.0-dev
  * Author: Adrian Duffell
  * Author URI: https://adrianduffell.com
- * Text Domain: outletpro
+ * Text Domain: authenticimages
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Requires Plugins: woocommerce
  * Requires at least: 6.9
  * Requires PHP: 7.4
- * Update URI: https://adrianduffell.store/outletpro
+ * Update URI: https://adrianduffell.store/authenticimages
  *
  * WC requires at least: 10.8.0
  * WC tested up to: 11.0.0
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const VERSION = '1.1.0-dev';
+const VERSION = '0.1.0-dev';
 
 /**
  * Plugin file path.
@@ -115,11 +115,11 @@ function admin_init_hook(): void {
  * @internal WordPress action hook
  */
 function woocommerce_loaded_hook(): void {
-	add_action( 'init', 'OutletPro\init_hook', 20 );
-	add_action( 'admin_init', 'OutletPro\admin_init_hook' );
+	add_action( 'init', 'AuthenticImages\init_hook', 20 );
+	add_action( 'admin_init', 'AuthenticImages\admin_init_hook' );
 }
 
-add_action( 'woocommerce_loaded', 'OutletPro\woocommerce_loaded_hook' );
+add_action( 'woocommerce_loaded', 'AuthenticImages\woocommerce_loaded_hook' );
 
 /**
  * Plugin activation hook.
@@ -127,7 +127,7 @@ add_action( 'woocommerce_loaded', 'OutletPro\woocommerce_loaded_hook' );
  * @internal
  */
 function activate(): void {
-	\wc_get_logger()->info( 'Activating Outlet plugin.' );
+	\wc_get_logger()->info( 'Activating Authentic Images plugin.' );
 
 	try {
 		seed_activated_at_option();

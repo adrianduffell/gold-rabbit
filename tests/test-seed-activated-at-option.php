@@ -2,13 +2,13 @@
 /**
  * Test the seed_activated_at_option function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\seed_activated_at_option;
-use const OutletPro\ACTIVATED_AT_OPTION;
+use function AuthenticImages\seed_activated_at_option;
+use const AuthenticImages\ACTIVATED_AT_OPTION;
 
 class Test_Seed_Activated_At_Option extends WP_UnitTestCase {
 

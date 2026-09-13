@@ -3,7 +3,7 @@
 # Copyright 2026 Adrian Duffell
 # Licensed under the GNU General Public License v2.0 or later.
 
-for file in outletpro.php src/index.ts; do
+for file in authenticimages.php src/index.ts; do
 	sed -E \
 		's@^([[:space:]]*)//[[:space:]]*(#(ifdef|endif).*)$@\1\2@' \
 		"$file" |
@@ -19,5 +19,5 @@ while IFS= read -r file; do
 done
 
 # Strip Update URI plugin header.
-sed '/^[[:space:]]*\* Update URI:/d' outletpro.php > outletpro.php.tmp &&
-	mv outletpro.php.tmp outletpro.php
+sed '/^[[:space:]]*\* Update URI:/d' authenticimages.php > authenticimages.php.tmp &&
+	mv authenticimages.php.tmp authenticimages.php

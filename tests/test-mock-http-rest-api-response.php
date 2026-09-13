@@ -2,7 +2,7 @@
 /**
  * Tests for mock_http_rest_api_response().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later

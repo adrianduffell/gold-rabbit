@@ -22,7 +22,7 @@
 
 		if ( isEditorCanvas && window.parent !== window ) {
 			window.parent.dispatchEvent(
-				new CustomEvent( 'outletproCanvasReady', {
+				new CustomEvent( 'authenticimagesCanvasReady', {
 					detail: { document },
 				} )
 			);

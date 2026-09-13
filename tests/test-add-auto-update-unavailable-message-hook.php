@@ -2,15 +2,15 @@
 /**
  * Tests for add_auto_update_unavailable_label_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright © 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\init_license;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
-use const OutletPro\PLUGIN_FILE;
+use function AuthenticImages\init_license;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
+use const AuthenticImages\PLUGIN_FILE;
 
 class Test_Add_Auto_Update_Unavailable_Label_Hook extends WP_UnitTestCase {
 

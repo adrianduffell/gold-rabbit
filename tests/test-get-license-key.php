@@ -2,15 +2,15 @@
 /**
  * Test the get_license_key function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_license_settings;
-use function OutletPro\get_license_key;
-use const OutletPro\LICENSE_KEY_OPTION;
+use function AuthenticImages\deinit_license_settings;
+use function AuthenticImages\get_license_key;
+use const AuthenticImages\LICENSE_KEY_OPTION;
 
 class Test_Get_License_Key extends WP_UnitTestCase {
 

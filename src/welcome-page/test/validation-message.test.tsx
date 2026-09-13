@@ -5,8 +5,8 @@
 import { render, screen } from '@testing-library/react';
 import { ValidationMessage, type ValidationState } from '../ValidationMessage';
 jest.mock( '@wordpress/ui', () => ( { Link: 'a' } ) );
-const helpUrl = 'https://outletpro.zip/help/license-key';
-const expiryHelpUrl = 'https://outletpro.zip/help/license-expiry';
+const helpUrl = 'https://authenticimages.zip/help/license-key';
+const expiryHelpUrl = 'https://authenticimages.zip/help/license-expiry';
 const availableExpiresAt = '2030-09-25T00:00:00.000000Z';
 const localizedAvailableExpiry = new Intl.DateTimeFormat( undefined, {
 	day: 'numeric',
@@ -150,7 +150,7 @@ test( 'renders the default license links', () => {
 	);
 	expect(
 		screen.getByRole( 'link', { name: 'Purchase a license' } )
-	).toHaveAttribute( 'href', 'https://outletpro.zip/buy' );
+	).toHaveAttribute( 'href', 'https://authenticimages.zip/buy' );
 	expect(
 		screen.getByRole( 'link', { name: 'find your license key' } )
 	).toHaveAttribute( 'href', helpUrl );

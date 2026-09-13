@@ -11,12 +11,12 @@ test( 'Get support', { tag: '@premium-license' }, async ( { page, admin } ) => {
 
 	// Assert.
 	const supportLink = page
-		.locator( 'tr[data-slug="outlet-pro"]' )
+		.locator( 'tr[data-slug="authentic-images"]' )
 		.getByRole( 'link', { name: 'Support' } );
 	await expect( supportLink ).toBeVisible();
 	await expect( supportLink ).toHaveAttribute(
 		'href',
-		'https://outletpro.zip/support'
+		'https://authenticimages.zip/support'
 	);
 	await supportLink.click( { trial: true } );
 } );

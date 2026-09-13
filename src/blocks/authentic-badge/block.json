@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "outletpro/outlet-badge",
-	"title": "Outlet Badge",
+	"name": "authenticimages/authentic-badge",
+	"title": "Authentic Badge",
 	"category": "woocommerce",
 	"description": "Displays a badge on product pages.",
 	"usesContext": [ "postId" ],
 	"supports": {
 		"html": false
 	},
-	"textdomain": "outletpro"
+	"textdomain": "authenticimages"
 }

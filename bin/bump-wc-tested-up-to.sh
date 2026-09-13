@@ -12,6 +12,6 @@ fi
 
 sed -i.bak -E \
 	"s/^([[:space:]]*\*[[:space:]]*WC tested up to:).*/\1 $version/" \
-	outletpro.php
+	authenticimages.php
 
-rm outletpro.php.bak
+rm authenticimages.php.bak

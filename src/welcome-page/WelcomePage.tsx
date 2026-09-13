@@ -24,7 +24,7 @@ import { dismiss, undoDismiss } from './dismiss';
 import { ValidationMessage } from './ValidationMessage';
 import { useLicenseValidation } from './useLicenseValidation';
 
-declare const outletproWelcomePage: {
+declare const authenticimagesWelcomePage: {
 	licenseName: string;
 	licenseStatus: 'none' | 'active' | 'not_found' | 'error' | 'expired';
 	productsUrl: string;
@@ -38,11 +38,12 @@ export function WelcomePage(): JSX.Element {
 		handleLicenseKeyChange: updateLicenseKey,
 	} = useLicenseValidation();
 	const isResetMode = [ 'not_found', 'error' ].includes(
-		outletproWelcomePage.licenseStatus
+		authenticimagesWelcomePage.licenseStatus
 	);
-	const isExpiredMode = outletproWelcomePage.licenseStatus === 'expired';
+	const isExpiredMode =
+		authenticimagesWelcomePage.licenseStatus === 'expired';
 	const isWelcomeMode = [ 'none', 'active' ].includes(
-		outletproWelcomePage.licenseStatus
+		authenticimagesWelcomePage.licenseStatus
 	);
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( '' );
@@ -68,26 +69,31 @@ export function WelcomePage(): JSX.Element {
 
 		setIsLoading( true );
 		setErrorMessage( '' );
-		let settings: { outletpro_license_key?: string };
+		let settings: { authenticimages_license_key?: string };
 		try {
-			settings = await apiFetch< { outletpro_license_key?: string } >( {
+			settings = await apiFetch< {
+				authenticimages_license_key?: string;
+			} >( {
 				path: '/wp/v2/settings',
 				method: 'POST',
-				data: { outletpro_license_key: licenseKey },
+				data: { authenticimages_license_key: licenseKey },
 			} );
 		} catch {
 			setErrorMessage(
 				__(
 					'Unable to apply the license. Please try again.',
-					'outletpro'
+					'authenticimages'
 				)
 			);
 			setIsLoading( false );
 			return;
 		}
-		if ( settings.outletpro_license_key !== licenseKey ) {
+		if ( settings.authenticimages_license_key !== licenseKey ) {
 			setErrorMessage(
-				__( 'Error activating site. Please try again', 'outletpro' )
+				__(
+					'Error activating site. Please try again',
+					'authenticimages'
+				)
 			);
 			setIsLoading( false );
 			return;
@@ -109,25 +115,25 @@ export function WelcomePage(): JSX.Element {
 
 	if ( isDismissed ) {
 		return (
-			<div className="outletpro-welcome-page">
-				<h1>{ __( 'Setup dismissed', 'outletpro' ) }</h1>
-				<p className="outletpro-welcome-page__description">
+			<div className="authenticimages-welcome-page">
+				<h1>{ __( 'Setup dismissed', 'authenticimages' ) }</h1>
+				<p className="authenticimages-welcome-page__description">
 					{ createInterpolateElement(
 						__(
 							'Complete setup any time from the setup link on the plugins screen. <learnMore>Learn more</learnMore>',
-							'outletpro'
+							'authenticimages'
 						),
 						{
 							learnMore: (
-								<Link href="https://outletpro.zip/help/license-key" />
+								<Link href="https://authenticimages.zip/help/license-key" />
 							),
 						}
 					) }
 				</p>
 
-				<div className="outletpro-welcome-page__button-row">
+				<div className="authenticimages-welcome-page__button-row">
 					<Button variant="secondary" onClick={ handleUndoDismiss }>
-						{ __( 'Undo', 'outletpro' ) }
+						{ __( 'Undo', 'authenticimages' ) }
 					</Button>
 				</div>
 			</div>
@@ -136,39 +142,39 @@ export function WelcomePage(): JSX.Element {
 
 	if ( isSuccess ) {
 		return (
-			<div className="outletpro-welcome-page">
+			<div className="authenticimages-welcome-page">
 				<h1>
 					{ isResetMode || isExpiredMode
-						? __( 'License activated', 'outletpro' )
-						: __( '🎉 Success!', 'outletpro' ) }
+						? __( 'License activated', 'authenticimages' )
+						: __( '🎉 Success!', 'authenticimages' ) }
 				</h1>
-				<p className="outletpro-welcome-page__description">
+				<p className="authenticimages-welcome-page__description">
 					{ isResetMode || isExpiredMode
 						? __(
 								'License activated. Your premium license includes plugin updates and email support.',
-								'outletpro'
+								'authenticimages'
 						  )
 						: __(
-								"Outlet Pro is now set up. Get started by including your first product in the store's outlet.",
-								'outletpro'
+								"Authentic Images is now set up. Get started by adding the authentic badge to a product.",
+								'authenticimages'
 						  ) }{ ' ' }
 					{ createInterpolateElement(
 						isResetMode || isExpiredMode
 							? __(
 									'<learnMore>Learn more</learnMore>',
-									'outletpro'
+									'authenticimages'
 							  )
 							: __(
 									'<learnMore>Learn More</learnMore>',
-									'outletpro'
+									'authenticimages'
 							  ),
 						{
 							learnMore: (
 								<Link
 									href={
 										isResetMode || isExpiredMode
-											? 'https://outletpro.zip/help/license'
-											: 'https://outletpro.zip/help/get-started/'
+											? 'https://authenticimages.zip/help/license'
+											: 'https://authenticimages.zip/help/get-started/'
 									}
 								/>
 							),
@@ -176,12 +182,12 @@ export function WelcomePage(): JSX.Element {
 					) }
 				</p>
 				{ ! ( isResetMode || isExpiredMode ) && (
-					<div className="outletpro-welcome-page__button-row">
+					<div className="authenticimages-welcome-page__button-row">
 						<Button
 							variant="primary"
-							href={ outletproWelcomePage.productsUrl }
+							href={ authenticimagesWelcomePage.productsUrl }
 						>
-							{ __( 'Get Started', 'outletpro' ) }
+							{ __( 'Get Started', 'authenticimages' ) }
 						</Button>
 					</div>
 				) }
@@ -195,52 +201,52 @@ export function WelcomePage(): JSX.Element {
 		? 'alert'
 		: 'status';
 	return (
-		<div className="outletpro-welcome-page">
+		<div className="authenticimages-welcome-page">
 			<Button
 				variant="link"
-				className="outletpro-welcome-page__dismiss"
+				className="authenticimages-welcome-page__dismiss"
 				onClick={ handleDismiss }
 			>
-				{ __( 'Dismiss', 'outletpro' ) }
+				{ __( 'Dismiss', 'authenticimages' ) }
 			</Button>
 			<h1>
 				{ isResetMode || isExpiredMode
-					? __( 'Outlet Pro Setup', 'outletpro' )
-					: __( 'Welcome to Outlet Pro', 'outletpro' ) }
+					? __( 'Authentic Images Setup', 'authenticimages' )
+					: __( 'Welcome to Authentic Images', 'authenticimages' ) }
 			</h1>
 
-			<p className="outletpro-welcome-page__description">
+			<p className="authenticimages-welcome-page__description">
 				{ isResetMode &&
 					__(
 						'The license could not be verified on this site. Enter your premium license key to continue.',
-						'outletpro'
+						'authenticimages'
 					) }
 				{ isExpiredMode &&
-					outletproWelcomePage.licenseName !== '' &&
+					authenticimagesWelcomePage.licenseName !== '' &&
 					sprintf(
 						/* translators: %s: lowercase license name. */
 						__(
 							'Your %s license has expired. Add a new premium license key to continue.',
-							'outletpro'
+							'authenticimages'
 						),
-						outletproWelcomePage.licenseName.toLocaleLowerCase()
+						authenticimagesWelcomePage.licenseName.toLocaleLowerCase()
 					) }
 				{ isExpiredMode &&
-					outletproWelcomePage.licenseName === '' &&
+					authenticimagesWelcomePage.licenseName === '' &&
 					__(
 						'Your license has expired. Add a new premium license key to continue.',
-						'outletpro'
+						'authenticimages'
 					) }
 				{ isWelcomeMode &&
 					__(
-						'Thank you for choosing Outlet Pro! Enter your premium license key to begin setup.',
-						'outletpro'
+						'Thank you for choosing Authentic Images! Enter your premium license key to begin setup.',
+						'authenticimages'
 					) }
 			</p>
 
-			<div className="outletpro-welcome-page__license-key-input">
+			<div className="authenticimages-welcome-page__license-key-input">
 				<TextControl
-					label={ __( 'Premium license key', 'outletpro' ) }
+					label={ __( 'Premium license key', 'authenticimages' ) }
 					hideLabelFromVision={ true }
 					value={ licenseKey }
 					onChange={ handleLicenseKeyChange }
@@ -254,7 +260,7 @@ export function WelcomePage(): JSX.Element {
 				/>
 			</div>
 			<p
-				className={ `outletpro-welcome-page__validation outletpro-welcome-page__validation--${ validationState.status }` }
+				className={ `authenticimages-welcome-page__validation authenticimages-welcome-page__validation--${ validationState.status }` }
 				role={ validationRole }
 				aria-live="polite"
 			>
@@ -262,11 +268,11 @@ export function WelcomePage(): JSX.Element {
 					<ValidationMessage validationState={ validationState } />
 				</span>
 			</p>
-			<p className="outletpro-welcome-page__notice">
+			<p className="authenticimages-welcome-page__notice">
 				{ createInterpolateElement(
 					__(
 						'By continuing, you agree to the <tos>terms of service</tos> and have read the <privacy>privacy policy</privacy>.',
-						'outletpro'
+						'authenticimages'
 					),
 					{
 						tos: (
@@ -290,18 +296,18 @@ export function WelcomePage(): JSX.Element {
 					}
 				) }
 			</p>
-			<div className="outletpro-welcome-page__button-row">
+			<div className="authenticimages-welcome-page__button-row">
 				<Button
 					variant="primary"
 					onClick={ handleContinue }
 					isBusy={ isLoading }
 					disabled={ isLoading || ! canActivate }
 				>
-					{ __( 'Activate site', 'outletpro' ) }
+					{ __( 'Activate site', 'authenticimages' ) }
 				</Button>
 			</div>
 			{ errorMessage && (
-				<p className="outletpro-welcome-page__error" role="alert">
+				<p className="authenticimages-welcome-page__error" role="alert">
 					{ errorMessage }
 				</p>
 			) }

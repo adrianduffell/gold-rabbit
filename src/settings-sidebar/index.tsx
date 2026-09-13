@@ -35,19 +35,20 @@ type FontWeightOption = {
 };
 
 const FONT_WEIGHTS: FontWeightOption[] = [
-	{ name: __( 'Default', 'outletpro' ), key: '' },
-	{ name: __( 'Regular', 'outletpro' ), key: '400' },
-	{ name: __( 'Medium', 'outletpro' ), key: '500' },
-	{ name: __( 'Semi Bold', 'outletpro' ), key: '600' },
-	{ name: __( 'Bold', 'outletpro' ), key: '700' },
-	{ name: __( 'Extra Bold', 'outletpro' ), key: '800' },
-	{ name: __( 'Black', 'outletpro' ), key: '900' },
+	{ name: __( 'Default', 'authenticimages' ), key: '' },
+	{ name: __( 'Regular', 'authenticimages' ), key: '400' },
+	{ name: __( 'Medium', 'authenticimages' ), key: '500' },
+	{ name: __( 'Semi Bold', 'authenticimages' ), key: '600' },
+	{ name: __( 'Bold', 'authenticimages' ), key: '700' },
+	{ name: __( 'Extra Bold', 'authenticimages' ), key: '800' },
+	{ name: __( 'Black', 'authenticimages' ), key: '900' },
 ];
 
 const bordersEnabled = ( () => {
 	try {
 		return (
-			window.localStorage.getItem( 'outletpro_borders_enabled' ) === '1'
+			window.localStorage.getItem( 'authenticimages_borders_enabled' ) ===
+			'1'
 		);
 	} catch {
 		return false;
@@ -125,16 +126,16 @@ const SettingsSidebar = () => {
 			<PanelBody>
 				<p style={ { marginBottom: 0 } }>
 					{ __(
-						'Customize the appearance of the outlet badge. Changes apply to the whole site.',
-						'outletpro'
+						'Customize the appearance of the authentic badge. Changes apply to the whole site.',
+						'authenticimages'
 					) }
 				</p>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Label', 'outletpro' ) } initialOpen>
+			<PanelBody title={ __( 'Label', 'authenticimages' ) } initialOpen>
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<TextControl
-						label={ __( 'Label', 'outletpro' ) }
+						label={ __( 'Label', 'authenticimages' ) }
 						value={ label ?? '' }
 						onChange={ ( value ) => setLabel( value ) }
 						hideLabelFromVision={ true }
@@ -145,29 +146,29 @@ const SettingsSidebar = () => {
 			</PanelBody>
 
 			<PanelColorSettings
-				title={ __( 'Color', 'outletpro' ) }
+				title={ __( 'Color', 'authenticimages' ) }
 				initialOpen={ false }
 				colorSettings={ [
 					{
 						value: textColor,
-						label: __( 'Text', 'outletpro' ),
+						label: __( 'Text', 'authenticimages' ),
 						onChange: ( color: string | undefined ) =>
 							setTextColor( color || undefined ),
 					},
 					{
 						value: bgColor,
-						label: __( 'Background', 'outletpro' ),
+						label: __( 'Background', 'authenticimages' ),
 						onChange: ( backgroundColor: string | undefined ) =>
 							setBgColor( backgroundColor || undefined ),
 					},
 				] }
 			/>
 
-			<PanelBody title={ __( 'Typography', 'outletpro' ) }>
+			<PanelBody title={ __( 'Typography', 'authenticimages' ) }>
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<div style={ { marginBottom: '16px' } }>
 						<RangeControl
-							label={ __( 'Font size', 'outletpro' ) }
+							label={ __( 'Font size', 'authenticimages' ) }
 							value={ density }
 							onChange={ ( value ) => {
 								if ( typeof value !== 'number' ) {
@@ -189,7 +190,7 @@ const SettingsSidebar = () => {
 
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<CustomSelectControl
-						label={ __( 'Font weight', 'outletpro' ) }
+						label={ __( 'Font weight', 'authenticimages' ) }
 						options={ fontWeightOptions }
 						value={ selectedFontWeight }
 						onChange={ ( { selectedItem } ) => {
@@ -200,10 +201,10 @@ const SettingsSidebar = () => {
 				</BaseControl>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Dimensions', 'outletpro' ) }>
+			<PanelBody title={ __( 'Dimensions', 'authenticimages' ) }>
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<RangeControl
-						label={ __( 'Scale', 'outletpro' ) }
+						label={ __( 'Scale', 'authenticimages' ) }
 						value={ scale }
 						renderTooltipContent={ ( value ) =>
 							typeof value === 'number'
@@ -227,11 +228,11 @@ const SettingsSidebar = () => {
 				</BaseControl>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Border', 'outletpro' ) }>
+			<PanelBody title={ __( 'Border', 'authenticimages' ) }>
 				{ bordersEnabled && (
 					<div style={ { marginBottom: 16 } }>
 						<BorderControl
-							label={ __( 'Border', 'outletpro' ) }
+							label={ __( 'Border', 'authenticimages' ) }
 							hideLabelFromVision={ true }
 							value={ border }
 							onChange={ ( value ) => {
@@ -259,7 +260,7 @@ const SettingsSidebar = () => {
 
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<UnitControl
-						label={ __( 'Radius', 'outletpro' ) }
+						label={ __( 'Radius', 'authenticimages' ) }
 						value={ borderRadius || undefined }
 						onChange={ ( value: string | undefined ) =>
 							setBorderRadius( value || undefined )
@@ -276,29 +277,25 @@ const SettingsSidebar = () => {
 		<>
 			<PanelBody>
 				<p
-					data-testid="outletpro-message-tab-description"
+					data-testid="authenticimages-message-tab-description"
 					style={ { marginBottom: 0 } }
 				>
 					{ __(
-						'Customize the outlet message. Changes apply to the whole site.',
-						'outletpro'
+						'Customize the authentic message. Changes apply to the whole site.',
+						'authenticimages'
 					) }
 				</p>
 			</PanelBody>
 
-			<PanelBody title={ __( 'Message', 'outletpro' ) } initialOpen>
+			<PanelBody title={ __( 'Message', 'authenticimages' ) } initialOpen>
 				<BaseControl __nextHasNoMarginBottom={ true }>
 					<TextareaControl
-						label={ __( 'Message', 'outletpro' ) }
+						label={ __( 'Message', 'authenticimages' ) }
 						hideLabelFromVision={ true }
 						value={ message ?? '' }
 						onChange={ ( value ) => setMessage( value ) }
 						rows={ 2 }
 						__nextHasNoMarginBottom={ true }
-						help={ __(
-							'Displayed for products included in the outlet.',
-							'outletpro'
-						) }
 					/>
 				</BaseControl>
 			</PanelBody>
@@ -311,28 +308,28 @@ const SettingsSidebar = () => {
 				target={ SIDEBAR_NAME }
 				icon={ settings }
 			>
-				{ __( 'Outlet settings', 'outletpro' ) }
+				{ __( 'Authentic Images settings', 'authenticimages' ) }
 			</PluginSidebarMoreMenuItem>
 			<PluginSidebar
 				name={ SIDEBAR_NAME }
-				title={ __( 'Outlet settings', 'outletpro' ) }
+				title={ __( 'Authentic Images settings', 'authenticimages' ) }
 				isPinnable={ false }
 				icon={ settings }
-				className="outletpro-sidebar"
+				className="authenticimages-sidebar"
 			>
 				<TabPanel
-					className="outletpro-sidebar__tabs"
+					className="authenticimages-sidebar__tabs"
 					activeClass="is-active"
 					tabs={ [
 						{
 							name: 'badge',
-							title: __( 'Badge', 'outletpro' ),
-							className: 'outletpro-sidebar__tab',
+							title: __( 'Badge', 'authenticimages' ),
+							className: 'authenticimages-sidebar__tab',
 						},
 						{
 							name: 'message',
-							title: __( 'Message', 'outletpro' ),
-							className: 'outletpro-sidebar__tab',
+							title: __( 'Message', 'authenticimages' ),
+							className: 'authenticimages-sidebar__tab',
 						},
 					] }
 				>

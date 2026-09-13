@@ -2,16 +2,16 @@
 /**
  * Tests for add_premium_license_notice_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\init_license;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
-use const OutletPro\PLUGIN_FILE;
-use const OutletPro\WELCOME_PAGE_SLUG;
+use function AuthenticImages\init_license;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
+use const AuthenticImages\PLUGIN_FILE;
+use const AuthenticImages\WELCOME_PAGE_SLUG;
 
 class Test_Add_Premium_License_Notice_Hook extends WP_UnitTestCase {
 
@@ -21,7 +21,7 @@ class Test_Add_Premium_License_Notice_Hook extends WP_UnitTestCase {
 		set_transient( LICENSE_STATUS_TRANSIENT, 'none', WEEK_IN_SECONDS );
 
 		// Expect.
-		$this->expectOutputRegex( '/A premium license is needed for Outlet Pro to receive updates\./' );
+		$this->expectOutputRegex( '/A premium license is needed for Authentic Images to receive updates\./' );
 
 		// Act.
 		do_action( 'after_plugin_row_' . plugin_basename( PLUGIN_FILE ), plugin_basename( PLUGIN_FILE ), array(), 'all' );

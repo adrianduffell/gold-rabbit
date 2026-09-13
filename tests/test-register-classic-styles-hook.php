@@ -2,13 +2,13 @@
 /**
  * Tests for register_classic_styles_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_enqueue;
-use function OutletPro\enqueue_init;
+use function AuthenticImages\deinit_enqueue;
+use function AuthenticImages\enqueue_init;
 
 class Test_Register_Classic_Styles_Hook extends WP_UnitTestCase {
 
@@ -21,7 +21,7 @@ class Test_Register_Classic_Styles_Hook extends WP_UnitTestCase {
 		do_action( 'wp_enqueue_scripts' );
 
 		// Assert.
-		$this->assertTrue( wp_style_is( 'outletpro-classic-badge', 'registered' ) );
+		$this->assertTrue( wp_style_is( 'authenticimages-classic-badge', 'registered' ) );
 	}
 
 	public function test_registers_classic_message_style(): void {
@@ -33,6 +33,6 @@ class Test_Register_Classic_Styles_Hook extends WP_UnitTestCase {
 		do_action( 'wp_enqueue_scripts' );
 
 		// Assert.
-		$this->assertTrue( wp_style_is( 'outletpro-classic-message', 'registered' ) );
+		$this->assertTrue( wp_style_is( 'authenticimages-classic-message', 'registered' ) );
 	}
 }

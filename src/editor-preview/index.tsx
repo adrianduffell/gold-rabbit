@@ -21,7 +21,7 @@ const EditorPreview = () => {
 
 		// Watch for custom event signalling when canvas iframe is ready.
 		window.addEventListener(
-			'outletproCanvasReady',
+			'authenticimagesCanvasReady',
 			handleCanvasReady,
 			true
 		);
@@ -29,7 +29,7 @@ const EditorPreview = () => {
 		// Cleanup listener on unmount.
 		return () => {
 			window.removeEventListener(
-				'outletproCanvasReady',
+				'authenticimagesCanvasReady',
 				handleCanvasReady,
 				true
 			);
@@ -40,7 +40,7 @@ const EditorPreview = () => {
 
 	// Portal needed because the editor canvas is not in the same document as the plugin script.
 	return createPortal(
-		<style id="outletpro-preview-vars">{ styleText }</style>,
+		<style id="authenticimages-preview-vars">{ styleText }</style>,
 		targetDoc.head
 	);
 };

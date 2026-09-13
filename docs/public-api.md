@@ -1,17 +1,17 @@
 # Public API
 
-Outlet implements a stable public API intended for use by third-party code. All items listed here increment the plugin's MAJOR semver version when any known incompatible changes are made.
+Authentic Images implements a stable public API intended for use by third-party code. All items listed here increment the plugin's MAJOR semver version when any known incompatible changes are made.
 
 ## Hooks
 
 ### Filters
 
-#### `outletpro_badge_single_product_hook`
+#### `authenticimages_badge_single_product_hook`
 
 Filter to modify which `single-product` [WooCommerce template hook](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) (or theme hook) displays the badge.
 
 ```php
-add_filter( 'outletpro_badge_single_product_hook', function ( $name ) {
+add_filter( 'authenticimages_badge_single_product_hook', function ( $name ) {
     return 'woocommerce_before_single_product';
 } );
 ```
@@ -22,12 +22,12 @@ add_filter( 'outletpro_badge_single_product_hook', function ( $name ) {
 
 Must return a non-empty string. Added in 1.0.0.
 
-#### `outletpro_badge_single_product_priority`
+#### `authenticimages_badge_single_product_priority`
 
 Filters the priority used for [hooking](https://developer.woocommerce.com/docs/theming/theme-development/template-structure/#changing-templates-via-hooks) the badge to the `single-product` classic templates.
 
 ```php
-add_filter( 'outletpro_badge_single_product_priority', function ( $priority ) {
+add_filter( 'authenticimages_badge_single_product_priority', function ( $priority ) {
     return 5;
 } );
 ```
@@ -44,25 +44,25 @@ These handles are registered by the plugin and can be used as dependencies in th
 
 ### Styles
 
-#### `outletpro-classic-badge`
+#### `authenticimages-classic-badge`
 
-Front-end badge stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'outletpro-classic-badge' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
+Front-end badge stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'authenticimages-classic-badge' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
 
-#### `outletpro-classic-message`
+#### `authenticimages-classic-message`
 
-Front-end message stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'outletpro-classic-message' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
+Front-end message stylesheet for classic (non-block) themes. Registered—but not automatically enqueued—on `wp_enqueue_scripts`. Use `wp_enqueue_style( 'authenticimages-classic-message' )` or declare it as a dependency to load it on demand. Added in 1.0.0.
 
-#### `outletpro-admin`
+#### `authenticimages-admin`
 
 Admin stylesheet enqueued on all `admin_enqueue_scripts` pages. Added in 1.0.0.
 
 ### Scripts
 
-#### `outletpro-editor`
+#### `authenticimages-editor`
 
 Block editor JavaScript enqueued on `enqueue_block_editor_assets`. Contains the block editor integration for the badge and message blocks. Added in 1.0.0.
 
-#### `outletpro-admin-canvas-scripts`
+#### `authenticimages-admin-canvas-scripts`
 
 Admin JavaScript enqueued on `enqueue_block_assets` in wp-admin for editor canvas previewing. Added in 1.0.0.
 
@@ -72,17 +72,17 @@ These classes are part of the public API and stable across versions. They can be
 
 ### Front-end classes
 
-#### `.outletpro-badge`
+#### `.authenticimages-badge`
 
 Applied to the badge element. Used by both the block renderer and classic theme template hooks. Added in 1.0.0.
 
-#### `.outletpro-message`
+#### `.authenticimages-message`
 
 Applied to the message element. Used by both the block renderer and classic theme template hooks. Added in 1.0.0.
 
 ## Blocks
 
-### `outletpro/outlet-badge`
+### `authenticimages/authentic-badge`
 
 Displays the badge on product pages. Automatically inserted after the product price on the single product template (block themes). Added in 1.0.0.
 
@@ -110,7 +110,7 @@ Use the scale setting to control the height of the badge, and density (called "f
 
 \* Denotes modifiable in settings.
 
-### `outletpro/outlet-message`
+### `authenticimages/authentic-message`
 
 Displays the message on product pages. Automatically inserted as the first child of the product meta block on the single product template (block themes). Added in 1.0.0.
 

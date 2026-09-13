@@ -3,7 +3,7 @@
  * Licensed under the GNU General Public License v2.0 or later.
  */
 
-const OutletBadgeIcon = (
+const AuthenticBadgeIcon = (
 	<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 		<rect
 			x="1.5"
@@ -25,4 +25,4 @@ const OutletBadgeIcon = (
 	</svg>
 );
 
-export default OutletBadgeIcon;
+export default AuthenticBadgeIcon;

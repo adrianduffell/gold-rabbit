@@ -1,25 +1,25 @@
 <?php
 /**
- * Tests for auto_insert_outlet_badge_hook().
+ * Tests for auto_insert_authentic_badge_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_blocks;
-use function OutletPro\init_blocks;
-use function OutletPro\register_outlet_badge_block;
+use function AuthenticImages\deinit_blocks;
+use function AuthenticImages\init_blocks;
+use function AuthenticImages\register_authentic_badge_block;
 
-class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
+class Test_Auto_Insert_Authentic_Badge_Hook extends WP_UnitTestCase {
 
-	public function test_outlet_badge_has_no_block_hooks_declaration(): void {
+	public function test_authentic_badge_has_no_block_hooks_declaration(): void {
 		// Arrange.
 		deinit_blocks();
-		register_outlet_badge_block();
+		register_authentic_badge_block();
 
 		// Act.
-		$block_type = WP_Block_Type_Registry::get_instance()->get_registered( 'outletpro/outlet-badge' );
+		$block_type = WP_Block_Type_Registry::get_instance()->get_registered( 'authenticimages/authentic-badge' );
 
 		// Assert.
 		$this->assertEmpty( $block_type->block_hooks );
@@ -34,7 +34,7 @@ class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
 		$result = apply_filters( 'hooked_block_types', array(), 'after', 'woocommerce/product-price', array() );
 
 		// Assert.
-		$this->assertNotContains( 'outletpro/outlet-badge', $result );
+		$this->assertNotContains( 'authenticimages/authentic-badge', $result );
 	}
 
 	public function test_badge_is_not_added_when_context_is_null(): void {
@@ -46,7 +46,7 @@ class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
 		$result = apply_filters( 'hooked_block_types', array(), 'after', 'woocommerce/product-price', null );
 
 		// Assert.
-		$this->assertNotContains( 'outletpro/outlet-badge', $result );
+		$this->assertNotContains( 'authenticimages/authentic-badge', $result );
 	}
 
 	public function test_badge_is_not_added_when_template_is_not_single_product(): void {
@@ -60,7 +60,7 @@ class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
 		$result = apply_filters( 'hooked_block_types', array(), 'after', 'woocommerce/product-price', $template );
 
 		// Assert.
-		$this->assertNotContains( 'outletpro/outlet-badge', $result );
+		$this->assertNotContains( 'authenticimages/authentic-badge', $result );
 	}
 
 	public function test_badge_is_added_when_template_is_single_product(): void {
@@ -74,7 +74,7 @@ class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
 		$result = apply_filters( 'hooked_block_types', array(), 'after', 'woocommerce/product-price', $template );
 
 		// Assert.
-		$this->assertContains( 'outletpro/outlet-badge', $result );
+		$this->assertContains( 'authenticimages/authentic-badge', $result );
 	}
 
 	public function test_other_hooked_blocks_are_not_filtered(): void {
@@ -102,6 +102,6 @@ class Test_Auto_Insert_Outlet_Badge_Hook extends WP_UnitTestCase {
 		$result = apply_filters( 'hooked_block_types', array(), 'after', 'core/heading', $template );
 
 		// Assert.
-		$this->assertNotContains( 'outletpro/outlet-badge', $result );
+		$this->assertNotContains( 'authenticimages/authentic-badge', $result );
 	}
 }

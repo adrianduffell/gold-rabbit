@@ -2,17 +2,17 @@
 /**
  * Test the sync_activation function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_license_settings;
-use function OutletPro\sync_activation;
-use const OutletPro\LICENSE_ACTIVATION_OPTION;
-use const OutletPro\LICENSE_KEY_OPTION;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
+use function AuthenticImages\deinit_license_settings;
+use function AuthenticImages\sync_activation;
+use const AuthenticImages\LICENSE_ACTIVATION_OPTION;
+use const AuthenticImages\LICENSE_KEY_OPTION;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
 
 class Test_Sync_Activation extends WP_UnitTestCase {
 

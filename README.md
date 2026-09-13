@@ -1,19 +1,17 @@
-# Outlet Pro
+# Authentic Images
 
 By [Adrian Duffell](https://adrianduffell.com)
 
-Welcome to the GitHub repo! [Outlet Pro](https://outletpro.zip) is made here.
-
-[Now available on the WooCommerce Marketplace](https://woocommerce.com/products/outletpro/)
+Welcome to the GitHub repo! [Authentic Images](https://authenticimages.zip) is made here.
 
 ## Getting started
 
-To develop Outlet Pro locally:
+To develop Authentic Images locally:
 
 ### Prerequisites
 
--   Node.js 24.x
--   Docker Desktop (if using wp-env)
+- Node.js 24.x
+- Docker Desktop (if using wp-env)
 
 ```sh
 npm i

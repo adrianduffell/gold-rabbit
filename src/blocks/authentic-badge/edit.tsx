@@ -14,22 +14,24 @@ type EntityProp< T > = [
 ];
 
 export function Edit(): JSX.Element {
-	const [ message, setMessage ] = useEntityProp(
+	const [ label, setLabel ] = useEntityProp(
 		'root',
 		'site',
-		'outletpro_message'
+		'authenticimages_badge_label'
 	) as EntityProp< string >;
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps( {
+		className: 'authenticimages-badge',
+	} );
 
 	return (
 		<RichText
 			{ ...blockProps }
-			tagName="p"
-			value={ message ?? '' }
-			onChange={ ( value: string ) => setMessage( value ) }
+			tagName="div"
+			value={ label ?? '' }
+			onChange={ ( value: string ) => setLabel( value ) }
 			allowedFormats={ [] }
-			placeholder={ __( 'Write outlet message…', 'outletpro' ) }
+			placeholder={ __( 'Authentic badge', 'authenticimages' ) }
 		/>
 	);
 }

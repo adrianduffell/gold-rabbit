@@ -2,12 +2,12 @@
 /**
  * Block registration and render callbacks.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,10 +17,10 @@ defined( 'ABSPATH' ) || exit;
  * @internal
  */
 function init_blocks(): void {
-	register_outlet_badge_block();
-	register_outlet_message_block();
-	add_filter( 'hooked_block_types', 'OutletPro\auto_insert_outlet_badge_hook', 10, 4 );
-	add_filter( 'hooked_block_types', 'OutletPro\auto_insert_outlet_message_hook', 10, 4 );
+	register_authentic_badge_block();
+	register_authentic_message_block();
+	add_filter( 'hooked_block_types', 'AuthenticImages\auto_insert_authentic_badge_hook', 10, 4 );
+	add_filter( 'hooked_block_types', 'AuthenticImages\auto_insert_authentic_message_hook', 10, 4 );
 }
 
 /**
@@ -31,9 +31,9 @@ function init_blocks(): void {
 function deinit_blocks(): void {
 	$registry = \WP_Block_Type_Registry::get_instance();
 
-	// Unregister all blocks in the outletpro namespace.
+	// Unregister all blocks in the authenticimages namespace.
 	foreach ( $registry->get_all_registered() as $block_name => $block_type ) {
-		if ( 0 !== strpos( $block_name, 'outletpro/' ) ) {
+		if ( 0 !== strpos( $block_name, 'authenticimages/' ) ) {
 			continue;
 		}
 
@@ -42,21 +42,21 @@ function deinit_blocks(): void {
 }
 
 /**
- * Register the outlet badge block type.
+ * Register the authentic badge block type.
  *
  * @internal
  */
-function register_outlet_badge_block(): void {
+function register_authentic_badge_block(): void {
 	register_block_type(
-		plugin_dir_path( __DIR__ ) . 'build/blocks/outlet-badge/',
+		plugin_dir_path( __DIR__ ) . 'build/blocks/authentic-badge/',
 		array(
-			'render_callback' => 'OutletPro\render_outlet_badge_callback',
+			'render_callback' => 'AuthenticImages\render_authentic_badge_callback',
 		)
 	);
 }
 
 /**
- * Auto-insert the outlet badge block after the product price on the single product template.
+ * Auto-insert the authentic badge block after the product price on the single product template.
  *
  * @internal WordPress filter hook
  * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint
@@ -66,21 +66,21 @@ function register_outlet_badge_block(): void {
  * @param \WP_Block_Template|array|null $context Block template or post context, or null.
  * @return string[] Filtered hooked block names.
  */
-function auto_insert_outlet_badge_hook( $hooked_blocks, $relative_position, $anchor_block, $context ): array {
+function auto_insert_authentic_badge_hook( $hooked_blocks, $relative_position, $anchor_block, $context ): array {
 	if ( 'woocommerce/product-price' !== $anchor_block || 'after' !== $relative_position ) {
 		return $hooked_blocks;
 	}
 
 	// Only auto-insert the badge on the single product template.
 	if ( $context instanceof \WP_Block_Template && 'single-product' === $context->slug ) {
-		$hooked_blocks[] = 'outletpro/outlet-badge';
+		$hooked_blocks[] = 'authenticimages/authentic-badge';
 	}
 
 	return $hooked_blocks;
 }
 
 /**
- * Auto-insert the outlet message block as the first child of the product meta block on the single product template.
+ * Auto-insert the authentic message block as the first child of the product meta block on the single product template.
  *
  * @internal WordPress filter hook
  * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint
@@ -90,21 +90,21 @@ function auto_insert_outlet_badge_hook( $hooked_blocks, $relative_position, $anc
  * @param \WP_Block_Template|array|null $context Block template or post context, or null.
  * @return string[] Filtered hooked block names.
  */
-function auto_insert_outlet_message_hook( $hooked_blocks, $relative_position, $anchor_block, $context ): array {
+function auto_insert_authentic_message_hook( $hooked_blocks, $relative_position, $anchor_block, $context ): array {
 	if ( 'woocommerce/product-meta' !== $anchor_block || 'first_child' !== $relative_position ) {
 		return $hooked_blocks;
 	}
 
 	// Only auto-insert the message on the single product template.
 	if ( $context instanceof \WP_Block_Template && 'single-product' === $context->slug ) {
-		$hooked_blocks[] = 'outletpro/outlet-message';
+		$hooked_blocks[] = 'authenticimages/authentic-message';
 	}
 
 	return $hooked_blocks;
 }
 
 /**
- * Render callback for the outlet badge block.
+ * Render callback for the authentic badge block.
  *
  * @internal
  * @param array<string, mixed> $attributes Block attributes.
@@ -112,7 +112,7 @@ function auto_insert_outlet_message_hook( $hooked_blocks, $relative_position, $a
  * @param \WP_Block            $block      Block instance.
  * @return string Rendered HTML.
  */
-function render_outlet_badge_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+function render_authentic_badge_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
 
 	if ( ! $product_id ) {
@@ -127,11 +127,11 @@ function render_outlet_badge_callback( array $attributes, string $_content, \WP_
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'class' => 'outletpro-badge',
+			'class' => 'authenticimages-badge',
 		)
 	);
 
-	$label = get_option( OUTLET_BADGE_LABEL_OPTION );
+	$label = get_option( AUTHENTIC_BADGE_LABEL_OPTION );
 
 	if ( ! is_string( $label ) || '' === $label ) {
 		return '';
@@ -145,21 +145,21 @@ function render_outlet_badge_callback( array $attributes, string $_content, \WP_
 }
 
 /**
- * Register the outlet message block type.
+ * Register the authentic message block type.
  *
  * @internal
  */
-function register_outlet_message_block(): void {
+function register_authentic_message_block(): void {
 	register_block_type(
-		plugin_dir_path( __DIR__ ) . 'build/blocks/outlet-message/',
+		plugin_dir_path( __DIR__ ) . 'build/blocks/authentic-message/',
 		array(
-			'render_callback' => 'OutletPro\render_outlet_message_callback',
+			'render_callback' => 'AuthenticImages\render_authentic_message_callback',
 		)
 	);
 }
 
 /**
- * Render callback for the outlet message block.
+ * Render callback for the authentic message block.
  *
  * @internal
  * @param array<string, mixed> $attributes Block attributes.
@@ -167,7 +167,7 @@ function register_outlet_message_block(): void {
  * @param \WP_Block            $block      Block instance.
  * @return string Rendered HTML.
  */
-function render_outlet_message_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+function render_authentic_message_callback( array $attributes, string $_content, \WP_Block $block ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$product_id = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
 
 	if ( ! $product_id ) {
@@ -182,11 +182,11 @@ function render_outlet_message_callback( array $attributes, string $_content, \W
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'class' => 'outletpro-message',
+			'class' => 'authenticimages-message',
 		)
 	);
 
-	$message = get_option( OUTLET_MESSAGE_OPTION );
+	$message = get_option( AUTHENTIC_MESSAGE_OPTION );
 
 	if ( ! is_string( $message ) || '' === $message ) {
 		return '';

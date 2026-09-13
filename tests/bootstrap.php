@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
@@ -36,8 +36,8 @@ function _manually_load_plugin(): void {
 	// Load WooCommerce plugin dependency.
 	require_once WP_PLUGIN_DIR . '/woocommerce/woocommerce.php';
 
-	// Load Outlet Pro.
-	require_once __DIR__ . '/../outletpro.php';
+	// Load Authentic Images.
+	require_once __DIR__ . '/../authenticimages.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
@@ -54,7 +54,7 @@ require_once WP_PLUGIN_DIR . '/woocommerce/includes/admin/wc-meta-box-functions.
 // WooCommerce test helpers.
 require_once dirname( __DIR__ ) . '/vendor/class-wc-helper-product.php';
 
-// Outlet Pro mocks.
+// Authentic Images mocks.
 require_once __DIR__ . '/mock-http-rest-api-response.php';
 
 // Prevent unexpected HTTP requests during tests.

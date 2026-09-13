@@ -2,12 +2,12 @@
 /**
  * Activation functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const ACTIVATED_AT_OPTION = 'outletpro_activated_at';
+const ACTIVATED_AT_OPTION = 'authenticimages_activated_at';
 
 /**
  * Seed the activation timestamp option with the current time.

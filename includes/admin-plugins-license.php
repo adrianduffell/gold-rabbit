@@ -2,13 +2,13 @@
 /**
  * License functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @subpackage License
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,11 +18,11 @@ defined( 'ABSPATH' ) || exit;
  * @internal
  */
 function init_license(): void {
-	add_filter( 'plugin_action_links_' . plugin_basename( PLUGIN_FILE ), 'OutletPro\add_plugin_action_links_hook' );
-	add_action( 'after_plugin_row_' . plugin_basename( PLUGIN_FILE ), 'OutletPro\add_premium_license_notice_hook', 10, 3 );
-	add_filter( 'plugin_auto_update_setting_html', 'OutletPro\add_auto_update_unavailable_label_hook', 10, 3 );
-	add_filter( 'plugin_row_meta', 'OutletPro\add_plugin_meta_links_hook', 10, 2 );
-	add_filter( 'plugin_row_meta', 'OutletPro\add_plugin_license_expiry_hook', 9999, 2 );
+	add_filter( 'plugin_action_links_' . plugin_basename( PLUGIN_FILE ), 'AuthenticImages\add_plugin_action_links_hook' );
+	add_action( 'after_plugin_row_' . plugin_basename( PLUGIN_FILE ), 'AuthenticImages\add_premium_license_notice_hook', 10, 3 );
+	add_filter( 'plugin_auto_update_setting_html', 'AuthenticImages\add_auto_update_unavailable_label_hook', 10, 3 );
+	add_filter( 'plugin_row_meta', 'AuthenticImages\add_plugin_meta_links_hook', 10, 2 );
+	add_filter( 'plugin_row_meta', 'AuthenticImages\add_plugin_license_expiry_hook', 9999, 2 );
 }
 
 /**
@@ -31,11 +31,11 @@ function init_license(): void {
  * @internal
  */
 function deinit_license(): void {
-	remove_filter( 'plugin_action_links_' . plugin_basename( PLUGIN_FILE ), 'OutletPro\add_plugin_action_links_hook' );
-	remove_action( 'after_plugin_row_' . plugin_basename( PLUGIN_FILE ), 'OutletPro\add_premium_license_notice_hook', 10 );
-	remove_filter( 'plugin_auto_update_setting_html', 'OutletPro\add_auto_update_unavailable_label_hook' );
-	remove_filter( 'plugin_row_meta', 'OutletPro\add_plugin_meta_links_hook' );
-	remove_filter( 'plugin_row_meta', 'OutletPro\add_plugin_license_expiry_hook', 9999 );
+	remove_filter( 'plugin_action_links_' . plugin_basename( PLUGIN_FILE ), 'AuthenticImages\add_plugin_action_links_hook' );
+	remove_action( 'after_plugin_row_' . plugin_basename( PLUGIN_FILE ), 'AuthenticImages\add_premium_license_notice_hook', 10 );
+	remove_filter( 'plugin_auto_update_setting_html', 'AuthenticImages\add_auto_update_unavailable_label_hook' );
+	remove_filter( 'plugin_row_meta', 'AuthenticImages\add_plugin_meta_links_hook' );
+	remove_filter( 'plugin_row_meta', 'AuthenticImages\add_plugin_license_expiry_hook', 9999 );
 }
 
 /**
@@ -51,7 +51,7 @@ function add_plugin_action_links_hook( array $links ): array {
 	$setup_link = sprintf(
 		'<a href="%s">%s</a>',
 		esc_url( admin_url( 'admin.php?page=' . WELCOME_PAGE_SLUG ) ),
-		esc_html__( 'Setup', 'outletpro' )
+		esc_html__( 'Setup', 'authenticimages' )
 	);
 
 	array_unshift( $links, $setup_link );
@@ -82,12 +82,12 @@ function add_premium_license_notice_hook( string $plugin_file, array $plugin_dat
 		return;
 	}
 	?>
-	<tr class="plugin-update-tr active outletpro-license-notice">
+	<tr class="plugin-update-tr active authenticimages-license-notice">
 		<td colspan="4" class="plugin-update colspanchange">
 			<div class="update-message notice inline notice-warning notice-alt">
-				<p><?php esc_html_e( 'A premium license is needed for Outlet Pro to receive updates.', 'outletpro' ); ?>
-					<a class="button-link" href="<?php echo esc_url( admin_url( 'admin.php?page=outletpro-welcome' ) ); ?>">
-						<?php esc_html_e( 'Set up premium license', 'outletpro' ); ?>
+				<p><?php esc_html_e( 'A premium license is needed for Authentic Images to receive updates.', 'authenticimages' ); ?>
+					<a class="button-link" href="<?php echo esc_url( admin_url( 'admin.php?page=authenticimages-welcome' ) ); ?>">
+						<?php esc_html_e( 'Set up premium license', 'authenticimages' ); ?>
 					</a>
 				</p>
 			</div>
@@ -137,7 +137,7 @@ function add_auto_update_unavailable_label_hook(
 
 	return sprintf(
 		'<span class="label">%s</span>',
-		esc_html__( 'Auto-updates unavailable', 'outletpro' )
+		esc_html__( 'Auto-updates unavailable', 'authenticimages' )
 	);
 }
 
@@ -158,8 +158,8 @@ function add_plugin_meta_links_hook( array $links, string $plugin_file ): array 
 
 	$links[] = sprintf(
 		'<a href="%s">%s</a>',
-		esc_url( 'https://outletpro.zip/support' ),
-		esc_html__( 'Support', 'outletpro' )
+		esc_url( 'https://authenticimages.zip/support' ),
+		esc_html__( 'Support', 'authenticimages' )
 	);
 
 	return $links;
@@ -198,7 +198,7 @@ function add_plugin_license_expiry_hook( array $links, string $plugin_file ): ar
 	if ( is_null( $license_expiry ) ) {
 		$links[] = sprintf(
 			/* translators: %s: license name. */
-			'<span class="outletpro-license-expiry">' . esc_html__( '%s (non-expiring)', 'outletpro' ) . '</span>',
+			'<span class="authenticimages-license-expiry">' . esc_html__( '%s (non-expiring)', 'authenticimages' ) . '</span>',
 			esc_html( $license_name )
 		);
 		return $links;
@@ -210,7 +210,7 @@ function add_plugin_license_expiry_hook( array $links, string $plugin_file ): ar
 		case 'expired':
 			$license_message = sprintf(
 				/* translators: 1: license name, 2: localized license expiry date. */
-				'<span class="outletpro-license-expiry outletpro-alert-text">' . esc_html__( '%1$s expired %2$s', 'outletpro' ) . '</span>',
+				'<span class="authenticimages-license-expiry authenticimages-alert-text">' . esc_html__( '%1$s expired %2$s', 'authenticimages' ) . '</span>',
 				esc_html( $license_name ),
 				esc_html( $formatted_expiry )
 			);
@@ -218,7 +218,7 @@ function add_plugin_license_expiry_hook( array $links, string $plugin_file ): ar
 		default:
 			$license_message = sprintf(
 				/* translators: 1: license name, 2: localized license expiry date. */
-				'<span class="outletpro-license-expiry">' . esc_html__( '%1$s until %2$s', 'outletpro' ) . '</span>',
+				'<span class="authenticimages-license-expiry">' . esc_html__( '%1$s until %2$s', 'authenticimages' ) . '</span>',
 				esc_html( $license_name ),
 				esc_html( $formatted_expiry )
 			);

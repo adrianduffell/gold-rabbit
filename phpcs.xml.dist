@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WC_Outlet">
-	<description>PHP CodeSniffer ruleset for Outlet plugin.</description>
+<ruleset name="AuthenticImages">
+	<description>PHP CodeSniffer ruleset for Authentic Images plugin.</description>
 
 	<!-- Files to check -->
 	<file>.</file>
@@ -46,7 +46,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="outletpro" />
+				<element value="authenticimages" />
 			</property>
 		</properties>
 	</rule>
@@ -77,9 +77,6 @@
 	<!-- Disallow nesting in tests -->
 	<rule ref="Generic.Metrics.NestingLevel">
 		<include-pattern>tests/</include-pattern>
-		<exclude-pattern>tests/test-seed-outlet-status-taxonomy.php</exclude-pattern>
-		<exclude-pattern>tests/test-set-outlet.php</exclude-pattern>
-		<exclude-pattern>tests/test-add-to-outlet.php</exclude-pattern>
 		<properties>
 			<property name="absoluteNestingLevel" value="0" />
 		</properties>
