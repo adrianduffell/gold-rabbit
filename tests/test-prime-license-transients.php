@@ -2,17 +2,17 @@
 /**
  * Test the prime_license_transients function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\prime_license_transients;
-use const OutletPro\LICENSE_ACTIVATION_OPTION;
-use const OutletPro\LICENSE_EXPIRY_TRANSIENT;
-use const OutletPro\LICENSE_NAME_TRANSIENT;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
+use function AuthenticImages\prime_license_transients;
+use const AuthenticImages\LICENSE_ACTIVATION_OPTION;
+use const AuthenticImages\LICENSE_EXPIRY_TRANSIENT;
+use const AuthenticImages\LICENSE_NAME_TRANSIENT;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
 
 class Test_Prime_License_Transients extends WP_UnitTestCase {
 

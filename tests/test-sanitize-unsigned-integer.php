@@ -2,12 +2,12 @@
 /**
  * Test the sanitize_unsigned_integer function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\sanitize_unsigned_integer;
+use function AuthenticImages\sanitize_unsigned_integer;
 
 class Test_Sanitize_Unsigned_Integer extends WP_UnitTestCase {
 

@@ -16,15 +16,19 @@ const mockUseEntityProp = useEntityProp as jest.Mock;
 describe( 'useStringEntityProp', () => {
 	test( 'returns string value from entity prop', () => {
 		// Arrange.
-		mockUseEntityProp.mockReturnValue( [ 'Sale', jest.fn(), undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			jest.fn(),
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
-		expect( result.current[ 0 ] ).toBe( 'Sale' );
+		expect( result.current[ 0 ] ).toBe( 'Authentic' );
 	} );
 
 	test( 'returns undefined when entity prop is not set', () => {
@@ -37,7 +41,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
@@ -50,7 +54,7 @@ describe( 'useStringEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 
 		// Assert.
@@ -66,39 +70,49 @@ describe( 'useStringEntityProp', () => {
 		] );
 
 		// Act.
-		renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) );
+		renderHook( () =>
+			useStringEntityProp( 'authenticimages_badge_label' )
+		);
 
 		// Assert.
 		expect( mockUseEntityProp ).toHaveBeenCalledWith(
 			'root',
 			'site',
-			'outletpro_badge_label'
+			'authenticimages_badge_label'
 		);
 	} );
 
 	test( 'exposes setter from entity prop', () => {
 		// Arrange.
 		const setValue = jest.fn();
-		mockUseEntityProp.mockReturnValue( [ 'Sale', setValue, undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			setValue,
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
-		result.current[ 1 ]( 'Clearance' );
+		result.current[ 1 ]( 'Real images' );
 
 		// Assert.
-		expect( setValue ).toHaveBeenCalledWith( 'Clearance' );
+		expect( setValue ).toHaveBeenCalledWith( 'Real images' );
 	} );
 
 	test( 'setter forwards undefined to clear the value', () => {
 		// Arrange.
 		const setValue = jest.fn();
-		mockUseEntityProp.mockReturnValue( [ 'Sale', setValue, undefined ] );
+		mockUseEntityProp.mockReturnValue( [
+			'Authentic',
+			setValue,
+			undefined,
+		] );
 
 		// Act.
 		const { result } = renderHook( () =>
-			useStringEntityProp( 'outletpro_badge_label' )
+			useStringEntityProp( 'authenticimages_badge_label' )
 		);
 		result.current[ 1 ]( undefined );
 
@@ -112,9 +126,11 @@ describe( 'useStringEntityProp', () => {
 
 		// Expect.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).toThrow(
-			'outletpro setting "outletpro_badge_label" must be a string'
+			'authenticimages setting "authenticimages_badge_label" must be a string'
 		);
 		expect( console ).toHaveErrored();
 	} );
@@ -129,7 +145,9 @@ describe( 'useStringEntityProp', () => {
 
 		// Act + Assert: no throw when value is undefined.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).not.toThrow();
 	} );
 
@@ -139,7 +157,9 @@ describe( 'useStringEntityProp', () => {
 
 		// Act + Assert: no throw when value is null.
 		expect( () =>
-			renderHook( () => useStringEntityProp( 'outletpro_badge_label' ) )
+			renderHook( () =>
+				useStringEntityProp( 'authenticimages_badge_label' )
+			)
 		).not.toThrow();
 	} );
 } );

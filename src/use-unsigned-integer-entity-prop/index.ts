@@ -16,7 +16,7 @@ function assertUnsignedIntegerValue(
 			value < 0 )
 	) {
 		throw new Error(
-			`outletpro setting "${ key }" must be an integer >= 0`
+			`authenticimages setting "${ key }" must be an integer >= 0`
 		);
 	}
 }

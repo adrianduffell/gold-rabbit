@@ -8,7 +8,7 @@ import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 test( 'plugin can be activated', async ( { page, admin, requestUtils } ) => {
 	// Arrange.
 	await requestUtils.rest( {
-		path: '/wp/v2/plugins/outletpro/outletpro',
+		path: '/wp/v2/plugins/authenticimages/authenticimages',
 		method: 'PUT',
 		data: {
 			status: 'inactive',
@@ -18,7 +18,7 @@ test( 'plugin can be activated', async ( { page, admin, requestUtils } ) => {
 	// Act: activate the plugin from the WP plugins screen.
 	await admin.visitAdminPage( 'plugins.php' );
 	await page
-		.locator( 'tr[data-slug="outlet-pro"]' )
+		.locator( 'tr[data-slug="authentic-images"]' )
 		.getByRole( 'link', { name: 'Activate' } )
 		.click();
 

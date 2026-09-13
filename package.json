@@ -1,6 +1,6 @@
 {
-	"name": "outletpro",
-	"version": "1.1.0-dev",
+	"name": "authenticimages",
+	"version": "0.1.0-dev",
 	"private": true,
 	"license": "GPL-2.0-or-later",
 	"type": "module",
@@ -18,7 +18,7 @@
 		"lint:md-docs:fix": "wp-scripts lint-md-docs --fix",
 		"lint:php": "vendor/bin/phpcs -s",
 		"lint:php:fix": "vendor/bin/phpcbf",
-		"plugin-zip": "wp-scripts plugin-zip && zip -d outletpro.zip outletpro/package.json outletpro/README.md",
+		"plugin-zip": "wp-scripts plugin-zip && zip -d authenticimages.zip authenticimages/package.json authenticimages/README.md",
 		"preprocess": "./bin/preprocess.sh",
 		"preprocess:marketplace": "./bin/preprocess-marketplace.sh",
 		"start": "wp-scripts start",
@@ -26,7 +26,7 @@
 		"test:e2e:block": "THEME=twentytwentyfive STORE_PAGES=block npm run test:e2e",
 		"test:e2e": "wp-scripts test-playwright",
 		"test:unit": "wp-scripts test-unit-js --config jest.config.cjs",
-		"test:wp": "wp-env run tests-cli --env-cwd=wp-content/plugins/outletpro vendor/bin/phpunit",
+		"test:wp": "wp-env run tests-cli --env-cwd=wp-content/plugins/authenticimages vendor/bin/phpunit",
 		"typecheck": "tsc --noEmit",
 		"wp-env": "wp-env",
 		"wp-scripts": "wp-scripts"
@@ -41,7 +41,7 @@
 		"build",
 		"CHANGELOG.md",
 		"includes",
-		"outletpro.php",
+		"authenticimages.php",
 		"readme.txt",
 		"LICENSE"
 	],

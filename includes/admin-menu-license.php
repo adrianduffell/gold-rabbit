@@ -2,13 +2,13 @@
 /**
  * Admin menu functions for the welcome page.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @subpackage License
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,14 +17,14 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const WELCOME_PAGE_SLUG = 'outletpro-welcome';
+const WELCOME_PAGE_SLUG = 'authenticimages-welcome';
 
 /**
  * Cookie used to dismiss the welcome screen on the current device.
  *
  * @internal
  */
-const DISMISS_COOKIE = 'OUTLETPRO_DISMISS_SETUP';
+const DISMISS_COOKIE = 'AUTHENTICIMAGES_DISMISS_SETUP';
 
 /**
  * Helper to initialize license features.
@@ -32,7 +32,7 @@ const DISMISS_COOKIE = 'OUTLETPRO_DISMISS_SETUP';
  * @internal
  */
 function init_admin_menu(): void {
-	$direct = isset( $_GET['page'] ) && 'outletpro-welcome' === wp_unslash( $_GET['page'] ); // phpcs:ignore
+	$direct = isset( $_GET['page'] ) && 'authenticimages-welcome' === wp_unslash( $_GET['page'] ); // phpcs:ignore
 
 	if ( isset( $_COOKIE[ DISMISS_COOKIE ] ) && ! $direct ) {
 		return;
@@ -44,7 +44,7 @@ function init_admin_menu(): void {
 		return;
 	}
 
-	add_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' );
+	add_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' );
 }
 
 /**
@@ -53,7 +53,7 @@ function init_admin_menu(): void {
  * @internal
  */
 function deinit_admin_menu(): void {
-	remove_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' );
+	remove_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' );
 }
 
 /**
@@ -65,11 +65,11 @@ function deinit_admin_menu(): void {
  */
 function add_welcome_menu_hook(): void {
 	add_menu_page(
-		__( 'Welcome to Outlet Pro', 'outletpro' ),
-		__( 'Outlet Pro Setup', 'outletpro' ),
+		__( 'Welcome to Authentic Images', 'authenticimages' ),
+		__( 'Authentic Images Setup', 'authenticimages' ),
 		'manage_options',
 		WELCOME_PAGE_SLUG,
-		'OutletPro\render_welcome_page',
+		'AuthenticImages\render_welcome_page',
 		'dashicons-admin-generic',
 		0
 	);
@@ -86,7 +86,7 @@ function render_welcome_page(): void {
 	}
 	?>
 	<div class="wrap">
-		<div id="outletpro-welcome-page-root"></div>
+		<div id="authenticimages-welcome-page-root"></div>
 	</div>
 	<?php
 }

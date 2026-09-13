@@ -2,13 +2,13 @@
 /**
  * Plugin update functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @subpackage Updates
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @internal
  */
 function init_update_plugin(): void {
-	add_filter( 'update_plugins_adrianduffell.store', 'OutletPro\update_plugin_hook', 10, 2 );
+	add_filter( 'update_plugins_adrianduffell.store', 'AuthenticImages\update_plugin_hook', 10, 2 );
 }
 
 /**
@@ -27,13 +27,13 @@ function init_update_plugin(): void {
  * @internal
  */
 function deinit_update_plugin(): void {
-	remove_filter( 'update_plugins_adrianduffell.store', 'OutletPro\update_plugin_hook', 10, 2 );
+	remove_filter( 'update_plugins_adrianduffell.store', 'AuthenticImages\update_plugin_hook', 10, 2 );
 }
 
 
 
 /**
- * Checks for an available Outlet Pro update.
+ * Checks for an available Authentic Images update.
  *
  * Fired by `update_plugins_adrianduffell.store`.
  *
@@ -44,7 +44,7 @@ function deinit_update_plugin(): void {
  * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingAnyTypeHint
  */
 function update_plugin_hook( $update, array $plugin_data ) {
-	if ( 'https://adrianduffell.store/outletpro' !== $plugin_data['UpdateURI'] ) {
+	if ( 'https://adrianduffell.store/authenticimages' !== $plugin_data['UpdateURI'] ) {
 		return $update;
 	}
 
@@ -74,7 +74,7 @@ function update_plugin_hook( $update, array $plugin_data ) {
 		add_query_arg(
 			'version',
 			VERSION,
-			'https://api.adrianduffell.store/v1/outletpro/updates'
+			'https://api.adrianduffell.store/v1/authenticimages/updates'
 		),
 		array(
 			'timeout' => 5,
@@ -104,8 +104,8 @@ function update_plugin_hook( $update, array $plugin_data ) {
 	}
 
 	return array(
-		'name'         => 'Outlet Pro',
-		'slug'         => 'outletpro',
+		'name'         => 'Authentic Images',
+		'slug'         => 'authenticimages',
 		'version'      => $data['version'],
 		'url'          => $data['url'],
 		'icons'        => $data['icons'] ?? array(),

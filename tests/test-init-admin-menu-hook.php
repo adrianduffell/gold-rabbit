@@ -2,18 +2,18 @@
 /**
  * Tests for add_welcome_menu_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_admin_menu;
-use function OutletPro\init_admin_menu;
-use const OutletPro\DISMISS_COOKIE;
-use const OutletPro\LICENSE_ACTIVATION_OPTION;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
-use const OutletPro\WELCOME_PAGE_SLUG;
+use function AuthenticImages\deinit_admin_menu;
+use function AuthenticImages\init_admin_menu;
+use const AuthenticImages\DISMISS_COOKIE;
+use const AuthenticImages\LICENSE_ACTIVATION_OPTION;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
+use const AuthenticImages\WELCOME_PAGE_SLUG;
 
 class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 
@@ -64,7 +64,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertIsInt( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertIsInt( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 	}
 
 	public function test_does_not_register_menu_page_when_license_is_active(): void {
@@ -79,7 +79,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertFalse( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertFalse( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 	}
 
 	public function test_does_not_register_menu_page_when_license_is_expired(): void {
@@ -92,7 +92,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertFalse( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertFalse( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 
 		// Cleanup.
 		delete_transient( LICENSE_STATUS_TRANSIENT );
@@ -109,7 +109,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertFalse( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertFalse( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 
 		// Cleanup.
 		unset( $_COOKIE[ DISMISS_COOKIE ] );
@@ -127,7 +127,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertIsInt( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertIsInt( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 
 		// Cleanup.
 		unset( $_GET['page'] );
@@ -146,7 +146,7 @@ class Test_Add_Welcome_Menu_Hook extends WP_UnitTestCase {
 		init_admin_menu();
 
 		// Assert.
-		$this->assertIsInt( has_action( 'admin_menu', 'OutletPro\add_welcome_menu_hook' ) );
+		$this->assertIsInt( has_action( 'admin_menu', 'AuthenticImages\add_welcome_menu_hook' ) );
 
 		// Cleanup.
 		unset( $_GET['page'] );

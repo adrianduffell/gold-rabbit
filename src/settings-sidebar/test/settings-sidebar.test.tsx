@@ -412,10 +412,12 @@ describe( 'settings-sidebar registration', () => {
 		render( pluginConfig.render() );
 
 		// Assert.
-		expect( screen.getByText( 'Outlet settings' ) ).toBeInTheDocument();
+		expect(
+			screen.getByText( 'Authentic Images settings' )
+		).toBeInTheDocument();
 	} );
 
-	test( 'opens the outlet settings sidebar when requested by the URL', () => {
+	test( 'opens the settings sidebar when requested by the URL', () => {
 		// Arrange.
 		const enableComplementaryArea = jest.fn();
 		mockUseDispatch.mockReturnValue( { enableComplementaryArea } );
@@ -470,7 +472,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			label: 'Sale',
+			label: 'Authentic',
 			setLabel,
 		} );
 		jest.isolateModules( () => {
@@ -483,7 +485,7 @@ describe( 'settings-sidebar registration', () => {
 
 		// Assert.
 		expect( screen.getByRole( 'textbox', { name: 'Label' } ) ).toHaveValue(
-			'Sale'
+			'Authentic'
 		);
 	} );
 
@@ -517,7 +519,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			label: 'Clearance',
+			label: 'Real images',
 			setLabel,
 		} );
 		jest.isolateModules( () => {
@@ -528,10 +530,10 @@ describe( 'settings-sidebar registration', () => {
 		const input = screen.getByRole( 'textbox', { name: 'Label' } );
 
 		// Act.
-		fireEvent.change( input, { target: { value: 'Discounts' } } );
+		fireEvent.change( input, { target: { value: 'Verified images' } } );
 
 		// Assert.
-		expect( setLabel ).toHaveBeenCalledWith( 'Discounts' );
+		expect( setLabel ).toHaveBeenCalledWith( 'Verified images' );
 	} );
 
 	test( 'font scale control reflects stored scale value', () => {
@@ -908,11 +910,11 @@ describe( 'settings-sidebar registration', () => {
 			borderWidth: '0',
 			setBorderWidth,
 		} );
-		window.localStorage.setItem( 'outletpro_borders_enabled', '1' );
+		window.localStorage.setItem( 'authenticimages_borders_enabled', '1' );
 		jest.isolateModules( () => {
 			require( '../index' );
 		} );
-		window.localStorage.removeItem( 'outletpro_borders_enabled' );
+		window.localStorage.removeItem( 'authenticimages_borders_enabled' );
 		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
 		render( pluginConfig.render() );
 		const input = screen.getByRole( 'textbox', { name: 'Border' } );
@@ -936,11 +938,11 @@ describe( 'settings-sidebar registration', () => {
 			borderWidth: '',
 			setBorderWidth: jest.fn(),
 		} );
-		window.localStorage.setItem( 'outletpro_borders_enabled', '1' );
+		window.localStorage.setItem( 'authenticimages_borders_enabled', '1' );
 		jest.isolateModules( () => {
 			require( '../index' );
 		} );
-		window.localStorage.removeItem( 'outletpro_borders_enabled' );
+		window.localStorage.removeItem( 'authenticimages_borders_enabled' );
 		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
 		render( pluginConfig.render() );
 		const input = screen.getByRole( 'textbox', { name: 'Border' } );
@@ -964,11 +966,11 @@ describe( 'settings-sidebar registration', () => {
 			borderWidth: '',
 			setBorderWidth: jest.fn(),
 		} );
-		window.localStorage.setItem( 'outletpro_borders_enabled', '1' );
+		window.localStorage.setItem( 'authenticimages_borders_enabled', '1' );
 		jest.isolateModules( () => {
 			require( '../index' );
 		} );
-		window.localStorage.removeItem( 'outletpro_borders_enabled' );
+		window.localStorage.removeItem( 'authenticimages_borders_enabled' );
 		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
 		render( pluginConfig.render() );
 		const input = screen.getByRole( 'textbox', { name: 'Border' } );
@@ -996,7 +998,7 @@ describe( 'settings-sidebar registration', () => {
 		// Assert.
 		expect(
 			screen.getByText(
-				'Customize the appearance of the outlet badge. Changes apply to the whole site.'
+				'Customize the appearance of the authentic badge. Changes apply to the whole site.'
 			)
 		).toBeInTheDocument();
 	} );
@@ -1115,7 +1117,7 @@ describe( 'settings-sidebar registration', () => {
 
 		// Assert.
 		expect(
-			screen.getByTestId( 'outletpro-message-tab-description' )
+			screen.getByTestId( 'authenticimages-message-tab-description' )
 		).toBeInTheDocument();
 	} );
 
@@ -1126,7 +1128,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			message: 'Only while stocks last',
+			message: 'No AI-generated product images.',
 			setMessage,
 		} );
 		jest.isolateModules( () => {
@@ -1160,7 +1162,7 @@ describe( 'settings-sidebar registration', () => {
 		// Assert.
 		expect(
 			screen.getByRole( 'textbox', { name: 'Message' } )
-		).toHaveValue( 'Only while stocks last' );
+		).toHaveValue( 'No AI-generated product images.' );
 	} );
 
 	test( 'message textarea is empty when setting is not set', () => {
@@ -1213,7 +1215,7 @@ describe( 'settings-sidebar registration', () => {
 		mockUseSelect.mockReturnValue( true );
 		mockUseSettings.mockReturnValue( {
 			...createInitialSettings(),
-			message: 'Only while stocks last',
+			message: 'No AI-generated product images.',
 			setMessage,
 		} );
 		jest.isolateModules( () => {

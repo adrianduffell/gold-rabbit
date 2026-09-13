@@ -2,19 +2,19 @@
 /**
  * Test the update_plugin_hook function.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group updates
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\deinit_update_plugin;
-use function OutletPro\init_settings;
-use function OutletPro\init_update_plugin;
-use const OutletPro\LICENSE_ACTIVATION_OPTION;
-use const OutletPro\LICENSE_KEY_OPTION;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
-use const OutletPro\VERSION;
+use function AuthenticImages\deinit_update_plugin;
+use function AuthenticImages\init_settings;
+use function AuthenticImages\init_update_plugin;
+use const AuthenticImages\LICENSE_ACTIVATION_OPTION;
+use const AuthenticImages\LICENSE_KEY_OPTION;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
+use const AuthenticImages\VERSION;
 
 class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 
@@ -82,7 +82,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			false,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
@@ -97,7 +97,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		set_transient( LICENSE_STATUS_TRANSIENT, 'active', WEEK_IN_SECONDS );
 		update_option( LICENSE_ACTIVATION_OPTION, array( 'invalid' ) );
 		$previous = array(
-			'slug'    => 'outletpro',
+			'slug'    => 'authenticimages',
 			'version' => '1.0.1',
 		);
 
@@ -105,7 +105,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$previous,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
@@ -146,7 +146,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		add_filter(
 			'pre_http_request',
 			function ( $pre, $args, $url ) {
-				if ( strpos( $url, 'v1/outletpro/updates' ) !== false ) {
+				if ( strpos( $url, 'v1/authenticimages/updates' ) !== false ) {
 					return array(
 						'headers'  => array(),
 						'body'     => '',
@@ -169,7 +169,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			false,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
@@ -189,7 +189,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		add_filter(
 			'pre_http_request',
 			function ( $pre, $args, $url ) {
-				if ( strpos( $url, 'v1/outletpro/updates' ) !== false ) {
+				if ( strpos( $url, 'v1/authenticimages/updates' ) !== false ) {
 					return array(
 						'headers'  => array(),
 						'body'     => '',
@@ -212,7 +212,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$previous,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
@@ -232,7 +232,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		add_filter(
 			'pre_http_request',
 			function ( $pre, $args, $url ) use ( &$requested_url ) {
-				if ( strpos( $url, 'v1/outletpro/updates' ) !== false ) {
+				if ( strpos( $url, 'v1/authenticimages/updates' ) !== false ) {
 					$requested_url = $url;
 
 					return array(
@@ -241,7 +241,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 							array(
 								'version' => '1.0.1',
 								'url'     => 'https://example.com',
-								'package' => 'https://example.com/outletpro.zip',
+								'package' => 'https://example.com/authenticimages.zip',
 							)
 						),
 						'response' => array(
@@ -263,12 +263,12 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			false,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
 		$this->assertSame(
-			add_query_arg( 'version', VERSION, 'https://api.adrianduffell.store/v1/outletpro/updates' ),
+			add_query_arg( 'version', VERSION, 'https://api.adrianduffell.store/v1/authenticimages/updates' ),
 			$requested_url
 		);
 	}
@@ -286,7 +286,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		add_filter(
 			'pre_http_request',
 			function ( $pre, $args, $url ) use ( &$authorization ) {
-				if ( strpos( $url, 'v1/outletpro/updates' ) !== false ) {
+				if ( strpos( $url, 'v1/authenticimages/updates' ) !== false ) {
 					$authorization = $args['headers']['Authorization'];
 
 					return array(
@@ -295,7 +295,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 							array(
 								'version' => '1.0.1',
 								'url'     => 'https://example.com',
-								'package' => 'https://example.com/outletpro.zip',
+								'package' => 'https://example.com/authenticimages.zip',
 							)
 						),
 						'response' => array(
@@ -317,16 +317,16 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			false,
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.
 		$this->assertSame( 'Bearer abc123.activation-id', $authorization );
 		$this->assertIsArray( $result );
-		$this->assertSame( 'outletpro', $result['slug'] );
+		$this->assertSame( 'authenticimages', $result['slug'] );
 		$this->assertSame( '1.0.1', $result['version'] );
 		$this->assertSame(
-			'https://example.com/outletpro.zip',
+			'https://example.com/authenticimages.zip',
 			$result['package']
 		);
 	}
@@ -340,7 +340,7 @@ class Test_Update_Plugin_Hook extends WP_UnitTestCase {
 		$result = apply_filters(
 			'update_plugins_adrianduffell.store', //phpcs:ignore WordPress.NamingConventions.ValidHookName
 			'my-previous-value',
-			array( 'UpdateURI' => 'https://adrianduffell.store/outletpro' ),
+			array( 'UpdateURI' => 'https://adrianduffell.store/authenticimages' ),
 		);
 
 		// Assert.

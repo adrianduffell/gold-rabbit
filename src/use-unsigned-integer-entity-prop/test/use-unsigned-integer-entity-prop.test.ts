@@ -20,7 +20,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Assert.
@@ -33,7 +33,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Assert.
@@ -50,7 +50,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Assert.
@@ -63,7 +63,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Assert.
@@ -80,14 +80,14 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Assert.
 		expect( mockUseEntityProp ).toHaveBeenCalledWith(
 			'root',
 			'site',
-			'outletpro_badge_scale'
+			'authenticimages_badge_scale'
 		);
 	} );
 
@@ -98,7 +98,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 		result.current[ 1 ]( 5 );
 
@@ -113,7 +113,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 
 		// Act.
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 		result.current[ 1 ]( undefined );
 
@@ -126,12 +126,12 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		const setValue = jest.fn();
 		mockUseEntityProp.mockReturnValue( [ 2, setValue, undefined ] );
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Act + Assert.
 		expect( () => result.current[ 1 ]( -1 ) ).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( setValue ).not.toHaveBeenCalled();
 	} );
@@ -141,12 +141,12 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		const setValue = jest.fn();
 		mockUseEntityProp.mockReturnValue( [ 2, setValue, undefined ] );
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Act + Assert.
 		expect( () => result.current[ 1 ]( 1.5 ) ).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( setValue ).not.toHaveBeenCalled();
 	} );
@@ -156,12 +156,12 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		const setValue = jest.fn();
 		mockUseEntityProp.mockReturnValue( [ 2, setValue, undefined ] );
 		const { result } = renderHook( () =>
-			useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+			useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 		);
 
 		// Act + Assert.
 		expect( () => result.current[ 1 ]( Number.NaN ) ).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( setValue ).not.toHaveBeenCalled();
 	} );
@@ -173,10 +173,10 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		// Expect.
 		expect( () =>
 			renderHook( () =>
-				useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+				useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 			)
 		).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( console ).toHaveErrored();
 	} );
@@ -188,10 +188,10 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		// Expect.
 		expect( () =>
 			renderHook( () =>
-				useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+				useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 			)
 		).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( console ).toHaveErrored();
 	} );
@@ -203,10 +203,10 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		// Expect.
 		expect( () =>
 			renderHook( () =>
-				useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+				useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 			)
 		).toThrow(
-			'outletpro setting "outletpro_badge_scale" must be an integer >= 0'
+			'authenticimages setting "authenticimages_badge_scale" must be an integer >= 0'
 		);
 		expect( console ).toHaveErrored();
 	} );
@@ -222,7 +222,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		// Act + Assert: no throw when value is undefined.
 		expect( () =>
 			renderHook( () =>
-				useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+				useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 			)
 		).not.toThrow();
 	} );
@@ -234,7 +234,7 @@ describe( 'useUnsignedIntegerEntityProp', () => {
 		// Act + Assert: no throw when value is null.
 		expect( () =>
 			renderHook( () =>
-				useUnsignedIntegerEntityProp( 'outletpro_badge_scale' )
+				useUnsignedIntegerEntityProp( 'authenticimages_badge_scale' )
 			)
 		).not.toThrow();
 	} );

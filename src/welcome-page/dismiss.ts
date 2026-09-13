@@ -3,7 +3,7 @@
  * Licensed under the GNU General Public License v2.0 or later.
  */
 
-const DISMISS_COOKIE = 'OUTLETPRO_DISMISS_SETUP';
+const DISMISS_COOKIE = 'AUTHENTICIMAGES_DISMISS_SETUP';
 
 const path = new URL( '.', window.location.href ).pathname;
 

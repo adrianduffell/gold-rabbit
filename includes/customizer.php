@@ -2,12 +2,12 @@
 /**
  * Customizer integration functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -16,14 +16,14 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const OUTLET_BADGE_TEXT_COLOUR_DEFAULT = '#111111';
+const AUTHENTIC_BADGE_TEXT_COLOUR_DEFAULT = '#111111';
 
 /**
  * Default badge background colour (yellow).
  *
  * @internal
  */
-const OUTLET_BADGE_BG_COLOUR_DEFAULT = '#D3AF37';
+const AUTHENTIC_BADGE_BG_COLOUR_DEFAULT = '#D3AF37';
 
 /**
  * Helper to initialize customizer integration.
@@ -31,47 +31,47 @@ const OUTLET_BADGE_BG_COLOUR_DEFAULT = '#D3AF37';
  * @internal
  */
 function init_customizer(): void {
-	add_action( 'customize_register', 'OutletPro\register_customizer_hook' );
+	add_action( 'customize_register', 'AuthenticImages\register_customizer_hook' );
 }
 
 /**
- * Register the outlet customizer section, settings and controls.
+ * Register the Authentic Images customizer section, settings and controls.
  *
  * @param \WP_Customize_Manager $wp_customize Customizer manager instance.
  * @internal WordPress action hook
  */
 function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 	$wp_customize->add_section(
-		'outletpro',
+		'authenticimages',
 		array(
-			'title' => __( 'Outlet', 'outletpro' ),
+			'title' => __( 'Authentic Images', 'authenticimages' ),
 			'panel' => 'woocommerce',
 		)
 	);
 
 	$wp_customize->add_setting(
-		OUTLET_BADGE_LABEL_OPTION,
+		AUTHENTIC_BADGE_LABEL_OPTION,
 		array(
 			'type'              => 'option',
-			'default'           => __( 'Authentic', 'outletpro' ),
+			'default'           => __( 'Authentic', 'authenticimages' ),
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
 
 	$wp_customize->add_control(
-		OUTLET_BADGE_LABEL_OPTION,
+		AUTHENTIC_BADGE_LABEL_OPTION,
 		array(
-			'label'   => __( 'Badge label', 'outletpro' ),
-			'section' => 'outletpro',
+			'label'   => __( 'Badge label', 'authenticimages' ),
+			'section' => 'authenticimages',
 			'type'    => 'text',
 		)
 	);
 
 	$wp_customize->add_setting(
-		OUTLET_BADGE_BG_COLOR_OPTION,
+		AUTHENTIC_BADGE_BG_COLOR_OPTION,
 		array(
 			'type'              => 'option',
-			'default'           => OUTLET_BADGE_BG_COLOUR_DEFAULT,
+			'default'           => AUTHENTIC_BADGE_BG_COLOUR_DEFAULT,
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -79,19 +79,19 @@ function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 	$wp_customize->add_control(
 		new \WP_Customize_Color_Control(
 			$wp_customize,
-			OUTLET_BADGE_BG_COLOR_OPTION,
+			AUTHENTIC_BADGE_BG_COLOR_OPTION,
 			array(
-				'label'   => __( 'Badge background color', 'outletpro' ),
-				'section' => 'outletpro',
+				'label'   => __( 'Badge background color', 'authenticimages' ),
+				'section' => 'authenticimages',
 			)
 		)
 	);
 
 	$wp_customize->add_setting(
-		OUTLET_BADGE_TEXT_COLOR_OPTION,
+		AUTHENTIC_BADGE_TEXT_COLOR_OPTION,
 		array(
 			'type'              => 'option',
-			'default'           => OUTLET_BADGE_TEXT_COLOUR_DEFAULT,
+			'default'           => AUTHENTIC_BADGE_TEXT_COLOUR_DEFAULT,
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -99,16 +99,16 @@ function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 	$wp_customize->add_control(
 		new \WP_Customize_Color_Control(
 			$wp_customize,
-			OUTLET_BADGE_TEXT_COLOR_OPTION,
+			AUTHENTIC_BADGE_TEXT_COLOR_OPTION,
 			array(
-				'label'   => __( 'Badge text color', 'outletpro' ),
-				'section' => 'outletpro',
+				'label'   => __( 'Badge text color', 'authenticimages' ),
+				'section' => 'authenticimages',
 			)
 		)
 	);
 
 	$wp_customize->add_setting(
-		OUTLET_MESSAGE_OPTION,
+		AUTHENTIC_MESSAGE_OPTION,
 		array(
 			'type'              => 'option',
 			'default'           => '',
@@ -117,16 +117,16 @@ function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 	);
 
 	$wp_customize->add_control(
-		OUTLET_MESSAGE_OPTION,
+		AUTHENTIC_MESSAGE_OPTION,
 		array(
-			'label'   => __( 'Message', 'outletpro' ),
-			'section' => 'outletpro',
+			'label'   => __( 'Message', 'authenticimages' ),
+			'section' => 'authenticimages',
 			'type'    => 'text',
 		)
 	);
 
 	$wp_customize->add_setting(
-		OUTLET_BADGE_SCALE_OPTION,
+		AUTHENTIC_BADGE_SCALE_OPTION,
 		array(
 			'type'              => 'option',
 			'default'           => 166,
@@ -135,10 +135,10 @@ function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 	);
 
 	$wp_customize->add_control(
-		OUTLET_BADGE_SCALE_OPTION,
+		AUTHENTIC_BADGE_SCALE_OPTION,
 		array(
-			'label'   => __( 'Badge scale', 'outletpro' ),
-			'section' => 'outletpro',
+			'label'   => __( 'Badge scale', 'authenticimages' ),
+			'section' => 'authenticimages',
 			'type'    => 'select',
 			'choices' => array(
 				100 => '1.00x',

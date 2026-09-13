@@ -3,7 +3,7 @@
  * Licensed under the GNU General Public License v2.0 or later.
  */
 
-body.toplevel_page_outletpro-welcome {
+body.toplevel_page_authenticimages-welcome {
 	background-color: #fff;
 
 	h1 {
@@ -32,7 +32,7 @@ body.toplevel_page_outletpro-welcome {
 		text-decoration: underline;
 	}
 
-	#outletpro-welcome-page-root {
+	#authenticimages-welcome-page-root {
 		position: relative;
 		display: grid;
 
@@ -46,23 +46,23 @@ body.toplevel_page_outletpro-welcome {
 		}
 	}
 
-	.outletpro-welcome-page {
+	.authenticimages-welcome-page {
 		max-width: 480px;
 		text-align: center;
 	}
 
-	.outletpro-welcome-page__dismiss {
+	.authenticimages-welcome-page__dismiss {
 		position: absolute;
 		right: 0;
 		text-decoration: none;
 		top: 0;
 	}
 
-	.outletpro-welcome-page__dismiss:hover {
+	.authenticimages-welcome-page__dismiss:hover {
 		text-decoration: none;
 	}
 
-	.outletpro-welcome-page__description {
+	.authenticimages-welcome-page__description {
 		font-size: 1.2rem;
 		font-weight: 300;
 		margin: 3rem auto 1rem;
@@ -70,7 +70,7 @@ body.toplevel_page_outletpro-welcome {
 		text-align: center;
 	}
 
-	.outletpro-welcome-page__license-key-input {
+	.authenticimages-welcome-page__license-key-input {
 		margin: 4em auto;
 
 		.components-text-control__input {
@@ -85,21 +85,21 @@ body.toplevel_page_outletpro-welcome {
 		}
 	}
 
-	.outletpro-welcome-page__validation--error,
-	.outletpro-welcome-page__validation--invalid {
+	.authenticimages-welcome-page__validation--error,
+	.authenticimages-welcome-page__validation--invalid {
 		color: #c00;
 	}
 
-	.outletpro-welcome-page__notice {
+	.authenticimages-welcome-page__notice {
 		max-width: 300px;
 		margin-top: 3em;
 	}
 
-	.outletpro-welcome-page__button-row {
+	.authenticimages-welcome-page__button-row {
 		margin-top: 2rem;
 	}
 
-	.outletpro-welcome-page__error {
+	.authenticimages-welcome-page__error {
 		left: 0;
 		width: 100%;
 		text-align: center;

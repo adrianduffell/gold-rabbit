@@ -2,12 +2,12 @@
 /**
  * Enqueue functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,11 +17,11 @@ defined( 'ABSPATH' ) || exit;
  * @internal
  */
 function enqueue_init(): void {
-	add_action( 'wp_enqueue_scripts', 'OutletPro\register_classic_styles_hook' );
-	add_action( 'enqueue_block_assets', 'OutletPro\enqueue_admin_canvas_scripts_hook' );
-	add_action( 'wp_head', 'OutletPro\output_badge_style_css_variables_hook' );
-	add_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_styles_hook' );
-	add_action( 'enqueue_block_editor_assets', 'OutletPro\enqueue_build_assets_hook' );
+	add_action( 'wp_enqueue_scripts', 'AuthenticImages\register_classic_styles_hook' );
+	add_action( 'enqueue_block_assets', 'AuthenticImages\enqueue_admin_canvas_scripts_hook' );
+	add_action( 'wp_head', 'AuthenticImages\output_badge_style_css_variables_hook' );
+	add_action( 'admin_enqueue_scripts', 'AuthenticImages\enqueue_admin_styles_hook' );
+	add_action( 'enqueue_block_editor_assets', 'AuthenticImages\enqueue_build_assets_hook' );
 
 	register_block_styles();
 }
@@ -32,26 +32,26 @@ function enqueue_init(): void {
  * @internal
  */
 function deinit_enqueue(): void {
-	remove_action( 'wp_enqueue_scripts', 'OutletPro\register_classic_styles_hook' );
-	remove_action( 'enqueue_block_assets', 'OutletPro\enqueue_admin_canvas_scripts_hook' );
-	remove_action( 'wp_head', 'OutletPro\output_badge_style_css_variables_hook' );
-	remove_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_styles_hook' );
-	remove_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_welcome_page_scripts_hook' );
-	remove_action( 'enqueue_block_editor_assets', 'OutletPro\enqueue_build_assets_hook' );
-	wp_deregister_style( 'outletpro-classic-badge' );
-	wp_deregister_style( 'outletpro-classic-message' );
-	wp_dequeue_style( 'outletpro-admin' );
-	wp_deregister_style( 'outletpro-admin' );
-	wp_dequeue_style( 'outletpro-admin-editor' );
-	wp_deregister_style( 'outletpro-admin-editor' );
-	wp_dequeue_script( 'outletpro-admin-canvas-scripts' );
-	wp_deregister_script( 'outletpro-admin-canvas-scripts' );
-	wp_dequeue_script( 'outletpro-welcome-page' );
-	wp_deregister_script( 'outletpro-welcome-page' );
-	wp_dequeue_script( 'outletpro-editor' );
-	wp_deregister_script( 'outletpro-editor' );
-	wp_dequeue_style( 'outletpro-badge-block' );
-	wp_deregister_style( 'outletpro-badge-block' );
+	remove_action( 'wp_enqueue_scripts', 'AuthenticImages\register_classic_styles_hook' );
+	remove_action( 'enqueue_block_assets', 'AuthenticImages\enqueue_admin_canvas_scripts_hook' );
+	remove_action( 'wp_head', 'AuthenticImages\output_badge_style_css_variables_hook' );
+	remove_action( 'admin_enqueue_scripts', 'AuthenticImages\enqueue_admin_styles_hook' );
+	remove_action( 'admin_enqueue_scripts', 'AuthenticImages\enqueue_admin_welcome_page_scripts_hook' );
+	remove_action( 'enqueue_block_editor_assets', 'AuthenticImages\enqueue_build_assets_hook' );
+	wp_deregister_style( 'authenticimages-classic-badge' );
+	wp_deregister_style( 'authenticimages-classic-message' );
+	wp_dequeue_style( 'authenticimages-admin' );
+	wp_deregister_style( 'authenticimages-admin' );
+	wp_dequeue_style( 'authenticimages-admin-editor' );
+	wp_deregister_style( 'authenticimages-admin-editor' );
+	wp_dequeue_script( 'authenticimages-admin-canvas-scripts' );
+	wp_deregister_script( 'authenticimages-admin-canvas-scripts' );
+	wp_dequeue_script( 'authenticimages-welcome-page' );
+	wp_deregister_script( 'authenticimages-welcome-page' );
+	wp_dequeue_script( 'authenticimages-editor' );
+	wp_deregister_script( 'authenticimages-editor' );
+	wp_dequeue_style( 'authenticimages-badge-block' );
+	wp_deregister_style( 'authenticimages-badge-block' );
 }
 
 /**
@@ -72,7 +72,7 @@ function enqueue_admin_canvas_scripts_hook(): void {
 	 * @internal
 	 */
 	wp_enqueue_script(
-		'outletpro-admin-canvas-scripts',
+		'authenticimages-admin-canvas-scripts',
 		plugin_dir_url( PLUGIN_FILE ) . 'assets/js/admin-canvas.js',
 		array(),
 		VERSION,
@@ -94,7 +94,7 @@ function register_classic_styles_hook(): void {
 	 * @since 1.0.0
 	 */
 	wp_register_style(
-		'outletpro-classic-badge',
+		'authenticimages-classic-badge',
 		plugin_dir_url( PLUGIN_FILE ) . 'assets/css/classic-badge.css',
 		array(),
 		VERSION
@@ -106,7 +106,7 @@ function register_classic_styles_hook(): void {
 	 * @since 1.0.0
 	 */
 	wp_register_style(
-		'outletpro-classic-message',
+		'authenticimages-classic-message',
 		plugin_dir_url( PLUGIN_FILE ) . 'assets/css/classic-message.css',
 		array(),
 		VERSION
@@ -122,15 +122,15 @@ function register_classic_styles_hook(): void {
  */
 function output_badge_style_css_variables_hook(): void {
 	$badge_style_options = array(
-		OUTLET_BADGE_BG_COLOR_OPTION,
-		OUTLET_BADGE_TEXT_COLOR_OPTION,
-		OUTLET_BADGE_BORDER_COLOR_OPTION,
-		OUTLET_BADGE_BORDER_STYLE_OPTION,
-		OUTLET_BADGE_BORDER_WIDTH_OPTION,
-		OUTLET_BADGE_BORDER_RADIUS_OPTION,
-		OUTLET_BADGE_FONT_WEIGHT_OPTION,
-		OUTLET_BADGE_SCALE_OPTION,
-		OUTLET_BADGE_DENSITY_OPTION,
+		AUTHENTIC_BADGE_BG_COLOR_OPTION,
+		AUTHENTIC_BADGE_TEXT_COLOR_OPTION,
+		AUTHENTIC_BADGE_BORDER_COLOR_OPTION,
+		AUTHENTIC_BADGE_BORDER_STYLE_OPTION,
+		AUTHENTIC_BADGE_BORDER_WIDTH_OPTION,
+		AUTHENTIC_BADGE_BORDER_RADIUS_OPTION,
+		AUTHENTIC_BADGE_FONT_WEIGHT_OPTION,
+		AUTHENTIC_BADGE_SCALE_OPTION,
+		AUTHENTIC_BADGE_DENSITY_OPTION,
 	);
 
 	$declarations = array_map(
@@ -147,7 +147,7 @@ function output_badge_style_css_variables_hook(): void {
 }
 
 /**
- * Register the block stylesheet so it only loads when the outlet badge block is rendered.
+ * Register the block stylesheet so it only loads when the authentic badge block is rendered.
  *
  * The message block doesn't have any styles currently.
  *
@@ -163,14 +163,14 @@ function register_block_styles(): void {
 	$asset = require $asset_file;
 
 	/**
-	 * Block stylesheet for the outlet badge block.
+	 * Block stylesheet for the authentic badge block.
 	 *
 	 * @internal
 	 */
 	wp_enqueue_block_style(
-		'outletpro/outlet-badge',
+		'authenticimages/authentic-badge',
 		array(
-			'handle' => 'outletpro-badge-block',
+			'handle' => 'authenticimages-badge-block',
 			'src'    => plugin_dir_url( PLUGIN_FILE ) . 'build/style-index.css',
 			'deps'   => array(),
 			'ver'    => $asset['version'],
@@ -192,7 +192,7 @@ function enqueue_admin_styles_hook(): void {
 	 * @internal
 	 */
 	wp_enqueue_style(
-		'outletpro-admin',
+		'authenticimages-admin',
 		plugin_dir_url( PLUGIN_FILE ) . 'assets/css/admin.css',
 		array(),
 		VERSION
@@ -226,7 +226,7 @@ function enqueue_build_assets_hook(): void {
 	 * @internal
 	 */
 	wp_enqueue_script(
-		'outletpro-editor',
+		'authenticimages-editor',
 		plugin_dir_url( PLUGIN_FILE ) . 'build/index.js',
 		array_merge( $deps, array( 'wc-blocks-registry' ) ),
 		$asset['version'],

@@ -5,7 +5,7 @@
 
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-const licenseKey = process.env.OUTLETPRO_LICENSE_KEY;
+const licenseKey = process.env.AUTHENTICIMAGES_LICENSE_KEY;
 
 test.describe.configure( { mode: 'serial' } );
 
@@ -18,7 +18,7 @@ test(
 			path: '/wp/v2/settings',
 			method: 'POST',
 			data: {
-				outletpro_license_key: '',
+				authenticimages_license_key: '',
 			},
 		} );
 
@@ -27,7 +27,7 @@ test(
 
 		// Assert.
 		await expect(
-			page.getByRole( 'link', { name: 'Outlet Pro Setup' } )
+			page.getByRole( 'link', { name: 'Authentic Images Setup' } )
 		).toBeVisible();
 	}
 );
@@ -38,16 +38,19 @@ test(
 	async ( { page, admin, requestUtils } ) => {
 		// Arrange.
 		await page.context().clearCookies( {
-			name: 'OUTLETPRO_DISMISS_SETUP',
+			name: 'AUTHENTICIMAGES_DISMISS_SETUP',
 		} );
 		await requestUtils.rest( {
 			path: '/wp/v2/settings',
 			method: 'POST',
 			data: {
-				outletpro_license_key: '',
+				authenticimages_license_key: '',
 			},
 		} );
-		await admin.visitAdminPage( 'admin.php', 'page=outletpro-welcome' );
+		await admin.visitAdminPage(
+			'admin.php',
+			'page=authenticimages-welcome'
+		);
 
 		// Act.
 		await page.getByRole( 'button', { name: 'Dismiss' } ).click();
@@ -55,7 +58,7 @@ test(
 
 		// Assert.
 		await expect(
-			page.getByRole( 'heading', { name: 'Welcome to Outlet Pro' } )
+			page.getByRole( 'heading', { name: 'Welcome to Authentic Images' } )
 		).toBeVisible();
 	}
 );
@@ -66,16 +69,19 @@ test(
 	async ( { page, admin, requestUtils } ) => {
 		// Arrange.
 		await page.context().clearCookies( {
-			name: 'OUTLETPRO_DISMISS_SETUP',
+			name: 'AUTHENTICIMAGES_DISMISS_SETUP',
 		} );
 		await requestUtils.rest( {
 			path: '/wp/v2/settings',
 			method: 'POST',
 			data: {
-				outletpro_license_key: '',
+				authenticimages_license_key: '',
 			},
 		} );
-		await admin.visitAdminPage( 'admin.php', 'page=outletpro-welcome' );
+		await admin.visitAdminPage(
+			'admin.php',
+			'page=authenticimages-welcome'
+		);
 
 		// Act.
 		await page.getByRole( 'button', { name: 'Dismiss' } ).click();
@@ -86,7 +92,10 @@ test(
 		).toBeVisible();
 		await expect(
 			page.getByRole( 'link', { name: 'Learn more' } )
-		).toHaveAttribute( 'href', 'https://outletpro.zip/help/license-key' );
+		).toHaveAttribute(
+			'href',
+			'https://authenticimages.zip/help/license-key'
+		);
 		await expect(
 			page.getByRole( 'button', { name: 'Undo' } )
 		).toBeVisible();
@@ -96,7 +105,7 @@ test(
 
 		// Assert.
 		await expect(
-			page.getByRole( 'link', { name: 'Outlet Pro Setup' } )
+			page.getByRole( 'link', { name: 'Authentic Images Setup' } )
 		).toHaveCount( 0 );
 	}
 );
@@ -107,21 +116,24 @@ test(
 	async ( { page, admin, requestUtils } ) => {
 		test.skip(
 			! licenseKey,
-			'OUTLETPRO_LICENSE_KEY environment variable not found.'
+			'AUTHENTICIMAGES_LICENSE_KEY environment variable not found.'
 		);
 
 		// Arrange.
 		await page.context().clearCookies( {
-			name: 'OUTLETPRO_DISMISS_SETUP',
+			name: 'AUTHENTICIMAGES_DISMISS_SETUP',
 		} );
 		await requestUtils.rest( {
 			path: '/wp/v2/settings',
 			method: 'POST',
 			data: {
-				outletpro_license_key: '',
+				authenticimages_license_key: '',
 			},
 		} );
-		await admin.visitAdminPage( 'admin.php', 'page=outletpro-welcome' );
+		await admin.visitAdminPage(
+			'admin.php',
+			'page=authenticimages-welcome'
+		);
 
 		// Act.
 		await page
@@ -145,7 +157,7 @@ test(
 	async ( { page, admin } ) => {
 		test.skip(
 			! licenseKey,
-			'OUTLETPRO_LICENSE_KEY environment variable not found.'
+			'AUTHENTICIMAGES_LICENSE_KEY environment variable not found.'
 		);
 
 		// Act.
@@ -153,7 +165,7 @@ test(
 
 		// Assert.
 		await expect(
-			page.getByRole( 'link', { name: 'Outlet Pro Setup' } )
+			page.getByRole( 'link', { name: 'Authentic Images Setup' } )
 		).toHaveCount( 0 );
 	}
 );

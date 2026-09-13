@@ -2,17 +2,17 @@
 /**
  * Tests for add_plugin_action_links_hook().
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @group license
  * @copyright © 2026 Adrian Duffell
  */
 
-use function OutletPro\init_license;
-use const OutletPro\LICENSE_EXPIRY_TRANSIENT;
-use const OutletPro\LICENSE_NAME_TRANSIENT;
-use const OutletPro\LICENSE_STATUS_TRANSIENT;
-use const OutletPro\PLUGIN_FILE;
-use const OutletPro\WELCOME_PAGE_SLUG;
+use function AuthenticImages\init_license;
+use const AuthenticImages\LICENSE_EXPIRY_TRANSIENT;
+use const AuthenticImages\LICENSE_NAME_TRANSIENT;
+use const AuthenticImages\LICENSE_STATUS_TRANSIENT;
+use const AuthenticImages\PLUGIN_FILE;
+use const AuthenticImages\WELCOME_PAGE_SLUG;
 
 class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 
@@ -69,7 +69,7 @@ class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 		$this->assertCount( 3, $result );
 		$this->assertSame( $links[0], $result[0] );
 		$this->assertSame( $links[1], $result[1] );
-		$this->assertStringContainsString( 'https://outletpro.zip/support', $result[2] );
+		$this->assertStringContainsString( 'https://authenticimages.zip/support', $result[2] );
 		$this->assertStringContainsString( 'Support', $result[2] );
 	}
 
@@ -91,7 +91,7 @@ class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 		// Assert.
 		$this->assertCount( 4, $result );
 		$this->assertSame(
-			'<span class="outletpro-license-expiry">Long-term service until 2050/01/01</span>',
+			'<span class="authenticimages-license-expiry">Long-term service until 2050/01/01</span>',
 			$result[ array_key_last( $result ) ]
 		);
 	}
@@ -127,7 +127,7 @@ class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 		$this->assertCount( 2, $result );
 		$this->assertStringContainsString( 'Support', $result[0] );
 		$this->assertStringContainsString(
-			'<span class="outletpro-license-expiry">Long-term service until 2050/01/01</span>',
+			'<span class="authenticimages-license-expiry">Long-term service until 2050/01/01</span>',
 			$result[1]
 		);
 	}
@@ -147,7 +147,7 @@ class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 		$this->assertCount( 2, $result );
 		$this->assertStringContainsString( 'Support', $result[0] );
 		$this->assertStringContainsString(
-			'<span class="outletpro-license-expiry outletpro-alert-text">Long-term service expired 1997/08/29</span>',
+			'<span class="authenticimages-license-expiry authenticimages-alert-text">Long-term service expired 1997/08/29</span>',
 			$result[1]
 		);
 	}
@@ -166,7 +166,7 @@ class Test_Add_Plugin_Action_Links_Hook extends WP_UnitTestCase {
 		$this->assertCount( 2, $result );
 		$this->assertStringContainsString( 'Support', $result[0] );
 		$this->assertStringContainsString(
-			'<span class="outletpro-license-expiry">Lifetime service (non-expiring)</span>',
+			'<span class="authenticimages-license-expiry">Lifetime service (non-expiring)</span>',
 			$result[1]
 		);
 	}

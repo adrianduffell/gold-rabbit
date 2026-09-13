@@ -2,13 +2,13 @@
 /**
  * License settings functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @subpackage License
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,14 +17,14 @@ defined( 'ABSPATH' ) || exit;
  *
  * @internal
  */
-const LICENSE_OPTIONS_GROUP = 'outletpro_license';
+const LICENSE_OPTIONS_GROUP = 'authenticimages_license';
 
 /**
  * WordPress option key used to store the license key.
  *
  * @internal
  */
-const LICENSE_KEY_OPTION = 'outletpro_license_key';
+const LICENSE_KEY_OPTION = 'authenticimages_license_key';
 
 /**
  * Minimum length for a valid stub license key.
@@ -69,7 +69,7 @@ const HTTP_OK = 200;
 const HTTP_NOT_FOUND = 404;
 
 /**
- * Lemon Squeezy product IDs accepted for Outlet Pro licenses.
+ * Lemon Squeezy product IDs accepted for Authentic Images licenses.
  *
  * @internal
  */
@@ -80,14 +80,14 @@ const ALLOWED_LICENSE_PRODUCT_IDS = array( 1279790 );
  *
  * @internal
  */
-const LICENSE_HTTP_CACHE_GROUP = 'outletpro_license_http';
+const LICENSE_HTTP_CACHE_GROUP = 'authenticimages_license_http';
 
 /**
  * WordPress option name used to store the license activation tuple.
  *
  * @internal
  */
-define( 'OutletPro\LICENSE_ACTIVATION_OPTION', 'outletpro_license_activation_' . safe_get_site_key() );
+define( 'AuthenticImages\LICENSE_ACTIVATION_OPTION', 'authenticimages_license_activation_' . safe_get_site_key() );
 
 /**
  * WordPress transient key used to cache license status.
@@ -95,7 +95,7 @@ define( 'OutletPro\LICENSE_ACTIVATION_OPTION', 'outletpro_license_activation_' .
  * @internal
  * @see get_license_status()
  */
-define( 'OutletPro\LICENSE_STATUS_TRANSIENT', 'outletpro_license_status_' . safe_get_site_key() );
+define( 'AuthenticImages\LICENSE_STATUS_TRANSIENT', 'authenticimages_license_status_' . safe_get_site_key() );
 
 /**
  * WordPress transient key used to cache the license variant name.
@@ -103,7 +103,7 @@ define( 'OutletPro\LICENSE_STATUS_TRANSIENT', 'outletpro_license_status_' . safe
  * @internal
  * @see get_license_name()
  */
-define( 'OutletPro\LICENSE_NAME_TRANSIENT', 'outletpro_license_name_' . safe_get_site_key() );
+define( 'AuthenticImages\LICENSE_NAME_TRANSIENT', 'authenticimages_license_name_' . safe_get_site_key() );
 
 /**
  * WordPress transient key used to cache the license expiry.
@@ -114,7 +114,7 @@ define( 'OutletPro\LICENSE_NAME_TRANSIENT', 'outletpro_license_name_' . safe_get
  *
  * @internal
  */
-define( 'OutletPro\LICENSE_EXPIRY_TRANSIENT', 'outletpro_license_expiry_' . safe_get_site_key() );
+define( 'AuthenticImages\LICENSE_EXPIRY_TRANSIENT', 'authenticimages_license_expiry_' . safe_get_site_key() );
 
 /**
  * Helper to initialize license settings.
@@ -125,8 +125,8 @@ function init_license_settings(): void {
 	wp_cache_add_non_persistent_groups( LICENSE_HTTP_CACHE_GROUP );
 	register_license_key_setting();
 
-	add_filter( 'pre_update_option_' . LICENSE_KEY_OPTION, 'OutletPro\pre_update_license_key_hook', 10, 2 );
-	add_action( 'deleted_option', 'OutletPro\delete_license_activation_hook', 10, 1 );
+	add_filter( 'pre_update_option_' . LICENSE_KEY_OPTION, 'AuthenticImages\pre_update_license_key_hook', 10, 2 );
+	add_action( 'deleted_option', 'AuthenticImages\delete_license_activation_hook', 10, 1 );
 }
 
 /**
@@ -136,8 +136,8 @@ function init_license_settings(): void {
  */
 function deinit_license_settings(): void {
 	unregister_setting( LICENSE_OPTIONS_GROUP, LICENSE_KEY_OPTION );
-	remove_filter( 'pre_update_option_' . LICENSE_KEY_OPTION, 'OutletPro\pre_update_license_key_hook', 10 );
-	remove_action( 'deleted_option', 'OutletPro\delete_license_activation_hook', 10 );
+	remove_filter( 'pre_update_option_' . LICENSE_KEY_OPTION, 'AuthenticImages\pre_update_license_key_hook', 10 );
+	remove_action( 'deleted_option', 'AuthenticImages\delete_license_activation_hook', 10 );
 }
 
 /**
@@ -229,8 +229,8 @@ function register_license_key_setting(): void {
 		LICENSE_KEY_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'License Key', 'outletpro' ),
-			'description'       => __( 'Outlet Pro license key.', 'outletpro' ),
+			'label'             => __( 'License Key', 'authenticimages' ),
+			'description'       => __( 'Authentic Images license key.', 'authenticimages' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_text_field',
 			'show_in_rest'      => array(

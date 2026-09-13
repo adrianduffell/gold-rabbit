@@ -2,13 +2,13 @@
 
 All contributions are welcome ❤️
 
-Thanks for your interest in Outlet Pro!
+Thanks for your interest in Authentic Images!
 
 — Adrian
 
 ## Linting
 
-Outlet Pro lints against the [WordPress coding standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) and other conventions found in [AGENTS.md](../AGENTS.md).
+Authentic Images lints against the [WordPress coding standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) and other conventions found in [AGENTS.md](../AGENTS.md).
 
 | Script             | Description            |
 | ------------------ | ---------------------- |
@@ -18,7 +18,7 @@ Outlet Pro lints against the [WordPress coding standards](https://developer.word
 
 ## Tests
 
-Outlet Pro aims for full test coverage.
+Authentic Images aims for full test coverage.
 
 | Script              | Description                                   |
 | ------------------- | --------------------------------------------- |

@@ -7,7 +7,9 @@ import { createRoot } from '@wordpress/element';
 import { WelcomePage } from './WelcomePage';
 import './style.css';
 
-const container = document.getElementById( 'outletpro-welcome-page-root' );
+const container = document.getElementById(
+	'authenticimages-welcome-page-root'
+);
 
 if ( container ) {
 	const root = createRoot( container );

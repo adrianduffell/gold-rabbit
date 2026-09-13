@@ -7,15 +7,15 @@ import { buildPreviewStyles } from '../index';
 
 describe( 'buildPreviewStyles', () => {
 	const vars = {
-		bgColor: '--outletpro-badge-bg-color',
-		textColor: '--outletpro-badge-text-color',
-		fontWeight: '--outletpro-badge-font-weight',
-		borderColor: '--outletpro-badge-border-color',
-		borderStyle: '--outletpro-badge-border-style',
-		borderWidth: '--outletpro-badge-border-width',
-		borderRadius: '--outletpro-badge-border-radius',
-		scale: '--outletpro-badge-scale',
-		density: '--outletpro-badge-density',
+		bgColor: '--authenticimages-badge-bg-color',
+		textColor: '--authenticimages-badge-text-color',
+		fontWeight: '--authenticimages-badge-font-weight',
+		borderColor: '--authenticimages-badge-border-color',
+		borderStyle: '--authenticimages-badge-border-style',
+		borderWidth: '--authenticimages-badge-border-width',
+		borderRadius: '--authenticimages-badge-border-radius',
+		scale: '--authenticimages-badge-scale',
+		density: '--authenticimages-badge-density',
 	};
 
 	test( 'wraps declarations in a :root rule', () => {
@@ -25,35 +25,39 @@ describe( 'buildPreviewStyles', () => {
 	} );
 
 	test( 'serializes label as a JSON string', () => {
-		const result = buildPreviewStyles( { label: 'Sale' } );
+		const result = buildPreviewStyles( { label: 'Authentic' } );
 
-		expect( result ).toContain( '--outletpro-badge-label: "Sale"' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic"'
+		);
 	} );
 
 	test( 'escapes special characters in label', () => {
-		const resultQuote = buildPreviewStyles( { label: 'Bob"s Sale' } );
+		const resultQuote = buildPreviewStyles( {
+			label: 'Bob"s original photography',
+		} );
 		const resultNewline = buildPreviewStyles( {
 			label: 'A "quote"\nand newline',
 		} );
 
 		expect( resultQuote ).toContain(
-			'--outletpro-badge-label: "Bob\\"s Sale"'
+			'--authenticimages-badge-label: "Bob\\"s original photography"'
 		);
 		expect( resultNewline ).toContain(
-			'--outletpro-badge-label: "A \\"quote\\"\\nand newline"'
+			'--authenticimages-badge-label: "A \\"quote\\"\\nand newline"'
 		);
 	} );
 
 	test( 'uses none for label when undefined', () => {
 		const result = buildPreviewStyles( {} );
 
-		expect( result ).toContain( '--outletpro-badge-label: none' );
+		expect( result ).toContain( '--authenticimages-badge-label: none' );
 	} );
 
 	test( 'uses none for label when empty string', () => {
 		const result = buildPreviewStyles( { label: '' } );
 
-		expect( result ).toContain( '--outletpro-badge-label: none' );
+		expect( result ).toContain( '--authenticimages-badge-label: none' );
 	} );
 
 	test.each( [
@@ -74,7 +78,7 @@ describe( 'buildPreviewStyles', () => {
 
 	test( 'includes all CSS vars when all settings are provided', () => {
 		const result = buildPreviewStyles( {
-			label: 'Sale',
+			label: 'Authentic',
 			bgColor: '#ff0000',
 			textColor: '#ffffff',
 			fontWeight: '700',
@@ -86,16 +90,32 @@ describe( 'buildPreviewStyles', () => {
 			density: 60,
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-label: "Sale"' );
-		expect( result ).toContain( '--outletpro-badge-bg-color: #ff0000' );
-		expect( result ).toContain( '--outletpro-badge-text-color: #ffffff' );
-		expect( result ).toContain( '--outletpro-badge-font-weight: 700' );
-		expect( result ).toContain( '--outletpro-badge-border-color: #cccccc' );
-		expect( result ).toContain( '--outletpro-badge-border-style: solid' );
-		expect( result ).toContain( '--outletpro-badge-border-width: 1px' );
-		expect( result ).toContain( '--outletpro-badge-border-radius: 4px' );
-		expect( result ).toContain( '--outletpro-badge-scale: 120' );
-		expect( result ).toContain( '--outletpro-badge-density: 60' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic"'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-bg-color: #ff0000'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-text-color: #ffffff'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-font-weight: 700'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-border-color: #cccccc'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-border-style: solid'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-border-width: 1px'
+		);
+		expect( result ).toContain(
+			'--authenticimages-badge-border-radius: 4px'
+		);
+		expect( result ).toContain( '--authenticimages-badge-scale: 120' );
+		expect( result ).toContain( '--authenticimages-badge-density: 60' );
 	} );
 
 	test.each(
@@ -115,11 +135,13 @@ describe( 'buildPreviewStyles', () => {
 			density: undefined,
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-bg-color: unset' );
-		expect( result ).toContain( '--outletpro-badge-border-width: 0' );
-		expect( result ).toContain( '--outletpro-badge-border-radius: 0' );
-		expect( result ).toContain( '--outletpro-badge-scale: unset' );
-		expect( result ).toContain( '--outletpro-badge-density: unset' );
+		expect( result ).toContain( '--authenticimages-badge-bg-color: unset' );
+		expect( result ).toContain( '--authenticimages-badge-border-width: 0' );
+		expect( result ).toContain(
+			'--authenticimages-badge-border-radius: 0'
+		);
+		expect( result ).toContain( '--authenticimages-badge-scale: unset' );
+		expect( result ).toContain( '--authenticimages-badge-density: unset' );
 	} );
 
 	test( 'outputs unset for undefined or empty alongside defined values', () => {
@@ -128,8 +150,10 @@ describe( 'buildPreviewStyles', () => {
 			textColor: undefined,
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-bg-color: #000' );
-		expect( result ).toContain( '--outletpro-badge-text-color: unset' );
+		expect( result ).toContain( '--authenticimages-badge-bg-color: #000' );
+		expect( result ).toContain(
+			'--authenticimages-badge-text-color: unset'
+		);
 	} );
 
 	test( 'outputs 0 for zero scale', () => {
@@ -137,7 +161,7 @@ describe( 'buildPreviewStyles', () => {
 			scale: 0,
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-scale: 0' );
+		expect( result ).toContain( '--authenticimages-badge-scale: 0' );
 	} );
 
 	test( 'outputs 0 for zero density', () => {
@@ -145,18 +169,22 @@ describe( 'buildPreviewStyles', () => {
 			density: 0,
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-density: 0' );
+		expect( result ).toContain( '--authenticimages-badge-density: 0' );
 	} );
 
 	test( 'joins declarations with semicolons', () => {
 		const result = buildPreviewStyles( {
-			label: 'Sale',
+			label: 'Authentic',
 			bgColor: '#ff0000',
 		} );
 
-		expect( result ).toContain( '--outletpro-badge-label: "Sale";' );
+		expect( result ).toContain(
+			'--authenticimages-badge-label: "Authentic";'
+		);
 
-		expect( result ).toContain( '--outletpro-badge-bg-color: #ff0000;' );
+		expect( result ).toContain(
+			'--authenticimages-badge-bg-color: #ff0000;'
+		);
 	} );
 
 	test( 'does not append a trailing semicolon before the closing brace', () => {

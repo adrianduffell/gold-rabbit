@@ -176,7 +176,7 @@ jobs:
 
     - name: Run E2E tests
       env:
-        OUTLETPRO_LICENSE_KEY: ${{ secrets.TEST_LICENSE_KEY }}
+        AUTHENTICIMAGES_LICENSE_KEY: ${{ secrets.TEST_LICENSE_KEY }}
       run: npm run test:e2e -- ${{ matrix.build.e2e_flags }}
 
     - name: Run classic theme shortcode E2E tests

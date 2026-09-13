@@ -2,22 +2,22 @@
 /**
  * Tests for the customizer integration functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-use function OutletPro\register_customizer_hook;
-use const OutletPro\OUTLET_BADGE_BG_COLOR_OPTION;
-use const OutletPro\OUTLET_BADGE_BG_COLOUR_DEFAULT;
-use const OutletPro\OUTLET_BADGE_LABEL_OPTION;
-use const OutletPro\OUTLET_BADGE_SCALE_OPTION;
-use const OutletPro\OUTLET_BADGE_TEXT_COLOR_OPTION;
-use const OutletPro\OUTLET_MESSAGE_OPTION;
+use function AuthenticImages\register_customizer_hook;
+use const AuthenticImages\AUTHENTIC_BADGE_BG_COLOR_OPTION;
+use const AuthenticImages\AUTHENTIC_BADGE_BG_COLOUR_DEFAULT;
+use const AuthenticImages\AUTHENTIC_BADGE_LABEL_OPTION;
+use const AuthenticImages\AUTHENTIC_BADGE_SCALE_OPTION;
+use const AuthenticImages\AUTHENTIC_BADGE_TEXT_COLOR_OPTION;
+use const AuthenticImages\AUTHENTIC_MESSAGE_OPTION;
 
 class Test_Register_Customizer extends WP_UnitTestCase {
 
-	public function test_registers_outletpro_section(): void {
+	public function test_registers_authenticimages_section(): void {
 		// Arrange.
 		$wp_customize = new WP_Customize_Manager();
 
@@ -25,7 +25,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_section( 'outletpro' ) );
+		$this->assertNotNull( $wp_customize->get_section( 'authenticimages' ) );
 	}
 
 	public function test_section_is_nested_in_woocommerce_panel(): void {
@@ -36,7 +36,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'woocommerce', $wp_customize->get_section( 'outletpro' )->panel );
+		$this->assertSame( 'woocommerce', $wp_customize->get_section( 'authenticimages' )->panel );
 	}
 
 	public function test_registers_message_setting(): void {
@@ -47,7 +47,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_setting( OUTLET_MESSAGE_OPTION ) );
+		$this->assertNotNull( $wp_customize->get_setting( AUTHENTIC_MESSAGE_OPTION ) );
 	}
 
 	public function test_message_setting_type_is_option(): void {
@@ -58,7 +58,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'option', $wp_customize->get_setting( OUTLET_MESSAGE_OPTION )->type );
+		$this->assertSame( 'option', $wp_customize->get_setting( AUTHENTIC_MESSAGE_OPTION )->type );
 	}
 
 	public function test_message_setting_default(): void {
@@ -69,7 +69,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( '', $wp_customize->get_setting( OUTLET_MESSAGE_OPTION )->default );
+		$this->assertSame( '', $wp_customize->get_setting( AUTHENTIC_MESSAGE_OPTION )->default );
 	}
 
 	public function test_registers_badge_text_colour_setting(): void {
@@ -80,7 +80,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_setting( OUTLET_BADGE_TEXT_COLOR_OPTION ) );
+		$this->assertNotNull( $wp_customize->get_setting( AUTHENTIC_BADGE_TEXT_COLOR_OPTION ) );
 	}
 
 	public function test_badge_text_colour_setting_type_is_option(): void {
@@ -91,7 +91,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'option', $wp_customize->get_setting( OUTLET_BADGE_TEXT_COLOR_OPTION )->type );
+		$this->assertSame( 'option', $wp_customize->get_setting( AUTHENTIC_BADGE_TEXT_COLOR_OPTION )->type );
 	}
 
 	public function test_badge_text_colour_setting_default(): void {
@@ -102,7 +102,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( '#111111', $wp_customize->get_setting( OUTLET_BADGE_TEXT_COLOR_OPTION )->default );
+		$this->assertSame( '#111111', $wp_customize->get_setting( AUTHENTIC_BADGE_TEXT_COLOR_OPTION )->default );
 	}
 
 	public function test_registers_badge_bg_colour_setting(): void {
@@ -113,7 +113,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_setting( OUTLET_BADGE_BG_COLOR_OPTION ) );
+		$this->assertNotNull( $wp_customize->get_setting( AUTHENTIC_BADGE_BG_COLOR_OPTION ) );
 	}
 
 	public function test_badge_bg_colour_setting_type_is_option(): void {
@@ -124,7 +124,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'option', $wp_customize->get_setting( OUTLET_BADGE_BG_COLOR_OPTION )->type );
+		$this->assertSame( 'option', $wp_customize->get_setting( AUTHENTIC_BADGE_BG_COLOR_OPTION )->type );
 	}
 
 	public function test_badge_bg_colour_setting_default(): void {
@@ -135,7 +135,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( OUTLET_BADGE_BG_COLOUR_DEFAULT, $wp_customize->get_setting( OUTLET_BADGE_BG_COLOR_OPTION )->default );
+		$this->assertSame( AUTHENTIC_BADGE_BG_COLOUR_DEFAULT, $wp_customize->get_setting( AUTHENTIC_BADGE_BG_COLOR_OPTION )->default );
 	}
 
 	public function test_registers_badge_label_setting(): void {
@@ -146,7 +146,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_setting( OUTLET_BADGE_LABEL_OPTION ) );
+		$this->assertNotNull( $wp_customize->get_setting( AUTHENTIC_BADGE_LABEL_OPTION ) );
 	}
 
 	public function test_badge_label_setting_type_is_option(): void {
@@ -157,7 +157,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'option', $wp_customize->get_setting( OUTLET_BADGE_LABEL_OPTION )->type );
+		$this->assertSame( 'option', $wp_customize->get_setting( AUTHENTIC_BADGE_LABEL_OPTION )->type );
 	}
 
 	public function test_badge_label_setting_default(): void {
@@ -168,7 +168,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'Authentic', $wp_customize->get_setting( OUTLET_BADGE_LABEL_OPTION )->default );
+		$this->assertSame( 'Authentic', $wp_customize->get_setting( AUTHENTIC_BADGE_LABEL_OPTION )->default );
 	}
 
 	public function test_registers_badge_scale_setting(): void {
@@ -179,7 +179,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertNotNull( $wp_customize->get_setting( OUTLET_BADGE_SCALE_OPTION ) );
+		$this->assertNotNull( $wp_customize->get_setting( AUTHENTIC_BADGE_SCALE_OPTION ) );
 	}
 
 	public function test_badge_scale_setting_type_is_option(): void {
@@ -190,7 +190,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 'option', $wp_customize->get_setting( OUTLET_BADGE_SCALE_OPTION )->type );
+		$this->assertSame( 'option', $wp_customize->get_setting( AUTHENTIC_BADGE_SCALE_OPTION )->type );
 	}
 
 	public function test_badge_scale_setting_default(): void {
@@ -201,7 +201,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$this->assertSame( 166, $wp_customize->get_setting( OUTLET_BADGE_SCALE_OPTION )->default );
+		$this->assertSame( 166, $wp_customize->get_setting( AUTHENTIC_BADGE_SCALE_OPTION )->default );
 	}
 
 	public function test_registers_badge_scale_select_control_with_expected_choices(): void {
@@ -212,7 +212,7 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 		register_customizer_hook( $wp_customize );
 
 		// Assert.
-		$control = $wp_customize->get_control( OUTLET_BADGE_SCALE_OPTION );
+		$control = $wp_customize->get_control( AUTHENTIC_BADGE_SCALE_OPTION );
 
 		$this->assertNotNull( $control );
 		$this->assertSame( 'Badge scale', $control->label );

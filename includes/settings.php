@@ -2,91 +2,91 @@
 /**
  * Settings functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * WordPress option key used to store the outlet message.
+ * WordPress option key used to store the authentic message.
  *
  * @internal
  */
-const OUTLET_MESSAGE_OPTION = 'outletpro_message';
+const AUTHENTIC_MESSAGE_OPTION = 'authenticimages_message';
 
 /**
  * WordPress option key used to store the badge label text.
  *
  * @internal
  */
-const OUTLET_BADGE_LABEL_OPTION = 'outletpro_badge_label';
+const AUTHENTIC_BADGE_LABEL_OPTION = 'authenticimages_badge_label';
 
 /**
  * WordPress option key used to store the badge text color.
  *
  * @internal
  */
-const OUTLET_BADGE_TEXT_COLOR_OPTION = 'outletpro_badge_text_color';
+const AUTHENTIC_BADGE_TEXT_COLOR_OPTION = 'authenticimages_badge_text_color';
 
 /**
  * WordPress option key used to store the badge background color.
  *
  * @internal
  */
-const OUTLET_BADGE_BG_COLOR_OPTION = 'outletpro_badge_bg_color';
+const AUTHENTIC_BADGE_BG_COLOR_OPTION = 'authenticimages_badge_bg_color';
 
 /**
  * WordPress option key used to store the badge border radius.
  *
  * @internal
  */
-const OUTLET_BADGE_BORDER_RADIUS_OPTION = 'outletpro_badge_border_radius';
+const AUTHENTIC_BADGE_BORDER_RADIUS_OPTION = 'authenticimages_badge_border_radius';
 
 /**
  * WordPress option key used to store the badge border color.
  *
  * @internal
  */
-const OUTLET_BADGE_BORDER_COLOR_OPTION = 'outletpro_badge_border_color';
+const AUTHENTIC_BADGE_BORDER_COLOR_OPTION = 'authenticimages_badge_border_color';
 
 /**
  * WordPress option key used to store the badge border style.
  *
  * @internal
  */
-const OUTLET_BADGE_BORDER_STYLE_OPTION = 'outletpro_badge_border_style';
+const AUTHENTIC_BADGE_BORDER_STYLE_OPTION = 'authenticimages_badge_border_style';
 
 /**
  * WordPress option key used to store the badge border width.
  *
  * @internal
  */
-const OUTLET_BADGE_BORDER_WIDTH_OPTION = 'outletpro_badge_border_width';
+const AUTHENTIC_BADGE_BORDER_WIDTH_OPTION = 'authenticimages_badge_border_width';
 
 /**
  * WordPress option key used to store the badge font weight.
  *
  * @internal
  */
-const OUTLET_BADGE_FONT_WEIGHT_OPTION = 'outletpro_badge_font_weight';
+const AUTHENTIC_BADGE_FONT_WEIGHT_OPTION = 'authenticimages_badge_font_weight';
 
 /**
  * WordPress option key used to store the badge scale.
  *
  * @internal
  */
-const OUTLET_BADGE_SCALE_OPTION = 'outletpro_badge_scale';
+const AUTHENTIC_BADGE_SCALE_OPTION = 'authenticimages_badge_scale';
 
 /**
  * WordPress option key used to store the badge density.
  *
  * @internal
  */
-const OUTLET_BADGE_DENSITY_OPTION = 'outletpro_badge_density';
+const AUTHENTIC_BADGE_DENSITY_OPTION = 'authenticimages_badge_density';
 
 /**
  * Sanitize a CSS property value, rejecting values that contain CSS block delimiters or
@@ -174,7 +174,7 @@ function sanitize_unsigned_integer( $value ): ?int {
  * @internal
  */
 function settings_screen_enabled(): bool {
-	return (bool) apply_filters( 'outletpro_settings_screen_enabled', false );
+	return (bool) apply_filters( 'authenticimages_settings_screen_enabled', false );
 }
 
 /**
@@ -183,17 +183,17 @@ function settings_screen_enabled(): bool {
  * @internal
  */
 function init_settings(): void {
-	register_outlet_badge_label_setting();
-	register_outlet_badge_text_color_setting();
-	register_outlet_badge_bg_color_setting();
-	register_outlet_badge_border_color_setting();
-	register_outlet_badge_border_style_setting();
-	register_outlet_badge_border_width_setting();
-	register_outlet_badge_border_radius_setting();
-	register_outlet_badge_font_weight_setting();
-	register_outlet_badge_scale_setting();
-	register_outlet_badge_density_setting();
-	register_outlet_message_setting();
+	register_authentic_badge_label_setting();
+	register_authentic_badge_text_color_setting();
+	register_authentic_badge_bg_color_setting();
+	register_authentic_badge_border_color_setting();
+	register_authentic_badge_border_style_setting();
+	register_authentic_badge_border_width_setting();
+	register_authentic_badge_border_radius_setting();
+	register_authentic_badge_font_weight_setting();
+	register_authentic_badge_scale_setting();
+	register_authentic_badge_density_setting();
+	register_authentic_message_setting();
 }
 
 /**
@@ -206,32 +206,32 @@ function init_settings(): void {
  * @internal
  */
 function seed_settings(): void {
-	add_option( OUTLET_BADGE_LABEL_OPTION, __( 'Authentic', 'outletpro' ) );
-	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#111111' );
-	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '#D3AF37' );
-	add_option( OUTLET_BADGE_BORDER_COLOR_OPTION, '' );
-	add_option( OUTLET_BADGE_BORDER_STYLE_OPTION, 'none' );
-	add_option( OUTLET_BADGE_BORDER_WIDTH_OPTION, '0' );
-	add_option( OUTLET_BADGE_BORDER_RADIUS_OPTION, '2px' );
-	add_option( OUTLET_BADGE_FONT_WEIGHT_OPTION, '600' );
-	add_option( OUTLET_BADGE_SCALE_OPTION, 166 );
-	add_option( OUTLET_BADGE_DENSITY_OPTION, 50 );
-	add_option( OUTLET_MESSAGE_OPTION, __( 'Our product images are not AI-generated', 'outletpro' ) );
+	add_option( AUTHENTIC_BADGE_LABEL_OPTION, __( 'Authentic', 'authenticimages' ) );
+	add_option( AUTHENTIC_BADGE_TEXT_COLOR_OPTION, '#111111' );
+	add_option( AUTHENTIC_BADGE_BG_COLOR_OPTION, '#D3AF37' );
+	add_option( AUTHENTIC_BADGE_BORDER_COLOR_OPTION, '' );
+	add_option( AUTHENTIC_BADGE_BORDER_STYLE_OPTION, 'none' );
+	add_option( AUTHENTIC_BADGE_BORDER_WIDTH_OPTION, '0' );
+	add_option( AUTHENTIC_BADGE_BORDER_RADIUS_OPTION, '2px' );
+	add_option( AUTHENTIC_BADGE_FONT_WEIGHT_OPTION, '600' );
+	add_option( AUTHENTIC_BADGE_SCALE_OPTION, 166 );
+	add_option( AUTHENTIC_BADGE_DENSITY_OPTION, 50 );
+	add_option( AUTHENTIC_MESSAGE_OPTION, __( 'Our product images are not AI-generated', 'authenticimages' ) );
 }
 
 /**
- * Register the outlet badge label setting.
+ * Register the authentic badge label setting.
  *
  * @internal
  */
-function register_outlet_badge_label_setting(): void {
+function register_authentic_badge_label_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_LABEL_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_LABEL_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge label', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge label.', 'outletpro' ),
+			'label'             => __( 'Authentic badge label', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge label.', 'authenticimages' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_text_field',
 			'show_in_rest'      => array(
@@ -244,18 +244,18 @@ function register_outlet_badge_label_setting(): void {
 }
 
 /**
- * Register the outlet badge text color setting.
+ * Register the authentic badge text color setting.
  *
  * @since 1.0.0
  */
-function register_outlet_badge_text_color_setting(): void {
+function register_authentic_badge_text_color_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_TEXT_COLOR_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_TEXT_COLOR_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge text color', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge text color.', 'outletpro' ),
+			'label'             => __( 'Authentic badge text color', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge text color.', 'authenticimages' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_hex_color',
 			'show_in_rest'      => array(
@@ -268,18 +268,18 @@ function register_outlet_badge_text_color_setting(): void {
 }
 
 /**
- * Register the outlet badge background color setting.
+ * Register the authentic badge background color setting.
  *
  * @since 1.0.0
  */
-function register_outlet_badge_bg_color_setting(): void {
+function register_authentic_badge_bg_color_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_BG_COLOR_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_BG_COLOR_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge background color', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge background color.', 'outletpro' ),
+			'label'             => __( 'Authentic badge background color', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge background color.', 'authenticimages' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_hex_color',
 			'show_in_rest'      => array(
@@ -292,20 +292,20 @@ function register_outlet_badge_bg_color_setting(): void {
 }
 
 /**
- * Register the outlet badge border radius setting.
+ * Register the authentic badge border radius setting.
  *
  * @internal
  */
-function register_outlet_badge_border_radius_setting(): void {
+function register_authentic_badge_border_radius_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_BORDER_RADIUS_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_BORDER_RADIUS_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge border radius', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge border radius.', 'outletpro' ),
+			'label'             => __( 'Authentic badge border radius', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge border radius.', 'authenticimages' ),
 			'default'           => '',
-			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+			'sanitize_callback' => 'AuthenticImages\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
@@ -316,20 +316,20 @@ function register_outlet_badge_border_radius_setting(): void {
 }
 
 /**
- * Register the outlet badge border color setting.
+ * Register the authentic badge border color setting.
  *
  * @internal
  */
-function register_outlet_badge_border_color_setting(): void {
+function register_authentic_badge_border_color_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_BORDER_COLOR_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_BORDER_COLOR_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge border color', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge border color.', 'outletpro' ),
+			'label'             => __( 'Authentic badge border color', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge border color.', 'authenticimages' ),
 			'default'           => '',
-			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+			'sanitize_callback' => 'AuthenticImages\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
@@ -340,20 +340,20 @@ function register_outlet_badge_border_color_setting(): void {
 }
 
 /**
- * Register the outlet badge border style setting.
+ * Register the authentic badge border style setting.
  *
  * @internal
  */
-function register_outlet_badge_border_style_setting(): void {
+function register_authentic_badge_border_style_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_BORDER_STYLE_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_BORDER_STYLE_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge border style', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge border style.', 'outletpro' ),
+			'label'             => __( 'Authentic badge border style', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge border style.', 'authenticimages' ),
 			'default'           => '',
-			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+			'sanitize_callback' => 'AuthenticImages\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
@@ -364,20 +364,20 @@ function register_outlet_badge_border_style_setting(): void {
 }
 
 /**
- * Register the outlet badge border width setting.
+ * Register the authentic badge border width setting.
  *
  * @internal
  */
-function register_outlet_badge_border_width_setting(): void {
+function register_authentic_badge_border_width_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_BORDER_WIDTH_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_BORDER_WIDTH_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge border width', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge border width.', 'outletpro' ),
+			'label'             => __( 'Authentic badge border width', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge border width.', 'authenticimages' ),
 			'default'           => '',
-			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+			'sanitize_callback' => 'AuthenticImages\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
@@ -388,20 +388,20 @@ function register_outlet_badge_border_width_setting(): void {
 }
 
 /**
- * Register the outlet badge font weight setting.
+ * Register the authentic badge font weight setting.
  *
  * @internal
  */
-function register_outlet_badge_font_weight_setting(): void {
+function register_authentic_badge_font_weight_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_FONT_WEIGHT_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_FONT_WEIGHT_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet badge font weight', 'outletpro' ),
-			'description'       => __( 'Store-wide outlet badge font weight.', 'outletpro' ),
+			'label'             => __( 'Authentic badge font weight', 'authenticimages' ),
+			'description'       => __( 'Store-wide authentic badge font weight.', 'authenticimages' ),
 			'default'           => '',
-			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+			'sanitize_callback' => 'AuthenticImages\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
@@ -412,20 +412,20 @@ function register_outlet_badge_font_weight_setting(): void {
 }
 
 /**
- * Register the outlet badge scale setting.
+ * Register the authentic badge scale setting.
  *
  * @internal
  */
-function register_outlet_badge_scale_setting(): void {
+function register_authentic_badge_scale_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_SCALE_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_SCALE_OPTION,
 		array(
 			'type'              => 'integer',
-			'label'             => __( 'Outlet badge scale', 'outletpro' ),
-			'description'       => __( 'Percentage size of the outlet badge relative to the surrounding text cap-height.', 'outletpro' ),
+			'label'             => __( 'Authentic badge scale', 'authenticimages' ),
+			'description'       => __( 'Percentage size of the authentic badge relative to the surrounding text cap-height.', 'authenticimages' ),
 			'default'           => null,
-			'sanitize_callback' => 'OutletPro\sanitize_unsigned_integer',
+			'sanitize_callback' => 'AuthenticImages\sanitize_unsigned_integer',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type'    => 'integer',
@@ -437,20 +437,20 @@ function register_outlet_badge_scale_setting(): void {
 }
 
 /**
- * Register the outlet badge density setting.
+ * Register the authentic badge density setting.
  *
  * @internal
  */
-function register_outlet_badge_density_setting(): void {
+function register_authentic_badge_density_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_BADGE_DENSITY_OPTION,
+		'authenticimages',
+		AUTHENTIC_BADGE_DENSITY_OPTION,
 		array(
 			'type'              => 'integer',
-			'label'             => __( 'Outlet badge density', 'outletpro' ),
-			'description'       => __( 'Controls the ratio between font size and padding for the badge. A lower density results in more whitespace. A Higher density results in a larger font.', 'outletpro' ),
+			'label'             => __( 'Authentic badge density', 'authenticimages' ),
+			'description'       => __( 'Controls the ratio between font size and padding for the badge. A lower density results in more whitespace. A Higher density results in a larger font.', 'authenticimages' ),
 			'default'           => null,
-			'sanitize_callback' => 'OutletPro\sanitize_unsigned_integer',
+			'sanitize_callback' => 'AuthenticImages\sanitize_unsigned_integer',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type'    => 'integer',
@@ -463,18 +463,18 @@ function register_outlet_badge_density_setting(): void {
 }
 
 /**
- * Register the outlet message setting.
+ * Register the authentic message setting.
  *
  * @internal
  */
-function register_outlet_message_setting(): void {
+function register_authentic_message_setting(): void {
 	register_setting(
-		'outletpro',
-		OUTLET_MESSAGE_OPTION,
+		'authenticimages',
+		AUTHENTIC_MESSAGE_OPTION,
 		array(
 			'type'              => 'string',
-			'label'             => __( 'Outlet message', 'outletpro' ),
-			'description'       => __( 'Message displayed on product pages.', 'outletpro' ),
+			'label'             => __( 'Authentic message', 'authenticimages' ),
+			'description'       => __( 'Message displayed on product pages.', 'authenticimages' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_text_field',
 			'show_in_rest'      => array(

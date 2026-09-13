@@ -2,13 +2,13 @@
 /**
  * License enqueue functions.
  *
- * @package OutletPro
+ * @package AuthenticImages
  * @subpackage License
  * @copyright 2026 Adrian Duffell
  * @license GNU General Public License v2.0 or later
  */
 
-namespace OutletPro;
+namespace AuthenticImages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @internal
  */
 function license_enqueue_init(): void {
-	add_action( 'admin_enqueue_scripts', 'OutletPro\enqueue_admin_welcome_page_scripts_hook' );
+	add_action( 'admin_enqueue_scripts', 'AuthenticImages\enqueue_admin_welcome_page_scripts_hook' );
 }
 
 /**
@@ -49,7 +49,7 @@ function enqueue_admin_welcome_page_scripts_hook(): void {
 	 * @internal
 	 */
 	wp_enqueue_script(
-		'outletpro-welcome-page',
+		'authenticimages-welcome-page',
 		plugin_dir_url( PLUGIN_FILE ) . 'build/index.js',
 		$asset['dependencies'],
 		$asset['version'],
@@ -67,8 +67,8 @@ function enqueue_admin_welcome_page_scripts_hook(): void {
 	}
 
 	wp_localize_script(
-		'outletpro-welcome-page',
-		'outletproWelcomePage',
+		'authenticimages-welcome-page',
+		'authenticimagesWelcomePage',
 		array(
 			'environmentType' => wp_get_environment_type(),
 			'licenseName'     => $license_name,
@@ -83,7 +83,7 @@ function enqueue_admin_welcome_page_scripts_hook(): void {
 	 * @internal
 	 */
 	wp_enqueue_style(
-		'outletpro-welcome-page-style',
+		'authenticimages-welcome-page-style',
 		plugin_dir_url( PLUGIN_FILE ) . 'build/style-index.css',
 		array(),
 		$asset['version']
