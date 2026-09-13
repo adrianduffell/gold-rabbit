@@ -4,7 +4,7 @@ Gold Rabbit is a prototype WooCommerce extension, spun off from the Authentic Im
 
 The idea is to provide a badge and message for stores to promote that their product images are authentic. It will be a gold badge with a label like "Authentic images". The message will be something like "All of our product images are real.".
 
-The goal of this prototype is to pivot from Authentic Images to Authentic Images, step-by-step.
+The goal of this prototype is to pivot from Outlet Pro to Authentic Images, step-by-step.
 
 ## Code style
 
