@@ -13,6 +13,8 @@ export type Settings = {
 	setTextColor: ( value: string | undefined ) => void;
 	bgColor: string | undefined;
 	setBgColor: ( value: string | undefined ) => void;
+	bgGradient: string | undefined;
+	setBgGradient: ( value: string | undefined ) => void;
 	fontWeight: string | undefined;
 	setFontWeight: ( value: string | undefined ) => void;
 	borderColor: string | undefined;
@@ -38,6 +40,9 @@ const useSettings = (): Settings => {
 	);
 	const [ bgColor, setBgColor ] = useStringEntityProp(
 		'outletpro_badge_bg_color'
+	);
+	const [ bgGradient, setBgGradient ] = useStringEntityProp(
+		'outletpro_badge_bg_gradient'
 	);
 	const [ fontWeight, setFontWeight ] = useStringEntityProp(
 		'outletpro_badge_font_weight'
@@ -69,6 +74,8 @@ const useSettings = (): Settings => {
 		setTextColor,
 		bgColor,
 		setBgColor,
+		bgGradient,
+		setBgGradient,
 		fontWeight,
 		setFontWeight,
 		borderColor,

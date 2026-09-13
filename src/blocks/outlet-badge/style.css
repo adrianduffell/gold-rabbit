@@ -7,7 +7,9 @@
 .outletpro-badge {
 	display: block;
 	width: fit-content;
-	background-color: var(--outletpro-badge-bg-color, unset);
+	background:
+		var(--outletpro-badge-bg-gradient, none)
+		var(--outletpro-badge-bg-color, transparent);
 	color: var(--outletpro-badge-text-color, unset);
 	border-radius: var(--outletpro-badge-border-radius, unset);
 	border-color: var(--outletpro-badge-border-color, unset);

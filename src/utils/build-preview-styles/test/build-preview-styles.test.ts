@@ -8,6 +8,7 @@ import { buildPreviewStyles } from '../index';
 describe( 'buildPreviewStyles', () => {
 	const vars = {
 		bgColor: '--outletpro-badge-bg-color',
+		bgGradient: '--outletpro-badge-bg-gradient',
 		textColor: '--outletpro-badge-text-color',
 		fontWeight: '--outletpro-badge-font-weight',
 		borderColor: '--outletpro-badge-border-color',
@@ -58,6 +59,7 @@ describe( 'buildPreviewStyles', () => {
 
 	test.each( [
 		[ 'bgColor', '#ff0000' ],
+		[ 'bgGradient', 'linear-gradient(red, blue)' ],
 		[ 'textColor', '#ffffff' ],
 		[ 'fontWeight', '700' ],
 		[ 'borderColor', '#cccccc' ],
@@ -76,6 +78,7 @@ describe( 'buildPreviewStyles', () => {
 		const result = buildPreviewStyles( {
 			label: 'Sale',
 			bgColor: '#ff0000',
+			bgGradient: 'linear-gradient(red, blue)',
 			textColor: '#ffffff',
 			fontWeight: '700',
 			borderColor: '#cccccc',
@@ -88,6 +91,9 @@ describe( 'buildPreviewStyles', () => {
 
 		expect( result ).toContain( '--outletpro-badge-label: "Sale"' );
 		expect( result ).toContain( '--outletpro-badge-bg-color: #ff0000' );
+		expect( result ).toContain(
+			'--outletpro-badge-bg-gradient: linear-gradient(red, blue)'
+		);
 		expect( result ).toContain( '--outletpro-badge-text-color: #ffffff' );
 		expect( result ).toContain( '--outletpro-badge-font-weight: 700' );
 		expect( result ).toContain( '--outletpro-badge-border-color: #cccccc' );
@@ -116,6 +122,7 @@ describe( 'buildPreviewStyles', () => {
 		} );
 
 		expect( result ).toContain( '--outletpro-badge-bg-color: unset' );
+		expect( result ).toContain( '--outletpro-badge-bg-gradient: unset' );
 		expect( result ).toContain( '--outletpro-badge-border-width: 0' );
 		expect( result ).toContain( '--outletpro-badge-border-radius: 0' );
 		expect( result ).toContain( '--outletpro-badge-scale: unset' );

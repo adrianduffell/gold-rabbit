@@ -240,28 +240,46 @@ jest.mock( '@wordpress/components', () => ( {
 } ) );
 
 jest.mock( '@wordpress/block-editor', () => ( {
-	PanelColorSettings: ( {
+	__experimentalPanelColorGradientSettings: ( {
 		title,
-		colorSettings,
+		settings,
 	}: {
 		title: string;
-		colorSettings: Array< {
+		settings: Array< {
 			label: string;
-			value: string;
-			onChange: ( v: string | undefined ) => void;
+			colorValue?: string;
+			gradientValue?: string;
+			onColorChange: ( v: string | undefined ) => void;
+			onGradientChange?: ( v: string | undefined ) => void;
 		} >;
 	} ) => (
 		<div>
 			<h2>{ title }</h2>
-			{ colorSettings.map( ( setting ) => (
-				<input
-					key={ setting.label }
-					aria-label={ setting.label }
-					value={ setting.value }
-					onChange={ ( e ) =>
-						setting.onChange( e.target.value || undefined )
-					}
-				/>
+			{ settings.map( ( setting ) => (
+				<div key={ setting.label }>
+					<input
+						aria-label={ setting.label }
+						value={ setting.colorValue ?? '' }
+						onChange={ ( e ) => {
+							setting.onColorChange(
+								e.target.value || undefined
+							);
+							setting.onGradientChange?.( undefined );
+						} }
+					/>
+					{ setting.onGradientChange && (
+						<input
+							aria-label={ `${ setting.label } gradient` }
+							value={ setting.gradientValue ?? '' }
+							onChange={ ( e ) => {
+								setting.onGradientChange?.(
+									e.target.value || undefined
+								);
+								setting.onColorChange( undefined );
+							} }
+						/>
+					) }
+				</div>
 			) ) }
 		</div>
 	),
@@ -301,6 +319,8 @@ const createInitialSettings = () => ( {
 	setTextColor: jest.fn(),
 	bgColor: undefined,
 	setBgColor: jest.fn(),
+	bgGradient: undefined,
+	setBgGradient: jest.fn(),
 	fontWeight: undefined,
 	setFontWeight: jest.fn(),
 	borderColor: undefined,
@@ -699,6 +719,32 @@ describe( 'settings-sidebar registration', () => {
 		).toHaveValue( '' );
 	} );
 
+	test( 'background gradient control shows stored value', () => {
+		// Arrange.
+		mockRegisterPlugin.mockClear();
+		mockUseSelect.mockReturnValue( true );
+		mockUseSettings.mockReturnValue( {
+			...createInitialSettings(),
+			bgColor: '#D4AF37',
+			bgGradient: 'linear-gradient(red, blue)',
+		} );
+		jest.isolateModules( () => {
+			require( '../index' );
+		} );
+		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
+
+		// Act.
+		render( pluginConfig.render() );
+
+		// Assert.
+		expect(
+			screen.getByRole( 'textbox', { name: 'Background gradient' } )
+		).toHaveValue( 'linear-gradient(red, blue)' );
+		expect(
+			screen.getByRole( 'textbox', { name: 'Background' } )
+		).toHaveValue( '' );
+	} );
+
 	test( 'border radius control calls setter when changed', () => {
 		// Arrange.
 		mockRegisterPlugin.mockClear();
@@ -890,6 +936,68 @@ describe( 'settings-sidebar registration', () => {
 
 		// Assert.
 		expect( setBgColor ).toHaveBeenCalledWith( '#0000ff' );
+	} );
+
+	test( 'background color control clears gradient when changed', () => {
+		// Arrange.
+		mockRegisterPlugin.mockClear();
+		const setBgColor = jest.fn();
+		const setBgGradient = jest.fn();
+		mockUseSelect.mockReturnValue( true );
+		mockUseSettings.mockReturnValue( {
+			...createInitialSettings(),
+			bgColor: undefined,
+			setBgColor,
+			bgGradient: 'linear-gradient(red, blue)',
+			setBgGradient,
+		} );
+		jest.isolateModules( () => {
+			require( '../index' );
+		} );
+		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
+		render( pluginConfig.render() );
+		const input = screen.getByRole( 'textbox', { name: 'Background' } );
+
+		// Act.
+		fireEvent.change( input, { target: { value: '#0000ff' } } );
+
+		// Assert.
+		expect( setBgColor ).toHaveBeenCalledWith( '#0000ff' );
+		expect( setBgGradient ).toHaveBeenCalledWith( undefined );
+	} );
+
+	test( 'background gradient control clears color when changed', () => {
+		// Arrange.
+		mockRegisterPlugin.mockClear();
+		const setBgColor = jest.fn();
+		const setBgGradient = jest.fn();
+		mockUseSelect.mockReturnValue( true );
+		mockUseSettings.mockReturnValue( {
+			...createInitialSettings(),
+			bgColor: '#D4AF37',
+			setBgColor,
+			bgGradient: undefined,
+			setBgGradient,
+		} );
+		jest.isolateModules( () => {
+			require( '../index' );
+		} );
+		const [ , pluginConfig ] = mockRegisterPlugin.mock.calls[ 0 ];
+		render( pluginConfig.render() );
+		const input = screen.getByRole( 'textbox', {
+			name: 'Background gradient',
+		} );
+
+		// Act.
+		fireEvent.change( input, {
+			target: { value: 'linear-gradient(red, blue)' },
+		} );
+
+		// Assert.
+		expect( setBgGradient ).toHaveBeenCalledWith(
+			'linear-gradient(red, blue)'
+		);
+		expect( setBgColor ).toHaveBeenCalledWith( undefined );
 	} );
 
 	test( 'border control calls setters when changed', () => {

@@ -123,6 +123,7 @@ function register_classic_styles_hook(): void {
 function output_badge_style_css_variables_hook(): void {
 	$badge_style_options = array(
 		OUTLET_BADGE_BG_COLOR_OPTION,
+		OUTLET_BADGE_BG_GRADIENT_OPTION,
 		OUTLET_BADGE_TEXT_COLOR_OPTION,
 		OUTLET_BADGE_BORDER_COLOR_OPTION,
 		OUTLET_BADGE_BORDER_STYLE_OPTION,

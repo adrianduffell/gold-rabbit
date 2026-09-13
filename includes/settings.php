@@ -40,6 +40,13 @@ const OUTLET_BADGE_TEXT_COLOR_OPTION = 'outletpro_badge_text_color';
 const OUTLET_BADGE_BG_COLOR_OPTION = 'outletpro_badge_bg_color';
 
 /**
+ * WordPress option key used to store the badge background gradient.
+ *
+ * @internal
+ */
+const OUTLET_BADGE_BG_GRADIENT_OPTION = 'outletpro_badge_bg_gradient';
+
+/**
  * WordPress option key used to store the badge border radius.
  *
  * @internal
@@ -186,6 +193,7 @@ function init_settings(): void {
 	register_outlet_badge_label_setting();
 	register_outlet_badge_text_color_setting();
 	register_outlet_badge_bg_color_setting();
+	register_outlet_badge_bg_gradient_setting();
 	register_outlet_badge_border_color_setting();
 	register_outlet_badge_border_style_setting();
 	register_outlet_badge_border_width_setting();
@@ -208,7 +216,11 @@ function init_settings(): void {
 function seed_settings(): void {
 	add_option( OUTLET_BADGE_LABEL_OPTION, __( 'Authentic', 'outletpro' ) );
 	add_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#111111' );
-	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '#D3AF37' );
+	add_option( OUTLET_BADGE_BG_COLOR_OPTION, '' );
+	add_option(
+		OUTLET_BADGE_BG_GRADIENT_OPTION,
+		'linear-gradient(90deg,rgb(211,175,55) 0%,rgb(237, 223, 174) 70%,rgb(233,215,154) 100%)'
+	);
 	add_option( OUTLET_BADGE_BORDER_COLOR_OPTION, '' );
 	add_option( OUTLET_BADGE_BORDER_STYLE_OPTION, 'none' );
 	add_option( OUTLET_BADGE_BORDER_WIDTH_OPTION, '0' );
@@ -282,6 +294,30 @@ function register_outlet_badge_bg_color_setting(): void {
 			'description'       => __( 'Store-wide outlet badge background color.', 'outletpro' ),
 			'default'           => '',
 			'sanitize_callback' => 'sanitize_hex_color',
+			'show_in_rest'      => array(
+				'schema' => array(
+					'type' => 'string',
+				),
+			),
+		)
+	);
+}
+
+/**
+ * Register the outlet badge background gradient setting.
+ *
+ * @internal
+ */
+function register_outlet_badge_bg_gradient_setting(): void {
+	register_setting(
+		'outletpro',
+		OUTLET_BADGE_BG_GRADIENT_OPTION,
+		array(
+			'type'              => 'string',
+			'label'             => __( 'Outlet badge background gradient', 'outletpro' ),
+			'description'       => __( 'Store-wide outlet badge background gradient.', 'outletpro' ),
+			'default'           => '',
+			'sanitize_callback' => 'OutletPro\sanitize_css_value',
 			'show_in_rest'      => array(
 				'schema' => array(
 					'type' => 'string',
