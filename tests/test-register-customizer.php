@@ -10,6 +10,7 @@
 use function OutletPro\register_customizer_hook;
 use const OutletPro\OUTLET_BADGE_BG_COLOR_OPTION;
 use const OutletPro\OUTLET_BADGE_BG_COLOUR_DEFAULT;
+use const OutletPro\OUTLET_BADGE_BG_GRADIENT_OPTION;
 use const OutletPro\OUTLET_BADGE_LABEL_OPTION;
 use const OutletPro\OUTLET_BADGE_SCALE_OPTION;
 use const OutletPro\OUTLET_BADGE_TEXT_COLOR_OPTION;
@@ -136,6 +137,25 @@ class Test_Register_Customizer extends WP_UnitTestCase {
 
 		// Assert.
 		$this->assertSame( OUTLET_BADGE_BG_COLOUR_DEFAULT, $wp_customize->get_setting( OUTLET_BADGE_BG_COLOR_OPTION )->default );
+	}
+
+	public function test_registers_badge_bg_gradient_text_control(): void {
+		// Arrange.
+		$wp_customize = new WP_Customize_Manager();
+
+		// Act.
+		register_customizer_hook( $wp_customize );
+
+		// Assert.
+		$setting = $wp_customize->get_setting( OUTLET_BADGE_BG_GRADIENT_OPTION );
+		$control = $wp_customize->get_control( OUTLET_BADGE_BG_GRADIENT_OPTION );
+
+		$this->assertNotNull( $setting );
+		$this->assertSame( 'option', $setting->type );
+		$this->assertSame( '', $setting->default );
+		$this->assertNotNull( $control );
+		$this->assertSame( 'Badge background gradient', $control->label );
+		$this->assertSame( 'text', $control->type );
 	}
 
 	public function test_registers_badge_label_setting(): void {

@@ -19,11 +19,11 @@ defined( 'ABSPATH' ) || exit;
 const OUTLET_BADGE_TEXT_COLOUR_DEFAULT = '#111111';
 
 /**
- * Default badge background colour (yellow).
+ * Default badge background colour.
  *
  * @internal
  */
-const OUTLET_BADGE_BG_COLOUR_DEFAULT = '#D3AF37';
+const OUTLET_BADGE_BG_COLOUR_DEFAULT = '';
 
 /**
  * Helper to initialize customizer integration.
@@ -84,6 +84,24 @@ function register_customizer_hook( \WP_Customize_Manager $wp_customize ): void {
 				'label'   => __( 'Badge background color', 'outletpro' ),
 				'section' => 'outletpro',
 			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		OUTLET_BADGE_BG_GRADIENT_OPTION,
+		array(
+			'type'              => 'option',
+			'default'           => '',
+			'sanitize_callback' => 'OutletPro\sanitize_css_value',
+		)
+	);
+
+	$wp_customize->add_control(
+		OUTLET_BADGE_BG_GRADIENT_OPTION,
+		array(
+			'label'   => __( 'Badge background gradient', 'outletpro' ),
+			'section' => 'outletpro',
+			'type'    => 'text',
 		)
 	);
 

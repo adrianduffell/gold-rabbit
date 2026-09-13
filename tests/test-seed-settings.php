@@ -9,6 +9,7 @@
 
 use function OutletPro\seed_settings;
 use const OutletPro\OUTLET_BADGE_BG_COLOR_OPTION;
+use const OutletPro\OUTLET_BADGE_BG_GRADIENT_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_COLOR_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_RADIUS_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_STYLE_OPTION;
@@ -96,7 +97,51 @@ class Test_Seed_Settings extends WP_UnitTestCase {
 		seed_settings();
 
 		// Assert.
-		$this->assertSame( '#D3AF37', get_option( OUTLET_BADGE_BG_COLOR_OPTION ) );
+		$this->assertSame( '', get_option( OUTLET_BADGE_BG_COLOR_OPTION ) );
+	}
+
+	public function test_sets_badge_bg_gradient_default_for_fresh_background_settings(): void {
+		// Arrange.
+		delete_option( OUTLET_BADGE_BG_COLOR_OPTION );
+		delete_option( OUTLET_BADGE_BG_GRADIENT_OPTION );
+
+		// Act.
+		seed_settings();
+
+		// Assert.
+		$this->assertSame(
+			'linear-gradient(90deg,rgb(211,175,55) 0%,rgb(237, 223, 174) 70%,rgb(233,215,154) 100%)',
+			get_option( OUTLET_BADGE_BG_GRADIENT_OPTION )
+		);
+	}
+
+	public function test_sets_badge_bg_gradient_when_background_color_exists(): void {
+		// Arrange.
+		update_option( OUTLET_BADGE_BG_COLOR_OPTION, '#FF0000' );
+		delete_option( OUTLET_BADGE_BG_GRADIENT_OPTION );
+
+		// Act.
+		seed_settings();
+
+		// Assert.
+		$this->assertSame(
+			'linear-gradient(90deg,rgb(211,175,55) 0%,rgb(237, 223, 174) 70%,rgb(233,215,154) 100%)',
+			get_option( OUTLET_BADGE_BG_GRADIENT_OPTION )
+		);
+	}
+
+	public function test_does_not_overwrite_existing_badge_bg_gradient_option(): void {
+		// Arrange.
+		update_option( OUTLET_BADGE_BG_GRADIENT_OPTION, 'linear-gradient(red, blue)' );
+
+		// Act.
+		seed_settings();
+
+		// Assert.
+		$this->assertSame(
+			'linear-gradient(red, blue)',
+			get_option( OUTLET_BADGE_BG_GRADIENT_OPTION )
+		);
 	}
 
 	public function test_does_not_overwrite_existing_badge_bg_color_option(): void {

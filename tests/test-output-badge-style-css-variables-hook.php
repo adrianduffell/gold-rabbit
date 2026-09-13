@@ -10,6 +10,7 @@
 use function OutletPro\deinit_enqueue;
 use function OutletPro\enqueue_init;
 use const OutletPro\OUTLET_BADGE_BG_COLOR_OPTION;
+use const OutletPro\OUTLET_BADGE_BG_GRADIENT_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_COLOR_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_RADIUS_OPTION;
 use const OutletPro\OUTLET_BADGE_BORDER_STYLE_OPTION;
@@ -24,6 +25,7 @@ class Test_Output_Badge_Style_Css_Variables_Hook extends WP_UnitTestCase {
 	public function test_outputs_badge_style_css_variables_in_wp_head(): void {
 		// Arrange.
 		update_option( OUTLET_BADGE_BG_COLOR_OPTION, '#FF0000' );
+		update_option( OUTLET_BADGE_BG_GRADIENT_OPTION, 'linear-gradient(red, blue)' );
 		update_option( OUTLET_BADGE_TEXT_COLOR_OPTION, '#00FF00' );
 		update_option( OUTLET_BADGE_BORDER_COLOR_OPTION, '#123456' );
 		update_option( OUTLET_BADGE_BORDER_STYLE_OPTION, 'solid' );
@@ -43,6 +45,7 @@ class Test_Output_Badge_Style_Css_Variables_Hook extends WP_UnitTestCase {
 
 		// Assert.
 		$this->assertStringContainsString( '--outletpro-badge-bg-color: #FF0000', $output );
+		$this->assertStringContainsString( '--outletpro-badge-bg-gradient: linear-gradient(red, blue)', $output );
 		$this->assertStringContainsString( '--outletpro-badge-text-color: #00FF00', $output );
 		$this->assertStringContainsString( '--outletpro-badge-border-color: #123456', $output );
 		$this->assertStringContainsString( '--outletpro-badge-border-style: solid', $output );
@@ -56,11 +59,12 @@ class Test_Output_Badge_Style_Css_Variables_Hook extends WP_UnitTestCase {
 	public function test_uses_unset_when_setting_value_is_empty(): void {
 		// Arrange.
 		update_option( OUTLET_BADGE_BG_COLOR_OPTION, '' );
+		delete_option( OUTLET_BADGE_BG_GRADIENT_OPTION );
 		deinit_enqueue();
 		enqueue_init();
 
 		// Assert.
-		$this->expectOutputRegex( '/--outletpro-badge-bg-color: unset/' );
+		$this->expectOutputRegex( '/--outletpro-badge-bg-gradient: unset/' );
 
 		// Act.
 		do_action( 'wp_head' );

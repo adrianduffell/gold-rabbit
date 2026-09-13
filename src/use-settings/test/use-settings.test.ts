@@ -65,6 +65,21 @@ describe( 'useSettings', () => {
 		expect( result.current.bgColor ).toBe( '#FFEE85' );
 	} );
 
+	test( 'returns bg gradient value from entity prop', () => {
+		// Arrange.
+		setupMock( {
+			outletpro_badge_bg_gradient: 'linear-gradient(red, blue)',
+		} );
+
+		// Act.
+		const { result } = renderHook( () => useSettings() );
+
+		// Assert.
+		expect( result.current.bgGradient ).toBe(
+			'linear-gradient(red, blue)'
+		);
+	} );
+
 	test( 'returns text color value from entity prop', () => {
 		// Arrange.
 		setupMock( { outletpro_badge_text_color: '#333333' } );
@@ -154,6 +169,7 @@ describe( 'useSettings', () => {
 			outletpro_badge_label: 'setLabel',
 			outletpro_badge_text_color: 'setTextColor',
 			outletpro_badge_bg_color: 'setBgColor',
+			outletpro_badge_bg_gradient: 'setBgGradient',
 			outletpro_badge_font_weight: 'setFontWeight',
 			outletpro_badge_border_color: 'setBorderColor',
 			outletpro_badge_border_style: 'setBorderStyle',
@@ -179,6 +195,7 @@ describe( 'useSettings', () => {
 		result.current.setLabel( 'a' );
 		result.current.setTextColor( 'b' );
 		result.current.setBgColor( 'c' );
+		result.current.setBgGradient( 'linear-gradient(red, blue)' );
 		result.current.setFontWeight( 'e' );
 		result.current.setBorderColor( 'f' );
 		result.current.setBorderStyle( 'g' );
@@ -194,6 +211,9 @@ describe( 'useSettings', () => {
 			'b'
 		);
 		expect( setters.outletpro_badge_bg_color ).toHaveBeenCalledWith( 'c' );
+		expect( setters.outletpro_badge_bg_gradient ).toHaveBeenCalledWith(
+			'linear-gradient(red, blue)'
+		);
 		expect( setters.outletpro_badge_font_weight ).toHaveBeenCalledWith(
 			'e'
 		);
@@ -230,6 +250,7 @@ describe( 'useSettings', () => {
 		expect( keys ).toContain( 'outletpro_badge_label' );
 		expect( keys ).toContain( 'outletpro_badge_text_color' );
 		expect( keys ).toContain( 'outletpro_badge_bg_color' );
+		expect( keys ).toContain( 'outletpro_badge_bg_gradient' );
 		expect( keys ).toContain( 'outletpro_badge_font_weight' );
 		expect( keys ).toContain( 'outletpro_badge_border_color' );
 		expect( keys ).toContain( 'outletpro_badge_border_style' );

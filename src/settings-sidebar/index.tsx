@@ -15,7 +15,8 @@ import {
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
-import { PanelColorSettings } from '@wordpress/block-editor';
+// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+import { __experimentalPanelColorGradientSettings as PanelColorGradientSettings } from '@wordpress/block-editor';
 import { store as coreStore } from '@wordpress/core-data';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useMemo } from '@wordpress/element';
@@ -82,6 +83,8 @@ const SettingsSidebar = () => {
 		setTextColor,
 		bgColor,
 		setBgColor,
+		bgGradient,
+		setBgGradient,
 		fontWeight,
 		setFontWeight,
 		borderColor,
@@ -144,21 +147,26 @@ const SettingsSidebar = () => {
 				</BaseControl>
 			</PanelBody>
 
-			<PanelColorSettings
+			<PanelColorGradientSettings
 				title={ __( 'Color', 'outletpro' ) }
 				initialOpen={ false }
-				colorSettings={ [
+				settings={ [
 					{
-						value: textColor,
+						colorValue: textColor,
 						label: __( 'Text', 'outletpro' ),
-						onChange: ( color: string | undefined ) =>
+						onColorChange: ( color: string | undefined ) =>
 							setTextColor( color || undefined ),
 					},
 					{
-						value: bgColor,
+						colorValue: bgGradient ? undefined : bgColor,
+						gradientValue: bgGradient,
 						label: __( 'Background', 'outletpro' ),
-						onChange: ( backgroundColor: string | undefined ) =>
-							setBgColor( backgroundColor || undefined ),
+						onColorChange: (
+							backgroundColor: string | undefined
+						) => setBgColor( backgroundColor || undefined ),
+						onGradientChange: (
+							backgroundGradient: string | undefined
+						) => setBgGradient( backgroundGradient || undefined ),
 					},
 				] }
 			/>

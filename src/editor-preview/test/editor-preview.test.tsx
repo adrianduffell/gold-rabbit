@@ -50,6 +50,10 @@ describe( 'EditorPreview', () => {
 		setupEntityPropMock( {
 			outletpro_badge_label: [ 'Sale', jest.fn() ],
 			outletpro_badge_bg_color: [ '#ff0000', jest.fn() ],
+			outletpro_badge_bg_gradient: [
+				'linear-gradient(red, blue)',
+				jest.fn(),
+			],
 			outletpro_badge_text_color: [ '#ffffff', jest.fn() ],
 			outletpro_badge_scale: [ 140, jest.fn() ],
 			outletpro_badge_density: [ 80, jest.fn() ],
@@ -68,6 +72,9 @@ describe( 'EditorPreview', () => {
 		);
 		expect( styleEl?.textContent ).toContain(
 			'--outletpro-badge-bg-color: #ff0000'
+		);
+		expect( styleEl?.textContent ).toContain(
+			'--outletpro-badge-bg-gradient: linear-gradient(red, blue)'
 		);
 		expect( styleEl?.textContent ).toContain(
 			'--outletpro-badge-text-color: #ffffff'
@@ -94,6 +101,9 @@ describe( 'EditorPreview', () => {
 
 		expect( styleEl?.textContent ).toContain(
 			'--outletpro-badge-bg-color: unset'
+		);
+		expect( styleEl?.textContent ).toContain(
+			'--outletpro-badge-bg-gradient: unset'
 		);
 		expect( styleEl?.textContent ).toContain(
 			'--outletpro-badge-text-color: unset'

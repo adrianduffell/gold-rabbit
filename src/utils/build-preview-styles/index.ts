@@ -6,6 +6,7 @@
 type BuildPreviewStylesParams = {
 	label?: string;
 	bgColor?: string;
+	bgGradient?: string;
 	textColor?: string;
 	fontWeight?: string;
 	borderColor?: string;
@@ -21,6 +22,7 @@ export function buildPreviewStyles(
 ): string {
 	const entries = {
 		'--outletpro-badge-bg-color': settings.bgColor,
+		'--outletpro-badge-bg-gradient': settings.bgGradient,
 		'--outletpro-badge-text-color': settings.textColor,
 		'--outletpro-badge-font-weight': settings.fontWeight,
 		'--outletpro-badge-border-color': settings.borderColor,
@@ -28,7 +30,6 @@ export function buildPreviewStyles(
 		'--outletpro-badge-border-width': settings.borderWidth,
 		'--outletpro-badge-border-radius': settings.borderRadius,
 	};
-
 	const declarations = [
 		`--outletpro-badge-label: ${
 			settings.label ? JSON.stringify( settings.label ) : 'none'
